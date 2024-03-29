@@ -1,4 +1,6 @@
-﻿using ImGuiNET;
+﻿#if !RELEASE
+using ImGuiNET;
+#endif
 using Microsoft.Xna.Framework;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -10,6 +12,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
     {
         public static void DrawAllFields(object obj)
         {
+#if !RELEASE
             var type = obj.GetType();
             var fieldsCategories = new Dictionary<string, List<FieldInfo>>();
             var fieldsWithoutCategories = new List<FieldInfo>();
@@ -49,8 +52,10 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 
             foreach (var field in fieldsWithoutCategories)
                 DrawField(field, obj);
+#endif
         }
 
+#if !RELEASE
         public static bool DrawSeparator(string name)
         {
             ImGui.Spacing();
@@ -60,7 +65,6 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 
             return treeNode;
         }
-
 
         public static void DrawField(FieldInfo fInfo, object prop)
         {
@@ -93,5 +97,6 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                     break;
             }
         }
+#endif
     }
 }

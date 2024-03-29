@@ -1,4 +1,6 @@
-﻿using ImGuiNET;
+﻿#if !RELEASE
+using ImGuiNET;
+#endif
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
@@ -43,6 +45,7 @@ namespace UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes
             UpdateBodyNodeSize();
         }
 
+#if !RELEASE
         public override void Draw(ImDrawListPtr imDraw)
         {
             base.Draw(imDraw);
@@ -56,6 +59,7 @@ namespace UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes
                 option.Position = nodePosition;
             }
         }
+#endif
 
         public override void OnSave()
         {
@@ -72,6 +76,7 @@ namespace UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes
                 AddNodeOption(node);
         }
 
+#if !RELEASE
         public override void DrawInspector()
         {
             base.DrawInspector();
@@ -91,6 +96,7 @@ namespace UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes
             if (ImGui.Button("Add a new Option"))
                 CreateAnOption<NodeOptionOutPut>();
         }
+#endif
 
         public override void OnDelete()
         {

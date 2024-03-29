@@ -1,7 +1,9 @@
 ﻿using System;
+#if !RELEASE
 using ImGuiNET;
-using System.Collections.Generic;
 using MonoGame.ImGui.Standard.Extensions;
+#endif
+using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using UmbrellaToolsKit.Input;
@@ -112,14 +114,14 @@ namespace UmbrellaToolsKit.EditorEngine.Nodes
                 Position = NodePositionOnClick + direction;
             }
         }
-
+#if !RELEASE
         public virtual void Draw(ImDrawListPtr imDraw)
         {
             DrawSelectionArea(imDraw);
             DrawNodeSquare(imDraw);
             DrawNodeText(imDraw);
         }
-
+#endif
         public virtual void OnDelete() 
         {
             _storage.AddItemFloat("Id", Id);
@@ -173,6 +175,7 @@ namespace UmbrellaToolsKit.EditorEngine.Nodes
                 _storage.SetFloat($"parent-{Id}", ParentNode.Id);
         }
 
+#if !RELEASE
         public virtual void DrawInspector()
         {
             ImGui.PushStyleColor(ImGuiCol.Button, new System.Numerics.Vector4(1, 0, 0, 1));
@@ -201,5 +204,6 @@ namespace UmbrellaToolsKit.EditorEngine.Nodes
             if (CanMoveNode)
                 Primativas.Square.Draw(imDraw, SelectedNodePosition, SelectedNodeSize, Color.White);
         }
+#endif
     }
 }

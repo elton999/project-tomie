@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Runtime.InteropServices.ComTypes;
+#if !RELEASE
 using ImGuiNET;
-using Microsoft.Xna.Framework;
 using MonoGame.ImGui.Standard.Extensions;
+#endif
+using Microsoft.Xna.Framework;
 using UmbrellaToolsKit.EditorEngine.Nodes;
 using UmbrellaToolsKit.EditorEngine.Nodes.Interfaces;
 using UmbrellaToolsKit.EditorEngine.Windows.DialogueEditor;
@@ -67,6 +69,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 
         public void ShowWindow(GameTime gameTime)
         {
+#if !RELEASE
             uint leftID = ImGui.GetID("MainLeft");
             uint rightID = ImGui.GetID("MainRight");
 
@@ -144,8 +147,9 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
             drawList.AddText((displayPosText + displaySize * Vector2.UnitX).ToNumericVector2(), Color.White.PackedValue, $"m x: {MouseHandler.Position.X}, y: {MouseHandler.Position.Y}");
 
             ImGui.End();
+#endif
         }
-
+#if !RELEASE
         private static void DrawBackground(ImDrawListPtr drawList, System.Numerics.Vector2 windowPosition, System.Numerics.Vector2 windowSize)
         {
             Primativas.Square.Draw(
@@ -171,7 +175,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                 }
             }
         }
-
+#endif
         public void Save(string filename)
         {
             if (_storage == null)
@@ -189,14 +193,16 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 
         public void ShowNodeInfo()
         {
+#if !RELEASE
             bool treeNode = InspectorClass.DrawSeparator("Node Inspector");
             if (treeNode) SelectedNode.DrawInspector();
             if (treeNode) ImGui.Unindent();
+#endif
         }
 
         private void SelectNode(BasicNode node) => SelectedNode = node;
         private void RemoveSelectedNode(BasicNode node) => SelectedNode = SelectedNode == node ? null: node;
-
+#if !RELEASE
         private void TraceLineConnection(ImDrawListPtr drawList)
         {
             Primativas.Line.Draw(
@@ -225,7 +231,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                 }
             }
         }
-
+#endif
         private void StartLineConnection(INodeOutPutle node)
         {
             NodeStartConnection = node;

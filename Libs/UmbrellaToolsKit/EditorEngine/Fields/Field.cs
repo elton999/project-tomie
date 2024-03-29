@@ -1,6 +1,8 @@
-﻿using ImGuiNET;
-using Microsoft.Xna.Framework;
+﻿#if !RELEASE
+using ImGuiNET;
 using MonoGame.ImGui.Standard.Extensions;
+#endif
+using Microsoft.Xna.Framework;
 
 namespace UmbrellaToolsKit.EditorEngine.Fields
 {
@@ -8,6 +10,7 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
     {
         public static void DrawVector(string name, ref Vector2 vector)
         {
+#if !RELEASE
             if (ImGui.BeginTable($"##{name}", 3))
             {
                 ImGui.TableNextColumn();
@@ -22,10 +25,12 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
                 ImGui.PopStyleColor();
                 ImGui.EndTable();
             }
+#endif
         }
 
         public static void DrawVector(string name, ref Vector3 vector)
         {
+#if !RELEASE
             if (ImGui.BeginTable($"##{name}", 4))
             {
                 ImGui.TableNextColumn();
@@ -44,43 +49,62 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
                 ImGui.PopStyleColor();
                 ImGui.EndTable();
             }
+#endif
         }
 
         public static void DrawFloat(string name, ref float value)
         {
+#if !RELEASE
             TableFormatBegin(name);
             ImGui.InputFloat("", ref value);
             TableFormatEnd();
+#endif
         }
 
-        public static void DrawInt(string name, ref int value) => ImGui.InputInt(name, ref value);
-
+        public static void DrawInt(string name, ref int value)
+        {
+#if !RELEASE
+            ImGui.InputInt(name, ref value);
+#endif
+        }
         public static void DrawString(string name, ref string value)
         {
+#if !RELEASE
             TableFormatBegin(name);
             if (value == null) value = "";
             ImGui.InputText("", ref value, 255);
             TableFormatEnd();
+#endif
         }
 
         public static void DrawLongText(string name, ref string value)
         {
+#if !RELEASE
             TableFormatBegin(name);
             if (value == null) value = "";
             ImGui.InputTextMultiline("", ref value, 500, Vector2.Zero.ToNumericVector2());
             TableFormatEnd();
+#endif
         }
-
+#if !RELEASE
         public static void DrawBoolean(string name, ref bool value) => ImGui.Checkbox(name, ref value);
+#endif
 
         public static void TableFormatBegin(string name)
         {
+#if !RELEASE
             ImGui.BeginTable($"##{name}", 2);
             ImGui.TableNextColumn();
             ImGui.TextUnformatted(name);
             ImGui.TableNextColumn();
+#endif
         }
 
-        public static void TableFormatEnd() => ImGui.EndTable();
+        public static void TableFormatEnd()
+        {
+#if !RELEASE
+            ImGui.EndTable();
+#endif
+        }
     }
 }

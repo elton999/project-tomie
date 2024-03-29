@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Reflection;
+#if !RELEASE
 using ImGuiNET;
+#endif
 using Microsoft.Xna.Framework;
 using UmbrellaToolsKit.EditorEngine.Windows.Interfaces;
 
@@ -21,6 +23,7 @@ namespace UmbrellaToolsKit.EditorEngine
 
         public void Draw(GameTime gameTime)
         {
+#if !RELEASE
             double frameRate = 1d / gameTime.ElapsedGameTime.TotalSeconds;
 
             if (ImGui.BeginMainMenuBar())
@@ -67,6 +70,7 @@ namespace UmbrellaToolsKit.EditorEngine
 
             if(isShowingImguiDemo)
                 ImGui.ShowDemoWindow();
+#endif
         }
     }
 }

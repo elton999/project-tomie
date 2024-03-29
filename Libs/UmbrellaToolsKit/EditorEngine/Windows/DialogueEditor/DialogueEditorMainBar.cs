@@ -1,4 +1,6 @@
-﻿using ImGuiNET;
+﻿#if !RELEASE
+using ImGuiNET;
+#endif
 using UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes;
 using UmbrellaToolsKit.EditorEngine.Windows.Interfaces;
 using Microsoft.Xna.Framework;
@@ -19,6 +21,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows.DialogueEditor
 
         public void Draw()
         {
+#if !RELEASE
             if (ImGui.BeginMenu("File"))
             {
                 if (ImGui.MenuItem("Open..."))
@@ -84,6 +87,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows.DialogueEditor
 
                 ImGui.EndMenu();
             }
+#endif
         }
     }
 }
