@@ -1,4 +1,5 @@
 ﻿using UmbrellaToolsKit;
+using UmbrellaToolsKit.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -27,7 +28,6 @@ namespace Project
             _gameManagement.Game = this;
             _gameManagement.Start();
 
-            // TODO: Add your initialization logic here
             base.Initialize();
         }
 
@@ -37,11 +37,14 @@ namespace Project
 
             _assetManagement = new AssetManagement();
             _gameManagement.SceneManagement.MainScene.AddGameObject(new GameObject(), Layers.FOREGROUND);
+
+            // Inputs
+            KeyBoardHandler.AddInput(Input.EXIT, Keys.Escape);
         }
 
         protected override void Update(GameTime gameTime)
         {
-            if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
+            if (KeyBoardHandler.KeyPressed(Input.EXIT))
                 Exit();
 
             _gameManagement.Update(gameTime);
