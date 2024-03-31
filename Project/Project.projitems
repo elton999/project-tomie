@@ -12,6 +12,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Actors\Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\PropRender.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Props\LockerProp.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Props\WindowProp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FilePath.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input.cs" />
