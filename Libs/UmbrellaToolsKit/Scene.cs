@@ -126,7 +126,7 @@ namespace UmbrellaToolsKit
 
         public void SetLevel(string level)
         {
-            Console.WriteLine($"Level: {MapLevelPath + level}");
+            EditorEngine.Log.Write($"Level: {MapLevelPath + level}");
             CreateCamera();
 
             Ogmo.TileMap tileMap = Content.Load<Ogmo.TileMap>(level);
@@ -137,13 +137,13 @@ namespace UmbrellaToolsKit
             CreateBackBuffer();
 
             LevelReady = true;
-            Console.WriteLine("\nDone");
+            EditorEngine.Log.Write("\nDone");
         }
 
         public void SetLevelLdtk(int level)
         {
-            Console.WriteLine($"Level: {MapLevelLdtkPath}");
-            Console.WriteLine($"tilemap sprite: {TileMapPath}");
+            EditorEngine.Log.Write($"Level: {MapLevelLdtkPath}");
+            EditorEngine.Log.Write($"tilemap sprite: {TileMapPath}");
 
             CreateCamera();
             CreateBackBuffer();
@@ -153,7 +153,7 @@ namespace UmbrellaToolsKit
             TileMap.TileMap.Create(this, tileMap, "Level_" + level, _tilemapSprite);
 
             LevelReady = true;
-            Console.WriteLine("\nDone");
+            EditorEngine.Log.Write("\nDone");
         }
 
         public void CreateCamera()
