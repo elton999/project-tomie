@@ -1,5 +1,4 @@
-﻿﻿using System;
-using System.Linq;
+﻿﻿using System.Linq;
 using System.Collections.Generic;
 using UmbrellaToolsKit.Collision;
 using Microsoft.Xna.Framework;
@@ -39,7 +38,7 @@ namespace UmbrellaToolsKit.TileMap
                     SetGrid(scene, layer);
                     SetTiles(scene, tilemapSprite, layer);
                 }
-                else if(layerType == "AutoLayer")
+                else if (layerType == "AutoLayer")
                     SetTiles(scene, tilemapSprite, layer);
                 else if (layerType == "Entities")
                     SetEntities(scene, layer);
@@ -65,11 +64,11 @@ namespace UmbrellaToolsKit.TileMap
 
         private static void SetEntities(Scene scene, ldtk.LayerInstance layer)
         {
-            Console.WriteLine($"Loading Entities: {layer.Identifier} ");
+            EditorEngine.Log.Write($"Loading Entities: {layer.Identifier} ");
 
-            for (var i = 0; i < layer.EntityInstances.Length; i++)
+            for (var i = layer.EntityInstances.Length - 1; i >= 0; i--)
             {
-                Console.Write(".");
+                EditorEngine.Log.Write(".");
                 // TODO: values and nodes
                 var entity = layer.EntityInstances[i];
                 AssetManagement.Instance.addEntityOnScene(
@@ -86,10 +85,10 @@ namespace UmbrellaToolsKit.TileMap
 
         private static void SetEntities(Scene scene, Ogmo.TileMapLayers layer)
         {
-            Console.WriteLine($"Loading Entities: {layer.name} ");
+            EditorEngine.Log.Write($"Loading Entities: {layer.name} ");
             foreach (Ogmo.TileMapEntity entity in layer.entities)
             {
-                System.Console.Write(".");
+                EditorEngine.Log.Write(".");
                 if (AssetManagement.Instance != null)
                 {
                     AssetManagement.Instance.addEntityOnScene(
