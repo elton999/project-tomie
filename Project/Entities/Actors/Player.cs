@@ -17,7 +17,7 @@ namespace Project.Entities.Actors
 
         public override void Update(GameTime gameTime)
         {
-            Scene.Camera.Position = Position;
+            Scene.Camera.Target = Position;
             base.Update(gameTime);
         }
     }
