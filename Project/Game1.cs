@@ -40,7 +40,7 @@ namespace Project
 
             // Props
             _assetManagement.Set<Entities.Props.LockerProp>("Locker", Layers.MIDDLEGROUND);
-            _assetManagement.Set<Entities.Props.LockerProp>("Window", Layers.MIDDLEGROUND);
+            _assetManagement.Set<Entities.Props.WindowProp>("Window", Layers.MIDDLEGROUND);
 
             _gameManagement.SceneManagement.MainScene.SetLevelLdtk(0);
             // Inputs
