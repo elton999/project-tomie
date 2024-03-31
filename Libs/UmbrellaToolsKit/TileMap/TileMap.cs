@@ -1,4 +1,4 @@
-﻿using System;
+﻿﻿using System;
 using System.Linq;
 using System.Collections.Generic;
 using UmbrellaToolsKit.Collision;
@@ -39,6 +39,8 @@ namespace UmbrellaToolsKit.TileMap
                     SetGrid(scene, layer);
                     SetTiles(scene, tilemapSprite, layer);
                 }
+                else if(layerType == "AutoLayer")
+                    SetTiles(scene, tilemapSprite, layer);
                 else if (layerType == "Entities")
                     SetEntities(scene, layer);
             }
@@ -64,7 +66,6 @@ namespace UmbrellaToolsKit.TileMap
         private static void SetEntities(Scene scene, ldtk.LayerInstance layer)
         {
             Console.WriteLine($"Loading Entities: {layer.Identifier} ");
-            EditorEngine.Log.Write($"Loading Entities: {layer.Identifier} ");
 
             for (var i = 0; i < layer.EntityInstances.Length; i++)
             {
@@ -73,9 +74,10 @@ namespace UmbrellaToolsKit.TileMap
                 var entity = layer.EntityInstances[i];
                 AssetManagement.Instance.addEntityOnScene(
                         entity.Identifier,
+                        entity.Iid,
                         new Vector2(entity.Px[0] + scene.ScreenOffset.X, entity.Px[1] + scene.ScreenOffset.Y),
                         new Point((int)entity.Width, (int)entity.Height),
-                        null,
+                        entity.FieldInstances,
                         null,
                         scene
                     );
@@ -85,8 +87,6 @@ namespace UmbrellaToolsKit.TileMap
         private static void SetEntities(Scene scene, Ogmo.TileMapLayers layer)
         {
             Console.WriteLine($"Loading Entities: {layer.name} ");
-            EditorEngine.Log.Write($"Loading Entities: {layer.name} ");
-
             foreach (Ogmo.TileMapEntity entity in layer.entities)
             {
                 System.Console.Write(".");
@@ -94,6 +94,7 @@ namespace UmbrellaToolsKit.TileMap
                 {
                     AssetManagement.Instance.addEntityOnScene(
                         entity.name,
+                        "gameobject",
                         new Vector2(entity.x + scene.ScreenOffset.X, entity.y + scene.ScreenOffset.Y),
                         new Point(entity.width, entity.height),
                         entity.values,
@@ -107,7 +108,7 @@ namespace UmbrellaToolsKit.TileMap
         private static void SetGrid(Scene scene, Ogmo.TileMap tileMap, Ogmo.TileMapLayers layer)
         {
             scene.Grid = new Grid();
-            scene.Grid.GridCollides = new List<List<string>>(layer.grid2D);
+            scene.Grid.GridCollides = layer.grid2D;
             scene.Grid.Scene = scene;
             scene.Grid.Origin = new Vector2(tileMap.offsetX, tileMap.offsetY);
         }
@@ -134,7 +135,7 @@ namespace UmbrellaToolsKit.TileMap
         {
             Layer layerTiles = CreateLayer(scene, tilemapSprite);
             layerTiles.Origin = new Vector2(tileMap.offsetX, tileMap.offsetY);
-            layerTiles.tiles = new List<List<List<int>>>(layer.dataCoords2D);
+            layerTiles.tiles = layer.dataCoords2D;
         }
 
         private static void SetTiles(Scene scene, Texture2D tilemapSprite, ldtk.LayerInstance layer)
@@ -150,8 +151,14 @@ namespace UmbrellaToolsKit.TileMap
                 var tile = layer.AutoLayerTiles[i];
                 int x = (int)tile.Px[0] / 8;
                 int y = (int)tile.Px[1] / 8;
-                layerTiles.tiles[y][x][0] = (int)tile.Src[0] / 8;
-                layerTiles.tiles[y][x].Add((int)(tile.Src[1] / 8));
+                if (y < layerTiles.tiles.Count && x < layerTiles.tiles[y].Count)
+                {
+                    layerTiles.tiles[y][x][0] = (int)tile.Src[0];
+                    if (layerTiles.tiles[y][x].Count == 1)
+                        layerTiles.tiles[y][x].Add((int)tile.Src[1]);
+                    else
+                        layerTiles.tiles[y][x][1] = (int)tile.Src[1];
+                }
             }
         }
 

@@ -143,11 +143,17 @@ namespace UmbrellaToolsKit
         public void SetLevelLdtk(int level)
         {
             Console.WriteLine($"Level: {MapLevelLdtkPath}");
+            Console.WriteLine($"tilemap sprite: {TileMapPath}");
+
+            CreateCamera();
+            CreateBackBuffer();
+
             Texture2D _tilemapSprite = Content.Load<Texture2D>(TileMapPath);
-
             var tileMap = Content.Load<ldtk.LdtkJson>(MapLevelLdtkPath);
-
             TileMap.TileMap.Create(this, tileMap, "Level_" + level, _tilemapSprite);
+
+            LevelReady = true;
+            Console.WriteLine("\nDone");
         }
 
         public void CreateCamera()

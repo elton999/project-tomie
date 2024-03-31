@@ -20,7 +20,6 @@ namespace UmbrellaToolsKit
                 GameManagement.Game.Content
             );
             MainScene.GameManagement = GameManagement;
-            MainScene.LevelReady = true;
         }
 
         public void Update(GameTime gameTime)

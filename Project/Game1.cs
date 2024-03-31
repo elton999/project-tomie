@@ -36,8 +36,9 @@ namespace Project
             _spriteBatch = new SpriteBatch(GraphicsDevice);
 
             _assetManagement = new AssetManagement();
-            _gameManagement.SceneManagement.MainScene.AddGameObject(new GameObject(), Layers.FOREGROUND);
+            _assetManagement.Set<Entities.Actors.Player>("Player", Layers.PLAYER);
 
+            _gameManagement.SceneManagement.MainScene.SetLevelLdtk(0);
             // Inputs
             KeyBoardHandler.AddInput(Input.EXIT, Keys.Escape);
         }

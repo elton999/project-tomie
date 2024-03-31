@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 
 namespace UmbrellaToolsKit.Sprite
@@ -12,19 +8,21 @@ namespace UmbrellaToolsKit.Sprite
         public List<Rectangle> Bodys { get; set; }
         public List<int> Duration { get; set; }
         public List<AsepriteTags> Tags { get; set; }
+        public Dictionary<string, (Rectangle, Vector2)> Slices { get; set; }
 
         public Rectangle Rectangle;
 
         public AsepriteDefinitions()
         {
-            this.Bodys = new List<Rectangle>();
-            this.Duration = new List<int>();
-            this.Tags = new List<AsepriteTags>();
+            Bodys = new List<Rectangle>();
+            Duration = new List<int>();
+            Tags = new List<AsepriteTags>();
+            Slices = new Dictionary<string, (Rectangle, Vector2)>();
         }
 
         public void BodyAdd(Rectangle body)
         {
-            this.Bodys.Add(body);
+            Bodys.Add(body);
         }
 
         public void TagAdd(string name, string direction, int from, int to)
@@ -34,7 +32,7 @@ namespace UmbrellaToolsKit.Sprite
             AsepriteTags.direction = direction;
             AsepriteTags.from = from;
             AsepriteTags.to = to;
-            this.Tags.Add(AsepriteTags);
+            Tags.Add(AsepriteTags);
         }
     }
 

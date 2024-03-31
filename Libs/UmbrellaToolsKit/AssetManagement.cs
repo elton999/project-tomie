@@ -44,6 +44,36 @@ namespace UmbrellaToolsKit
             }
         }
 
+        public List<GameObject> SetGameObjectInfos(string name, string tag, Vector2 position, Point size, dynamic values, List<Vector2> nodes, Scene scene)
+        {
+            var assets = GetObject(name);
+            List<GameObject> gameObjects = new List<GameObject>();
+
+            foreach(var asset in assets)
+            {
+                GameObject gameObject = (GameObject)Activator.CreateInstance(asset.GameObject);
+                gameObject.tag = tag;
+                gameObject.Position = position;
+                gameObject.size = size;
+                gameObject.Values = values;
+                gameObject.Nodes = nodes;
+                gameObject.Content = scene.Content;
+                gameObject.Scene = scene;
+                scene.AddGameObject(gameObject, asset.Layer);
+                gameObjects.Add(gameObject);
+            }
+            return gameObjects;
+        }
+
+
+        public void addEntityOnScene(string name, string tag, Vector2 position, Point size, dynamic values, List<Vector2> nodes, Scene scene)
+        { // ? values:Dynamic, ? nodes:Array<Vector2>, ? flipx:Bool):Void{
+            List<GameObject> gameObjects = SetGameObjectInfos(name, tag, position, size, values, nodes, scene);
+
+            foreach (var gameObject in gameObjects)
+                gameObject.Start();
+        }
+
 
         public void ClearAll()
         {
