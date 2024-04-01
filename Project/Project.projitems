@@ -9,6 +9,9 @@
     <Import_RootNamespace>Project</Import_RootNamespace>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="$(MSBuildThisFileDirectory)Components\DebugActorComponent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\InputMovementComponent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\MoveActorComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Actors\Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\PropRender.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Props\LockerProp.cs" />

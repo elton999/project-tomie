@@ -2,6 +2,6 @@
 {
     public class LockerProp : PropRender
     {
-        LockerProp() => SetSpriteName("locker");
+        public LockerProp() => SetSpriteName("locker");
     }
 }

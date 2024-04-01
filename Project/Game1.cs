@@ -40,11 +40,14 @@ namespace Project
 
             // Props
             _assetManagement.Set<Entities.Props.LockerProp>("Locker", Layers.MIDDLEGROUND);
-            _assetManagement.Set<Entities.Props.LockerProp>("Window", Layers.MIDDLEGROUND);
+            _assetManagement.Set<Entities.Props.WindowProp>("Window", Layers.MIDDLEGROUND);
 
             _gameManagement.SceneManagement.MainScene.SetLevelLdtk(0);
+
             // Inputs
             KeyBoardHandler.AddInput(Input.EXIT, Keys.Escape);
+            KeyBoardHandler.AddInput(Input.LEFT, Keys.Left);
+            KeyBoardHandler.AddInput(Input.RIGHT, Keys.Right);
         }
 
         protected override void Update(GameTime gameTime)

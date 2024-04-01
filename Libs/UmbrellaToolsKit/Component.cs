@@ -17,8 +17,8 @@ namespace UmbrellaToolsKit
 
         public virtual void Start() { }
 
-        public virtual void Update(GameTime gameTime) => Next?.Update(gameTime);
-        public virtual void UpdateData(GameTime gameTime) => Next?.UpdateData(gameTime);
+        public virtual void Update(GameTime gameTime) { }
+        public virtual void UpdateData(GameTime gameTime) { }
 
         public void Add(IComponent component)
         {
