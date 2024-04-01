@@ -49,7 +49,7 @@ namespace UmbrellaToolsKit
             var assets = GetObject(name);
             List<GameObject> gameObjects = new List<GameObject>();
 
-            foreach(var asset in assets)
+            foreach (var asset in assets)
             {
                 GameObject gameObject = (GameObject)Activator.CreateInstance(asset.GameObject);
                 gameObject.tag = tag;
@@ -69,9 +69,6 @@ namespace UmbrellaToolsKit
         public void addEntityOnScene(string name, string tag, Vector2 position, Point size, dynamic values, List<Vector2> nodes, Scene scene)
         { // ? values:Dynamic, ? nodes:Array<Vector2>, ? flipx:Bool):Void{
             List<GameObject> gameObjects = SetGameObjectInfos(name, tag, position, size, values, nodes, scene);
-
-            foreach (var gameObject in gameObjects)
-                gameObject.Start();
         }
 
 

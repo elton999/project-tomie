@@ -178,10 +178,17 @@ namespace UmbrellaToolsKit
             {
                 for (int e = layers[i].Count - 1; e >= 0; e--)
                 {
-                    layers[i][e].Update(gameTime);
                     if (layers[i][e].Components != null)
-                        layers[i][e].Components.Update(gameTime);
+                    {
+                        var component = layers[i][e].Components;
+                        while (component != null)
+                        {
+                            component.Update(gameTime);
+                            component = component.Next;
+                        }
+                    }
 
+                    layers[i][e].Update(gameTime);
                     layers[i][e].CoroutineManagement.Update(gameTime);
                 }
             }
@@ -193,15 +200,21 @@ namespace UmbrellaToolsKit
                 {
                     for (int e = layers[i].Count - 1; e >= 0; e--)
                     {
-                        layers[i][e].UpdateData(gameTime);
 
                         if (Camera != null)
                             Camera.update(gameTime);
 
                         if (layers[i][e].Components != null)
-                            layers[i][e].Components.UpdateData(gameTime);
+                        {
+                            var component = layers[i][e].Components;
+                            while (component != null)
+                            {
+                                component.UpdateData(gameTime);
+                                component = component.Next;
+                            }
+                        }
+                        layers[i][e].UpdateData(gameTime);
                     }
-
                 }
                 if (Camera != null)
                     Camera.CheckActorAndSolids();
