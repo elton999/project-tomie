@@ -10,8 +10,7 @@ namespace Project.Components
 
         public override void Start()
         {
-            _moveActor = GetComponent<MoveActorComponent>();
-            base.Start();
+            _moveActor = GameObject.GetComponent<MoveActorComponent>();
         }
 
         public override void Update(GameTime gameTime)
