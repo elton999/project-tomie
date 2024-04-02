@@ -46,8 +46,14 @@ namespace Project
 
             // Inputs
             KeyBoardHandler.AddInput(Input.EXIT, Keys.Escape);
+            // moviment
             KeyBoardHandler.AddInput(Input.LEFT, Keys.Left);
             KeyBoardHandler.AddInput(Input.RIGHT, Keys.Right);
+            // ui inputs
+            KeyBoardHandler.AddInput(Input.UP, Keys.Up);
+            KeyBoardHandler.AddInput(Input.DOWN, Keys.Down);
+
+            KeyBoardHandler.AddInput(Input.INTERACT, Keys.Space);
         }
 
         protected override void Update(GameTime gameTime)
