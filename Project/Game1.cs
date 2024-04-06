@@ -51,7 +51,7 @@ namespace Project
             // moviment
             KeyBoardHandler.AddInput(Input.LEFT, Keys.Left);
             KeyBoardHandler.AddInput(Input.RIGHT, Keys.Right);
-            // ui inputs
+            // UI inputs
             KeyBoardHandler.AddInput(Input.UP, Keys.Up);
             KeyBoardHandler.AddInput(Input.DOWN, Keys.Down);
 

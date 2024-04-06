@@ -14,6 +14,7 @@ namespace UmbrellaToolsKit
         private CoroutineManagement _coroutineManagement;
         private bool _removeFromScene = false;
         private Scene _scene;
+        private Layers _layer;
 
         public IComponent Components { get => _components; set => _components = value; }
         public bool RemoveFromScene { get => _removeFromScene; set => _removeFromScene = value; }
@@ -36,6 +37,8 @@ namespace UmbrellaToolsKit
         public Scene Scene { get => _scene; set => _scene = value; }
 
         public CoroutineManagement CoroutineManagement => _coroutineManagement;
+
+        public Layers Layer { get => _layer; set => _layer = value; }
 
         public dynamic Values;
         public List<Vector2> Nodes;
@@ -67,7 +70,7 @@ namespace UmbrellaToolsKit
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
-            BeginDraw(spriteBatch, true);
+            BeginDraw(spriteBatch, Layer != Layers.UI);
             DrawSprite(spriteBatch);
             EndDraw(spriteBatch);
         }
