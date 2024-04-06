@@ -5,7 +5,10 @@
         // Sprites
         public const string TILE_MAP_SPRITE_PATH = "Sprites/tilemap";
 
-        //Atlas
+        // Atlas
         public const string TILE_MAP_ATLAS_PATH = "Sprites/atlas";
+
+        // Fonts
+        public const string FONT_PATH = "Font";
     }
 }
