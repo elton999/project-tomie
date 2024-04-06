@@ -172,7 +172,10 @@ namespace UmbrellaToolsKit
         {
             //UI update
             for (int i = UI.Count - 1; i >= 0; i--)
+            {
                 UI[i].Update(gameTime);
+                UI[i].CoroutineManagement.Update(gameTime);
+            }
 
             for (int i = layers.Count - 1; i >= 0; i--)
             {
