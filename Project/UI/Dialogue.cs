@@ -22,8 +22,9 @@ namespace Project.UI
         public override void Start()
         {
             _size = new Point(200, 30);
-            Position = new Vector2(30, 110);
+            Position = new Vector2(30, 120);
             _font = Scene.Content.Load<SpriteFont>("Font");
+            _font.LineSpacing = 7;
             base.Start();
         }
 
