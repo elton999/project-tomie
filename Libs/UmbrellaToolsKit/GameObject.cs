@@ -68,6 +68,11 @@ namespace UmbrellaToolsKit
 
         public virtual void UpdateData(GameTime gameTime) { }
 
+        public System.Collections.IEnumerator Wait(float time)
+        {
+            yield return _coroutineManagement.Wait(time);
+        }
+
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             BeginDraw(spriteBatch, Layer != Layers.UI);
