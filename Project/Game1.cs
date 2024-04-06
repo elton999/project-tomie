@@ -45,13 +45,14 @@ namespace Project
             _gameManagement.SceneManagement.MainScene.SetLevelLdtk(0);
 
             _gameManagement.SceneManagement.MainScene.AddGameObject(new UI.Dialogue(), Layers.UI);
+            _gameManagement.SceneManagement.MainScene.AddGameObject(new UI.InteractionMenu(), Layers.UI);
 
             // Inputs
             KeyBoardHandler.AddInput(Input.EXIT, Keys.Escape);
             // moviment
             KeyBoardHandler.AddInput(Input.LEFT, Keys.Left);
             KeyBoardHandler.AddInput(Input.RIGHT, Keys.Right);
-            // ui inputs
+            // UI inputs
             KeyBoardHandler.AddInput(Input.UP, Keys.Up);
             KeyBoardHandler.AddInput(Input.DOWN, Keys.Down);
 

@@ -76,6 +76,7 @@ namespace UmbrellaToolsKit
             }
 
             gameObject.Scene = this;
+            gameObject.Layer = layer;
             gameObject.Content = Content;
             gameObject.Start();
         }

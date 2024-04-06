@@ -87,22 +87,6 @@ namespace Project.UI
         }
 
         #region Drawing
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Begin(
-                SpriteSortMode,
-                BlendState,
-                SamplerState,
-                null,
-                null,
-                Effect,
-                null
-            );
-
-            DrawSprite(spriteBatch);
-            EndDraw(spriteBatch);
-        }
-
         public override void DrawSprite(SpriteBatch spriteBatch)
         {
             if (!_isShowing) return;
