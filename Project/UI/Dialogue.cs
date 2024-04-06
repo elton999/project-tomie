@@ -12,8 +12,8 @@ namespace Project.UI
         private Point _size;
 
         private bool _isShowing = false;
+        private bool _skip = false;
         [ShowEditor] private float _timeToWrite = 0.5f;
-        private Vector2 _letterSize = new Vector2(5, 5);
 
         private string _text;
         private string _formattedText;
@@ -30,8 +30,11 @@ namespace Project.UI
 
         public override void Update(GameTime gameTime)
         {
-            if (KeyBoardHandler.KeyPressed(Input.INTERACT))
-                Say("Hello World! it is just a little bit different than you think it is in the game world and you can see it in the game world by clicking on the button below and press the Enter key.");
+            if (_isShowing && KeyBoardHandler.KeyPressed(Input.INTERACT))
+                _skip = true;
+
+            // if (KeyBoardHandler.KeyPressed(Input.INTERACT))
+            //     Say("Hello World! it is just a little bit different than you think it is in the game world and you can see it in the game world by clicking on the button below and press the Enter key.");
             base.Update(gameTime);
         }
 
@@ -44,7 +47,30 @@ namespace Project.UI
 
             _text = _text.Trim();
             _text = _text.Replace("\n", "");
+            FormatText();
 
+            CoroutineManagement.ClearCoroutines();
+            CoroutineManagement.StarCoroutine(WriteText());
+        }
+
+        public void Clear() => _isShowing = false;
+
+        public IEnumerator WriteText()
+        {
+            for (int i = 0; i < _formattedText.Length; i++)
+            {
+                string currentLetter = _formattedText[i].ToString();
+                _renderText += currentLetter;
+
+                if (!_skip)
+                    yield return CoroutineManagement.Wait(_timeToWrite);
+            }
+
+            yield return null;
+        }
+
+        private void FormatText()
+        {
             int lineSize = 0;
             foreach (string word in _text.Split(" "))
             {
@@ -58,24 +84,9 @@ namespace Project.UI
                 _formattedText += wordFormatted;
                 lineSize += (int)size.X;
             }
-
-            CoroutineManagement.ClearCoroutines();
-            CoroutineManagement.StarCoroutine(WriteText());
         }
 
-        public IEnumerator WriteText()
-        {
-            for (int i = 0; i < _formattedText.Length; i++)
-            {
-                string currentLetter = _formattedText[i].ToString();
-                _renderText += currentLetter;
-                UmbrellaToolsKit.EditorEngine.Log.Write(_renderText);
-                yield return CoroutineManagement.Wait(_timeToWrite);
-            }
-
-            yield return null;
-        }
-
+        #region Drawing
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin(
@@ -97,5 +108,6 @@ namespace Project.UI
             if (!_isShowing) return;
             spriteBatch.DrawString(_font, _renderText, Position, Color.White);
         }
+        #endregion
     }
 }
