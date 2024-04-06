@@ -1,5 +1,6 @@
 ﻿using UmbrellaToolsKit;
 using UmbrellaToolsKit.Sprite;
+using UmbrellaToolsKit.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -21,6 +22,19 @@ namespace Project.UI
             AddButton("look", null, null);
             AddButton("use", null, null);
             AddButton("combine", null, null);
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            if (KeyBoardHandler.KeyPressed(Input.INTERACT))
+                ClickOnSelectedButton();
+
+            if (KeyBoardHandler.KeyPressed(Input.UP))
+                SelectPreviousButton();
+
+            if (KeyBoardHandler.KeyPressed(Input.DOWN))
+                SelectNextButton();
+
         }
     }
 }

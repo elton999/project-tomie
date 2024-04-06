@@ -37,6 +37,37 @@ namespace Project.UI
         public bool TextToCenter = true;
         public Color DefaultTextColor = Color.White;
 
+        public void SelectNextButton()
+        {
+            _selectIndex++;
+            _selectIndex %= Buttons.Count;
+            SelectButton(_selectIndex);
+        }
+
+        public void SelectPreviousButton()
+        {
+            _selectIndex--;
+            if (_selectIndex < 0) _selectIndex = Buttons.Count - 1;
+            _selectIndex %= Buttons.Count;
+            SelectButton(_selectIndex);
+        }
+
+        public void SelectButton(int index)
+        {
+            if (index < 0 || index >= Buttons.Count) return;
+
+            Button button = Buttons[index];
+            button.OnSelected?.Invoke();
+
+            _selectIndex = index;
+        }
+
+        public void ClickOnSelectedButton()
+        {
+            Button button = Buttons[_selectIndex];
+            button.OnClick?.Invoke();
+        }
+
         public void AddButton(string name, Action onClick, Action onSelected)
         {
             Vector2 buttonSize = Vector2.One;
