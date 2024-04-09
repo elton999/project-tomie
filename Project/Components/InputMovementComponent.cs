@@ -7,6 +7,7 @@ namespace Project.Components
     public class InputMovementComponent : Component
     {
         private MoveActorComponent _moveActor;
+        [ShowEditor] private bool _inputEnable = true;
 
         public override void Start()
         {
@@ -15,6 +16,8 @@ namespace Project.Components
 
         public override void Update(GameTime gameTime)
         {
+            if (!_inputEnable) return;
+
             Vector2 direction = Vector2.Zero;
             if (KeyBoardHandler.KeyDown(Input.LEFT))
                 direction = Vector2.UnitX * -1;
@@ -24,5 +27,8 @@ namespace Project.Components
             _moveActor.SetDirection(direction);
             base.Update(gameTime);
         }
+
+        public void DisableInput() => _inputEnable = false;
+        public void EnableInput() => _inputEnable = true;
     }
 }
