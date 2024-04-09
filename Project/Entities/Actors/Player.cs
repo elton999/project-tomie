@@ -7,6 +7,8 @@ namespace Project.Entities.Actors
 {
     public class Player : Actor
     {
+        private static InputMovementComponent _inputMovement;
+
         public override void Start()
         {
             size = new Point(20, 55);
@@ -14,7 +16,7 @@ namespace Project.Entities.Actors
             base.Start();
 
             AddComponent<MoveActorComponent>().SetVelocity(20f);
-            AddComponent<InputMovementComponent>();
+            _inputMovement = AddComponent<InputMovementComponent>();
             AddComponent<DebugActorComponent>();
         }
 
@@ -23,5 +25,8 @@ namespace Project.Entities.Actors
             Scene.Camera.Target = Position;
             base.Update(gameTime);
         }
+
+        public static void DisableInput() => _inputMovement.DisableInput();
+        public static void EnableInput() => _inputMovement.EnableInput();
     }
 }
