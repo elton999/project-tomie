@@ -18,14 +18,12 @@ namespace Project.UI
             CoordOnSelect = atlas.Slices["selected_button"].Item1;
 
             SpaceBetweenButtons = Vector2.Zero;
-
-            AddButton("look", null, null);
-            AddButton("use", null, null);
-            AddButton("combine", null, null);
         }
 
         public override void Update(GameTime gameTime)
         {
+            if (!IsShowingMenu) return;
+
             if (KeyBoardHandler.KeyPressed(Input.INTERACT))
                 ClickOnSelectedButton();
 
