@@ -15,7 +15,7 @@ namespace Project.Entities.Actors
         public override void Start()
         {
             _playerActor = Scene.AllActors[0];
-
+            tag += " hitbox";
             base.Start();
         }
 

@@ -1,9 +1,8 @@
 ﻿using Project.UI;
-using Project.Entities.Actors;
 using UmbrellaToolsKit;
 using Project.Components;
 
-namespace Project.Entities
+namespace Project.Entities.Actors
 {
     public class InteractionHitBox : HitboxEvents
     {
@@ -14,11 +13,11 @@ namespace Project.Entities
             base.Start();
 
             _interactionMenu = new InteractionMenu();
+            Scene.AddGameObject(_interactionMenu, Layers.UI);
+
             _interactionMenu.AddButton("Look", null, null);
             _interactionMenu.AddButton("Use", null, null);
             _interactionMenu.AddButton("Combine", null, null);
-
-            Scene.AddGameObject(_interactionMenu, Layers.UI);
         }
 
         public override void OnInteract()

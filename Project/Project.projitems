@@ -16,6 +16,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Actors\InteractionHitBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Actors\Player.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\PropRender.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Props\DoorProp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Props\LockerProp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Props\WindowProp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FilePath.cs" />
