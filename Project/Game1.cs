@@ -39,6 +39,8 @@ namespace Project
             _assetManagement.Set<Entities.Actors.Player>("Player", Layers.PLAYER);
 
             // Props
+            _assetManagement.Set<Entities.Props.DoorProp>("Door", Layers.MIDDLEGROUND);
+            _assetManagement.Set<Entities.Actors.InteractionHitBox>("Door", Layers.MIDDLEGROUND);
             _assetManagement.Set<Entities.Props.LockerProp>("Locker", Layers.MIDDLEGROUND);
             _assetManagement.Set<Entities.Props.WindowProp>("Window", Layers.MIDDLEGROUND);
 

@@ -24,6 +24,9 @@ namespace Project.UI
         }
 
         private int _selectIndex = 0;
+        private bool _canShow = false;
+
+        public bool IsShowingMenu => _canShow;
 
         public List<Button> Buttons = new List<Button>();
         public SpriteFont Font;
@@ -98,8 +101,14 @@ namespace Project.UI
             Buttons.Add(button);
         }
 
+        public void ShowMenu() => _canShow = true;
+
+        public void HideMenu() => _canShow = false;
+
         public override void DrawSprite(SpriteBatch spriteBatch)
         {
+            if (!_canShow) return;
+
             for (int i = 0; i < Buttons.Count; i++)
             {
                 var button = Buttons[i];
