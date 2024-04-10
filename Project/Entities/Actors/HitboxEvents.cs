@@ -6,7 +6,7 @@ using UmbrellaToolsKit.Collision;
 
 namespace Project.Entities.Actors
 {
-    public class HitboxEvents : Actor
+    public abstract class HitboxEvents : Actor
     {
         public static Action<HitboxEvents> OnAnyInteract;
 
@@ -29,6 +29,6 @@ namespace Project.Entities.Actors
             }
         }
 
-        public virtual void OnInteract() { }
+        public abstract void OnInteract();
     }
 }
