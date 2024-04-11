@@ -15,9 +15,15 @@ namespace Project.Entities.Actors
             _interactionMenu = new InteractionMenu();
             Scene.AddGameObject(_interactionMenu, Layers.UI);
 
-            _interactionMenu.AddButton("Look", null, null);
-            _interactionMenu.AddButton("Use", null, null);
-            _interactionMenu.AddButton("Combine", null, null);
+            ldtk.FieldInstance field = (ldtk.FieldInstance)Values[0];
+            if (field.Identifier != "Boolean") return;
+
+            if ((bool)field.Value[0])
+                _interactionMenu.AddButton("Look", null, null);
+            if ((bool)field.Value[1])
+                _interactionMenu.AddButton("Use", null, null);
+            if ((bool)field.Value[2])
+                _interactionMenu.AddButton("Combine", null, null);
         }
 
         public override void OnInteract()
