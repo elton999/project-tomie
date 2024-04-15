@@ -1,5 +1,6 @@
 ﻿using Project.UI;
 using UmbrellaToolsKit;
+using Microsoft.Xna.Framework;
 using Project.Components;
 
 namespace Project.Entities.Actors
@@ -24,6 +25,8 @@ namespace Project.Entities.Actors
                 _interactionMenu.AddButton("Use", null, null);
             if ((bool)field.Value[2])
                 _interactionMenu.AddButton("Combine", null, null);
+
+            _interactionMenu.Position = new Vector2(100, 56);
         }
 
         public override void OnInteract()
