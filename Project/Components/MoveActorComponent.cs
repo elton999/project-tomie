@@ -12,6 +12,7 @@ namespace Project.Components
         private Actor _actor;
 
         public bool IsMoving => _direction.LengthSquared() > 0.0f;
+        public Vector2 Direction => _direction;
 
         public override void Start() => _actor = GameObject.GetActor();
 
