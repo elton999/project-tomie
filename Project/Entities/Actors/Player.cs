@@ -15,7 +15,7 @@ namespace Project.Entities.Actors
             tag = "player";
             base.Start();
 
-            AddComponent<MoveActorComponent>().SetVelocity(20f);
+            AddComponent<MoveActorComponent>().SetVelocity(70f);
             _inputMovement = AddComponent<InputMovementComponent>();
             AddComponent<DebugActorComponent>();
         }
