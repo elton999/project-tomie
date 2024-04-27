@@ -39,6 +39,7 @@ namespace Project
             _assetManagement.Set<Entities.Actors.Player>("Player", Layers.PLAYER);
 
             // UI Settings
+            _assetManagement.Set<SceneSettings>("Player", Layers.UI);
             _assetManagement.Set<UI.Dialogue>("Player", Layers.UI);
             _assetManagement.Set<UI.InteractionMenu>("Player", Layers.UI);
 
