@@ -38,6 +38,10 @@ namespace Project
             _assetManagement = new AssetManagement();
             _assetManagement.Set<Entities.Actors.Player>("Player", Layers.PLAYER);
 
+            // UI Settings
+            _assetManagement.Set<UI.Dialogue>("Player", Layers.UI);
+            _assetManagement.Set<UI.InteractionMenu>("Player", Layers.UI);
+
             // Props
             _assetManagement.Set<Entities.Props.DoorProp>("Door", Layers.MIDDLEGROUND);
             _assetManagement.Set<Entities.Actors.InteractionHitBox>("Door", Layers.MIDDLEGROUND);
@@ -45,9 +49,6 @@ namespace Project
             _assetManagement.Set<Entities.Props.WindowProp>("Window", Layers.MIDDLEGROUND);
 
             _gameManagement.SceneManagement.MainScene.SetLevelLdtk(0);
-
-            _gameManagement.SceneManagement.MainScene.AddGameObject(new UI.Dialogue(), Layers.UI);
-            _gameManagement.SceneManagement.MainScene.AddGameObject(new UI.InteractionMenu(), Layers.UI);
 
             // Inputs
             KeyBoardHandler.AddInput(Input.EXIT, Keys.Escape);
