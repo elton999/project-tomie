@@ -12,6 +12,7 @@ namespace Project.Entities.Actors
 
         public override void Start()
         {
+
             size = new Point(20, 55);
             Origin = new Vector2(20, 9);
 
