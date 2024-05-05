@@ -87,6 +87,27 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
 #endif
 		}
 
+		public static void DrawStringOptions(string name, ref string value, string[] options)
+		{
+#if !RELEASE
+			TableFormatBegin(name);
+			if (value == null) value = "";
+			if (ImGui.BeginCombo("", value, ImGuiComboFlags.HeightLarge | ImGuiComboFlags.HeightLargest))
+			{
+				for (int i = 0; i < options.Length; i++)
+				{
+					bool is_selected = options[i] == value;
+					if (ImGui.Selectable(options[i], is_selected))
+						value = options[i];
+					if (is_selected)
+						ImGui.SetItemDefaultFocus();
+				}
+				ImGui.EndCombo();
+			}
+			TableFormatEnd();
+#endif
+		}
+
 #if !RELEASE
 		public static void DrawBoolean(string name, ref bool value) => ImGui.Checkbox(name, ref value);
 #endif
