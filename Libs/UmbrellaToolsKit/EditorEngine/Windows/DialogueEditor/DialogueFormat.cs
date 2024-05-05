@@ -34,6 +34,9 @@ namespace UmbrellaToolsKit.EditorEngine.Windows.DialogueEditor
         [JsonProperty("name")]
         public string Name { get; set; }
 
+        [JsonProperty("sprite")]
+        public string Sprite { get; set; }
+
         [JsonProperty("content")]
         public string Content { get; set; }
 

@@ -106,7 +106,7 @@ namespace UmbrellaToolsKit.Storage
             Save();
         }
 
-        public void SetString(string node, string value) => AddItemString(node, new List<string> { value });
+        public void SetString(string node, string value) => AddItemString(node, new List<string> { value == null ? "" : value });
 
         public void AddItemString(string Node, List<string> ContentList) => AddAItem(Node, "string", ContentList);
 

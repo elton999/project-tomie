@@ -4,6 +4,7 @@ using ImGuiNET;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using UmbrellaToolsKit.EditorEngine.Nodes.Interfaces;
 using UmbrellaToolsKit.EditorEngine.Windows.DialogueEditor;
 using UmbrellaToolsKit.Storage;
@@ -49,7 +50,7 @@ namespace UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes
         public override void Draw(ImDrawListPtr imDraw)
         {
             base.Draw(imDraw);
-            for(int i = 0; i < NodeOptions.Count; i++)
+            for (int i = 0; i < NodeOptions.Count; i++)
             {
                 var option = NodeOptions[i];
                 int optionNumber = i + 1;
@@ -64,15 +65,14 @@ namespace UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes
         public override void OnSave()
         {
             base.OnSave();
-            _storage.SetString($"Nodes-Object-{Id}", typeof(NodeWithOptions).Namespace + "." + typeof(NodeWithOptions).Name );
+            _storage.SetString($"Nodes-Object-{Id}", typeof(NodeWithOptions).Namespace + "." + typeof(NodeWithOptions).Name);
         }
 
         public override void Load()
         {
             base.Load();
             var nodes = DialogueData.Nodes.FindAll(x => x.ParentNode != null && x.ParentNode.Id == this.Id);
-
-            foreach(var node in nodes)
+            foreach (var node in nodes)
                 AddNodeOption(node);
         }
 
@@ -93,6 +93,16 @@ namespace UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes
                     ImGui.Unindent();
                 }
             }
+
+            string path = "Content/CutScenes/";
+            var options = Directory.GetFiles(@"" + path);
+            for (int k = 0; k < options.Length; k++)
+                options[k] = options[k].Replace(path, "").Replace(".xnb", "");
+
+            string spriteNameValue = SpriteName;
+            Fields.Field.DrawStringOptions("Sprite option", ref spriteNameValue, options);
+            SpriteName = spriteNameValue;
+
             if (ImGui.Button("Add a new Option"))
                 CreateAnOption<NodeOptionOutPut>();
         }
