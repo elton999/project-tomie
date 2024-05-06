@@ -1,6 +1,6 @@
 ﻿#if !RELEASE
 using ImGuiNET;
-using MonoGame.ImGui.Standard.Extensions;
+using MonoGame.ImGui.Extensions;
 #endif
 using Microsoft.Xna.Framework;
 

@@ -1,7 +1,7 @@
 ﻿using System;
 #if !RELEASE
 using ImGuiNET;
-using MonoGame.ImGui.Standard.Extensions;
+using MonoGame.ImGui.Extensions;
 #endif
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
