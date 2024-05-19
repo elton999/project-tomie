@@ -50,6 +50,14 @@ namespace UmbrellaToolsKit.EditorEngine.Windows.DialogueEditor
     public partial class DialogueFormat
     {
         public static DialogueFormat FromJson(string json) => JsonConvert.DeserializeObject<DialogueFormat>(json, UmbrellaToolsKit.EditorEngine.Windows.DialogueEditor.Converter.Settings);
+
+        public Node GetFirstNode()
+        {
+            foreach (var node in Nodes)
+                if (node.Id == StartNode)
+                    return node;
+            return null;
+        }
     }
 
     public static class Serialize
