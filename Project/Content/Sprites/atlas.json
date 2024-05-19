@@ -28,7 +28,8 @@
    { "name": "window", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 0, "y": 96, "w": 100, "h": 54 } }] },
    { "name": "wacth", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 72, "y": 0, "w": 23, "h": 23 } }] },
    { "name": "default_button", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 0, "w": 39, "h": 10 } }] },
-   { "name": "selected_button", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 10, "w": 39, "h": 10 } }] }
+   { "name": "selected_button", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 96, "y": 10, "w": 39, "h": 10 } }] },
+   { "name": "background", "color": "#0000ffff", "keys": [{ "frame": 0, "bounds": {"x": 32, "y": 80, "w": 8, "h": 8 } }] }
   ]
  }
 }
