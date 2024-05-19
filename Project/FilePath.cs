@@ -12,5 +12,8 @@
 
         // Fonts
         public const string FONT_PATH = "Font";
+
+        // CutScenes
+        public const string CUTSCENE_1_PATH = "Dialogues/cutscene_1";
     }
 }

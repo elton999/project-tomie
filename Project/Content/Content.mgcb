@@ -27,6 +27,9 @@
 /processorParam:TextureFormat=Color
 /build:CutScenes/cutscene_1_frame_1.png
 
+#begin Dialogues/cutscene_1.dn
+/copy:Dialogues/cutscene_1.dn
+
 #begin Font.spritefont
 /importer:FontDescriptionImporter
 /processor:FontDescriptionProcessor
