@@ -3,6 +3,7 @@ using UmbrellaToolsKit;
 using UmbrellaToolsKit.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using System;
 
 namespace Project.UI
 {
@@ -11,13 +12,17 @@ namespace Project.UI
         private SpriteFont _font;
         private Point _size;
 
-        private bool _isShowing = false;
-        private bool _skip = false;
+        protected bool _isShowing = false;
+        protected bool _skip = false;
         [ShowEditor] private float _timeToWrite = 0.5f;
 
         private string _text;
         private string _formattedText;
         private string _renderText;
+
+        protected bool _isAnimationDone = false;
+
+        public bool IsShowing => _isShowing;
 
         public override void Start()
         {
@@ -53,7 +58,12 @@ namespace Project.UI
             CoroutineManagement.StarCoroutine(WriteText());
         }
 
-        public void Clear() => _isShowing = false;
+        public void Clear()
+        {
+            _isShowing = false;
+            _skip = false;
+            _isAnimationDone = false;
+        }
 
         public IEnumerator WriteText()
         {
@@ -65,7 +75,7 @@ namespace Project.UI
                 if (!_skip)
                     yield return CoroutineManagement.Wait(_timeToWrite);
             }
-
+            _isAnimationDone = true;
             yield return null;
         }
 

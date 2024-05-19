@@ -1,0 +1,153 @@
+<Umbrella>
+  <Ids type="float">
+    <item>0</item>
+    <item>1</item>
+    <item>2</item>
+    <item>3</item>
+    <item>5</item>
+    <item>6</item>
+  </Ids>
+  <name-0 type="string">
+    <item>start</item>
+  </name-0>
+  <content-0 type="string">
+    <item>
+    </item>
+  </content-0>
+  <position-0-vector-x type="float">
+    <item>561</item>
+  </position-0-vector-x>
+  <position-0-vector-y type="float">
+    <item>178</item>
+  </position-0-vector-y>
+  <sprite-0 type="string">
+    <item>
+    </item>
+  </sprite-0>
+  <Nodes-Connection-In-0 type="float">
+    <item>2</item>
+  </Nodes-Connection-In-0>
+  <Nodes-Object-0 type="string">
+    <item>UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes.StartNode</item>
+  </Nodes-Object-0>
+  <Nodes-Connection-Out-1 type="float">
+    <item>3</item>
+    <item>6</item>
+  </Nodes-Connection-Out-1>
+  <name-1 type="string">
+    <item>End</item>
+  </name-1>
+  <content-1 type="string">
+    <item>
+    </item>
+  </content-1>
+  <position-1-vector-x type="float">
+    <item>1361</item>
+  </position-1-vector-x>
+  <position-1-vector-y type="float">
+    <item>488</item>
+  </position-1-vector-y>
+  <sprite-1 type="string">
+    <item>
+    </item>
+  </sprite-1>
+  <Nodes-Object-1 type="string">
+    <item>UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes.EndNode</item>
+  </Nodes-Object-1>
+  <Nodes-Connection-Out-2 type="float">
+    <item>0</item>
+  </Nodes-Connection-Out-2>
+  <name-2 type="string">
+    <item>new node</item>
+  </name-2>
+  <content-2 type="string">
+    <item>
+    </item>
+  </content-2>
+  <position-2-vector-x type="float">
+    <item>743</item>
+  </position-2-vector-x>
+  <position-2-vector-y type="float">
+    <item>302</item>
+  </position-2-vector-y>
+  <sprite-2 type="string">
+    <item>cutscene_1_frame_1</item>
+  </sprite-2>
+  <Nodes-Object-2 type="string">
+    <item>UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes.NodeWithOptions</item>
+  </Nodes-Object-2>
+  <name-3 type="string">
+    <item>node 1</item>
+  </name-3>
+  <content-3 type="string">
+    <item>text test</item>
+  </content-3>
+  <position-3-vector-x type="float">
+    <item>743</item>
+  </position-3-vector-x>
+  <position-3-vector-y type="float">
+    <item>332</item>
+  </position-3-vector-y>
+  <parent-3 type="float">
+    <item>2</item>
+  </parent-3>
+  <sprite-3 type="string">
+    <item>
+    </item>
+  </sprite-3>
+  <Nodes-Connection-In-3 type="float">
+    <item>5</item>
+  </Nodes-Connection-In-3>
+  <Nodes-Object-3 type="string">
+    <item>UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes.NodeOptionOutPut</item>
+  </Nodes-Object-3>
+  <Id type="float">
+  </Id>
+  <Nodes-Connection-Out-5 type="float">
+    <item>3</item>
+  </Nodes-Connection-Out-5>
+  <name-5 type="string">
+    <item>new node</item>
+  </name-5>
+  <content-5 type="string">
+    <item>
+    </item>
+  </content-5>
+  <position-5-vector-x type="float">
+    <item>1037</item>
+  </position-5-vector-x>
+  <position-5-vector-y type="float">
+    <item>378</item>
+  </position-5-vector-y>
+  <sprite-5 type="string">
+    <item>cutscene_1_frame_1</item>
+  </sprite-5>
+  <Nodes-Object-5 type="string">
+    <item>UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes.NodeWithOptions</item>
+  </Nodes-Object-5>
+  <name-6 type="string">
+    <item>option - 6</item>
+  </name-6>
+  <content-6 type="string">
+    <item>node 2 test</item>
+  </content-6>
+  <position-6-vector-x type="float">
+    <item>1037</item>
+  </position-6-vector-x>
+  <position-6-vector-y type="float">
+    <item>408</item>
+  </position-6-vector-y>
+  <parent-6 type="float">
+    <item>5</item>
+  </parent-6>
+  <sprite-6 type="string">
+    <item>
+    </item>
+  </sprite-6>
+  <Nodes-Connection-In-6 type="float">
+    <item>1</item>
+  </Nodes-Connection-In-6>
+  <Nodes-Object-6 type="string">
+    <item>UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes.NodeOptionOutPut</item>
+  </Nodes-Object-6>
+</Umbrella>

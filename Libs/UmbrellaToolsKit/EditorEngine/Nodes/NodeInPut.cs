@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework;
 using UmbrellaToolsKit.Input;
 #if !RELEASE
 using ImGuiNET;
-using MonoGame.ImGui.Standard.Extensions;
+using MonoGame.ImGui.Extensions;
 #endif
 using UmbrellaToolsKit.EditorEngine.Windows.DialogueEditor;
 

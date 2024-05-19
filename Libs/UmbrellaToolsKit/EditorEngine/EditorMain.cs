@@ -1,18 +1,18 @@
 ﻿#if !RELEASE
-using ImGuiNET;
-using MonoGame.ImGui.Standard;
+using MonoGame.ImGui;
 #endif
 using Microsoft.Xna.Framework;
 using System;
 using Microsoft.Xna.Framework.Input;
 using UmbrellaToolsKit.EditorEngine.Windows.Interfaces;
+using ImGuiNET;
 
 namespace UmbrellaToolsKit.EditorEngine
 {
     public class EditorMain
     {
 #if !RELEASE
-        private ImGUIRenderer _imGUIRenderer;
+        private ImGuiRenderer _imGUIRenderer;
 #endif
         private BarEdtior _mainBarEditor;
         private EditorArea _editorArea;
@@ -33,7 +33,7 @@ namespace UmbrellaToolsKit.EditorEngine
             _game = game;
             _gameManagement = gameManagement;
  #if !RELEASE
-            _imGUIRenderer = new ImGUIRenderer(game).Initialize().RebuildFontAtlas();
+            _imGUIRenderer = new ImGuiRenderer(game).Initialize().RebuildFontAtlas();
 #endif
             _mainBarEditor = new BarEdtior();
             _editorArea = new EditorArea();

@@ -1,110 +1,132 @@
 ﻿#if !RELEASE
 using ImGuiNET;
-using MonoGame.ImGui.Standard.Extensions;
+using MonoGame.ImGui.Extensions;
 #endif
 using Microsoft.Xna.Framework;
 
 namespace UmbrellaToolsKit.EditorEngine.Fields
 {
-    public class Field
-    {
-        public static void DrawVector(string name, ref Vector2 vector)
-        {
+	public class Field
+	{
+		public static void DrawVector(string name, ref Vector2 vector)
+		{
 #if !RELEASE
-            if (ImGui.BeginTable($"##{name}", 3))
-            {
-                ImGui.TableNextColumn();
-                ImGui.TextUnformatted(name);
-                ImGui.TableNextColumn();
-                ImGui.PushStyleColor(ImGuiCol.FrameBg, new System.Numerics.Vector4(1, 0, 0, 0.5f));
-                ImGui.InputFloat("x", ref vector.X);
-                ImGui.PopStyleColor();
-                ImGui.TableNextColumn();
-                ImGui.PushStyleColor(ImGuiCol.FrameBg, new System.Numerics.Vector4(0, 1, 0, 0.5f));
-                ImGui.InputFloat("y", ref vector.Y);
-                ImGui.PopStyleColor();
-                ImGui.EndTable();
-            }
+			if (ImGui.BeginTable($"##{name}", 3))
+			{
+				ImGui.TableNextColumn();
+				ImGui.TextUnformatted(name);
+				ImGui.TableNextColumn();
+				ImGui.PushStyleColor(ImGuiCol.FrameBg, new System.Numerics.Vector4(1, 0, 0, 0.5f));
+				ImGui.InputFloat("x", ref vector.X);
+				ImGui.PopStyleColor();
+				ImGui.TableNextColumn();
+				ImGui.PushStyleColor(ImGuiCol.FrameBg, new System.Numerics.Vector4(0, 1, 0, 0.5f));
+				ImGui.InputFloat("y", ref vector.Y);
+				ImGui.PopStyleColor();
+				ImGui.EndTable();
+			}
 #endif
-        }
+		}
 
-        public static void DrawVector(string name, ref Vector3 vector)
-        {
+		public static void DrawVector(string name, ref Vector3 vector)
+		{
 #if !RELEASE
-            if (ImGui.BeginTable($"##{name}", 4))
-            {
-                ImGui.TableNextColumn();
-                ImGui.TextUnformatted(name);
-                ImGui.TableNextColumn();
-                ImGui.PushStyleColor(ImGuiCol.FrameBg, new System.Numerics.Vector4(1, 0, 0, 0.5f));
-                ImGui.InputFloat("x", ref vector.X);
-                ImGui.PopStyleColor();
-                ImGui.TableNextColumn();
-                ImGui.PushStyleColor(ImGuiCol.FrameBg, new System.Numerics.Vector4(0, 1, 0, 0.5f));
-                ImGui.InputFloat("y", ref vector.Y);
-                ImGui.PopStyleColor();
-                ImGui.TableNextColumn();
-                ImGui.PushStyleColor(ImGuiCol.FrameBg, new System.Numerics.Vector4(0, 0, 1, 0.5f));
-                ImGui.InputFloat("z", ref vector.Z);
-                ImGui.PopStyleColor();
-                ImGui.EndTable();
-            }
+			if (ImGui.BeginTable($"##{name}", 4))
+			{
+				ImGui.TableNextColumn();
+				ImGui.TextUnformatted(name);
+				ImGui.TableNextColumn();
+				ImGui.PushStyleColor(ImGuiCol.FrameBg, new System.Numerics.Vector4(1, 0, 0, 0.5f));
+				ImGui.InputFloat("x", ref vector.X);
+				ImGui.PopStyleColor();
+				ImGui.TableNextColumn();
+				ImGui.PushStyleColor(ImGuiCol.FrameBg, new System.Numerics.Vector4(0, 1, 0, 0.5f));
+				ImGui.InputFloat("y", ref vector.Y);
+				ImGui.PopStyleColor();
+				ImGui.TableNextColumn();
+				ImGui.PushStyleColor(ImGuiCol.FrameBg, new System.Numerics.Vector4(0, 0, 1, 0.5f));
+				ImGui.InputFloat("z", ref vector.Z);
+				ImGui.PopStyleColor();
+				ImGui.EndTable();
+			}
 #endif
-        }
+		}
 
-        public static void DrawFloat(string name, ref float value)
-        {
+		public static void DrawFloat(string name, ref float value)
+		{
 #if !RELEASE
-            TableFormatBegin(name);
-            ImGui.InputFloat("", ref value);
-            TableFormatEnd();
+			TableFormatBegin(name);
+			ImGui.InputFloat("", ref value);
+			TableFormatEnd();
 #endif
-        }
+		}
 
-        public static void DrawInt(string name, ref int value)
-        {
+		public static void DrawInt(string name, ref int value)
+		{
 #if !RELEASE
-            ImGui.InputInt(name, ref value);
+			ImGui.InputInt(name, ref value);
 #endif
-        }
-        public static void DrawString(string name, ref string value)
-        {
+		}
+		public static void DrawString(string name, ref string value)
+		{
 #if !RELEASE
-            TableFormatBegin(name);
-            if (value == null) value = "";
-            ImGui.InputText("", ref value, 255);
-            TableFormatEnd();
+			TableFormatBegin(name);
+			if (value == null) value = "";
+			ImGui.InputText("", ref value, 255);
+			TableFormatEnd();
 #endif
-        }
+		}
 
-        public static void DrawLongText(string name, ref string value)
-        {
+		public static void DrawLongText(string name, ref string value)
+		{
 #if !RELEASE
-            TableFormatBegin(name);
-            if (value == null) value = "";
-            ImGui.InputTextMultiline("", ref value, 500, Vector2.Zero.ToNumericVector2());
-            TableFormatEnd();
+			TableFormatBegin(name, 1);
+			if (value == null) value = "";
+			ImGui.InputTextMultiline("", ref value, 500, (Vector2.One * 500).ToNumericVector2(), ImGuiInputTextFlags.EnterReturnsTrue);
+			TableFormatEnd();
 #endif
-        }
+		}
+
+		public static void DrawStringOptions(string name, ref string value, string[] options)
+		{
 #if !RELEASE
-        public static void DrawBoolean(string name, ref bool value) => ImGui.Checkbox(name, ref value);
+			TableFormatBegin(name);
+			if (value == null) value = "";
+			if (ImGui.BeginCombo("", value, ImGuiComboFlags.HeightLarge | ImGuiComboFlags.HeightLargest))
+			{
+				for (int i = 0; i < options.Length; i++)
+				{
+					bool is_selected = options[i] == value;
+					if (ImGui.Selectable(options[i], is_selected))
+						value = options[i];
+					if (is_selected)
+						ImGui.SetItemDefaultFocus();
+				}
+				ImGui.EndCombo();
+			}
+			TableFormatEnd();
+#endif
+		}
+
+#if !RELEASE
+		public static void DrawBoolean(string name, ref bool value) => ImGui.Checkbox(name, ref value);
 #endif
 
-        public static void TableFormatBegin(string name)
-        {
+		public static void TableFormatBegin(string name, int columns = 2)
+		{
 #if !RELEASE
-            ImGui.BeginTable($"##{name}", 2);
-            ImGui.TableNextColumn();
-            ImGui.TextUnformatted(name);
-            ImGui.TableNextColumn();
+			ImGui.BeginTable($"##{name}", columns);
+			ImGui.TableNextColumn();
+			ImGui.TextUnformatted(name);
+			ImGui.TableNextColumn();
 #endif
-        }
+		}
 
-        public static void TableFormatEnd()
-        {
+		public static void TableFormatEnd()
+		{
 #if !RELEASE
-            ImGui.EndTable();
+			ImGui.EndTable();
 #endif
-        }
-    }
+		}
+	}
 }
