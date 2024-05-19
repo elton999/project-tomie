@@ -108,7 +108,11 @@ namespace Project.UI
         public override void DrawSprite(SpriteBatch spriteBatch)
         {
             if (IsShowing)
-                spriteBatch.Draw(_frames[_currentFrame].Sprite, Vector2.Zero, Color.White);
+            {
+                float x = Scene.Sizes.X / 2f - _frames[_currentFrame].Sprite.Width / 2f;
+                float y = 5;
+                spriteBatch.Draw(_frames[_currentFrame].Sprite, (new Vector2(x, y)).ToPoint().ToVector2(), Color.White);
+            }
             base.DrawSprite(spriteBatch);
         }
         #endregion
