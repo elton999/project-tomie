@@ -51,10 +51,12 @@ namespace UmbrellaToolsKit.EditorEngine.Windows.DialogueEditor
     {
         public static DialogueFormat FromJson(string json) => JsonConvert.DeserializeObject<DialogueFormat>(json, UmbrellaToolsKit.EditorEngine.Windows.DialogueEditor.Converter.Settings);
 
-        public Node GetFirstNode()
+        public Node GetFirstNode() => GetNodeById(StartNode);
+
+        public Node GetNodeById(int id)
         {
             foreach (var node in Nodes)
-                if (node.Id == StartNode)
+                if (node.Id == id)
                     return node;
             return null;
         }
