@@ -52,8 +52,8 @@ namespace Project.UI
                 string text = firstOption.Content;
                 _frames.Add(new Frame() { Sprite = sprite, Text = text });
 
-                Log(firstNode.Name);
-                Log(text);
+                Log("node name: " + firstNode.Name);
+                Log("text: " + text);
                 firstNode = firstOption;
                 Log(firstNode.Id.ToString());
 
