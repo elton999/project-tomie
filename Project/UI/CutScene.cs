@@ -4,6 +4,7 @@ using System.IO;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using UmbrellaToolsKit.Input;
+using UmbrellaToolsKit.Sprite;
 
 namespace Project.UI
 {
@@ -21,12 +22,17 @@ namespace Project.UI
         private int _currentFrame = -1;
         private bool _isPlaying;
 
+        private AsepriteDefinitions _atlas;
+
         public List<Frame> Frames => _frames;
 
         public CutScene(string path) => _path = path;
 
         public override void Start()
         {
+            Sprite = Content.Load<Texture2D>(FilePath.TILE_MAP_SPRITE_PATH);
+            _atlas = Content.Load<AsepriteDefinitions>(FilePath.TILE_MAP_ATLAS_PATH);
+
             SetDialogues();
             UpdateFrames();
             base.Start();
@@ -109,6 +115,8 @@ namespace Project.UI
         {
             if (IsShowing)
             {
+                spriteBatch.Draw(Sprite, new Rectangle(new Point(0), Scene.Sizes), _atlas.Slices["background"].Item1, Color.White);
+
                 float x = Scene.Sizes.X / 2f - _frames[_currentFrame].Sprite.Width / 2f;
                 float y = 5;
                 spriteBatch.Draw(_frames[_currentFrame].Sprite, (new Vector2(x, y)).ToPoint().ToVector2(), Color.White);
