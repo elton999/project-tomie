@@ -4,6 +4,7 @@ using UmbrellaToolsKit.Sprite;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System;
+using UmbrellaToolsKit.Sound;
 
 namespace Project.UI
 {
@@ -15,8 +16,9 @@ namespace Project.UI
         [ShowEditor] private float _animationCooldownValue = 50.0f;
 
         private float _minProgressValue = 0.2f;
-
         private float _progress = 0.0f;
+
+        private FMOD.Studio.EventInstance _typeEventInstance;
 
         public float Progress => _progress;
 
@@ -25,6 +27,7 @@ namespace Project.UI
             Sprite = Content.Load<Texture2D>(FilePath.SMASH_BUTTON_SPRITE_PATH);
             AsepriteDefinitions asepriteDefinitions = Content.Load<AsepriteDefinitions>(FilePath.SMASH_BUTTON_ATLAS_PATH);
             _animation = new AsepriteAnimation(asepriteDefinitions);
+            _typeEventInstance = SoundManager.Instance.GetEventInstance(FSPRO.Event.UI_Click);
             base.Start();
         }
 
@@ -36,6 +39,7 @@ namespace Project.UI
             {
                 _cooldown = Math.Min(_maxCooldown, _cooldown + _animationCooldownValue * (float)gameTime.ElapsedGameTime.TotalSeconds);
                 SetProgress(_minProgressValue);
+                _typeEventInstance.start();
             }
             else
                 SetProgress(_minProgressValue * -(float)gameTime.ElapsedGameTime.TotalSeconds);

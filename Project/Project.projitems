@@ -21,6 +21,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Props\LockerProp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Props\WindowProp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)FilePath.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)fmod_studio_guids.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneSettings.cs" />
@@ -32,6 +33,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />
+    <Folder Include="$(MSBuildThisFileDirectory)SoundsEvent\" />
   </ItemGroup>
   <ItemGroup>
     <MonoGameContentReference Include="$(MSBuildThisFileDirectory)Content\Content.mgcb" />
