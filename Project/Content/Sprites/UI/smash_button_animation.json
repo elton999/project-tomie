@@ -1,0 +1,64 @@
+{ "frames": [
+   {
+    "filename": "smash_button_animation 0.aseprite",
+    "frame": { "x": 0, "y": 0, "w": 88, "h": 54 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 88, "h": 54 },
+    "sourceSize": { "w": 88, "h": 54 },
+    "duration": 50
+   },
+   {
+    "filename": "smash_button_animation 1.aseprite",
+    "frame": { "x": 88, "y": 0, "w": 88, "h": 54 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 88, "h": 54 },
+    "sourceSize": { "w": 88, "h": 54 },
+    "duration": 50
+   },
+   {
+    "filename": "smash_button_animation 2.aseprite",
+    "frame": { "x": 176, "y": 0, "w": 88, "h": 54 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 88, "h": 54 },
+    "sourceSize": { "w": 88, "h": 54 },
+    "duration": 50
+   },
+   {
+    "filename": "smash_button_animation 3.aseprite",
+    "frame": { "x": 264, "y": 0, "w": 88, "h": 54 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 88, "h": 54 },
+    "sourceSize": { "w": 88, "h": 54 },
+    "duration": 50
+   },
+   {
+    "filename": "smash_button_animation 4.aseprite",
+    "frame": { "x": 352, "y": 0, "w": 88, "h": 54 },
+    "rotated": false,
+    "trimmed": false,
+    "spriteSourceSize": { "x": 0, "y": 0, "w": 88, "h": 54 },
+    "sourceSize": { "w": 88, "h": 54 },
+    "duration": 50
+   }
+ ],
+ "meta": {
+  "app": "https://www.aseprite.org/",
+  "version": "1.3.7-x64",
+  "image": "smash_button.png",
+  "format": "RGBA8888",
+  "size": { "w": 440, "h": 54 },
+  "scale": "1",
+  "frameTags": [
+   { "name": "tap", "from": 0, "to": 4, "direction": "forward", "color": "#000000ff" }
+  ],
+  "layers": [
+   { "name": "Layer 3", "opacity": 255, "blendMode": "normal" }
+  ],
+  "slices": [
+  ]
+ }
+}

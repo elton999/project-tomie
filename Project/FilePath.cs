@@ -13,6 +13,9 @@
         // Fonts
         public const string FONT_PATH = "Font";
 
+        //FMOD
+        public const string FMOD_BANK_PATH = "Content/Desktop/Master.bank";
+
         // CutScenes
         public const string CUTSCENE_1_PATH = @"Content/Dialogues/cutscene_1.dn";
     }
