@@ -12,10 +12,10 @@ namespace Project.UI
     {
         private AsepriteAnimation _animation;
         private float _cooldown = 0.0f;
-        [ShowEditor] private float _maxCooldown = 0.1f;
+        [ShowEditor] private float _maxCooldown = 0.2f;
         [ShowEditor] private float _animationCooldownValue = 50.0f;
 
-        private float _minProgressValue = 0.2f;
+        private float _minProgressValue = 4f;
         private float _progress = 0.0f;
 
         private FMOD.Studio.EventInstance _typeEventInstance;
@@ -34,17 +34,18 @@ namespace Project.UI
         public override void Update(GameTime gameTime)
         {
             _animation.Play(gameTime, "tap", AsepriteAnimation.AnimationDirection.LOOP);
+            float timer = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
             if (KeyBoardHandler.KeyPressed(Input.INTERACT))
             {
-                _cooldown = Math.Min(_maxCooldown, _cooldown + _animationCooldownValue * (float)gameTime.ElapsedGameTime.TotalSeconds);
-                SetProgress(_minProgressValue);
+                _cooldown = Math.Min(_maxCooldown, _cooldown + _animationCooldownValue * timer);
+                SetProgress(_minProgressValue * timer);
                 _typeEventInstance.start();
             }
             else
-                SetProgress(_minProgressValue * -(float)gameTime.ElapsedGameTime.TotalSeconds);
+                SetProgress(_animationCooldownValue * 0.01f * -timer);
 
-            _cooldown = Math.Max(0, _cooldown - (float)gameTime.ElapsedGameTime.TotalSeconds);
+            _cooldown = Math.Max(0, _cooldown - timer);
 
             base.Update(gameTime);
         }
@@ -62,6 +63,7 @@ namespace Project.UI
         private void SetProgress(float progress)
         {
             _progress = Math.Clamp(_progress + progress, 0.0f, 1.0f);
+            System.Console.WriteLine(_progress);
         }
 
     }

@@ -3,6 +3,7 @@ using UmbrellaToolsKit.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Project.SoundEvent;
 
 namespace Project
 {
@@ -54,7 +55,9 @@ namespace Project
 
             _gameManagement.SceneManagement.MainScene.SetLevelLdtk(0);
 
-            _gameManagement.SceneManagement.MainScene.AddGameObject(new UI.SmashButton(), Layers.UI);
+            var smashButton = new UI.SmashButton();
+            _gameManagement.SceneManagement.MainScene.AddGameObject(smashButton, Layers.UI);
+            _gameManagement.SceneManagement.MainScene.AddGameObject(new CutScene1(smashButton), Layers.BACKGROUND);
 
             // Inputs
             KeyBoardHandler.AddInput(Input.EXIT, Keys.Escape);
