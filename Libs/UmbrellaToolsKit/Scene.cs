@@ -90,7 +90,7 @@ namespace UmbrellaToolsKit
         public GraphicsDevice ScreenGraphicsDevice;
         public ContentManager Content;
 
-        private Color BackgroundColor = Color.CornflowerBlue;
+        private Color backgroundColor = Color.CornflowerBlue;
         public ScreenController Screen { get; set; }
 
         //Camera
@@ -107,9 +107,10 @@ namespace UmbrellaToolsKit
 
         public Point Sizes { get => new Point(Width, Height); }
 
-        public Color SetBackgroundColor
+        public Color BackgroundColor
         {
-            set => BackgroundColor = value;
+            set => backgroundColor = value;
+            get => backgroundColor;
         }
         #endregion
 
@@ -332,7 +333,7 @@ namespace UmbrellaToolsKit
 
 
                 RestartRenderTarget();
-                if (BackgroundColor != Color.Transparent) graphicsDevice.Clear(BackgroundColor);
+                if (backgroundColor != Color.Transparent) graphicsDevice.Clear(backgroundColor);
 
                 DrawGameObjects(spriteBatch, SortLayers);
 

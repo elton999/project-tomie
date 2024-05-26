@@ -54,6 +54,8 @@ namespace Project
 
             _gameManagement.SceneManagement.MainScene.SetLevelLdtk(0);
 
+            _gameManagement.SceneManagement.MainScene.AddGameObject(new UI.SmashButton(), Layers.UI);
+
             // Inputs
             KeyBoardHandler.AddInput(Input.EXIT, Keys.Escape);
             // moviment

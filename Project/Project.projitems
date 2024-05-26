@@ -28,6 +28,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)UI\Dialogue.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\InteractionMenu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\MenuBase.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\SmashButton.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />

@@ -10,7 +10,7 @@ namespace UmbrellaToolsKit.Sprite
     public class AsepriteAnimation
     {
         public Rectangle Body { get; set; }
-        private AsepriteDefinitions AsepriteDefinitions { get; set; }
+        public AsepriteDefinitions AsepriteDefinitions { get; set; }
 
         public AsepriteAnimation(AsepriteDefinitions AsepriteDefinitions)
         {
