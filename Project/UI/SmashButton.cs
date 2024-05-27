@@ -47,6 +47,8 @@ namespace Project.UI
 
             _cooldown = Math.Max(0, _cooldown - timer);
 
+            Position = (Scene.Sizes.ToVector2() / 2.0f - Body.Size.ToVector2() / 2.0f).ToPoint().ToVector2();
+
             base.Update(gameTime);
         }
 
