@@ -21,7 +21,16 @@ namespace Project.SoundEvent
 
         public override void Update(GameTime gameTime)
         {
-            _soundEventInstance.setParameterByName("pitch", _smashButton.Progress * 3.5f);
+            if (_smashButton != null)
+            {
+                _soundEventInstance.setParameterByName("pitch", _smashButton.Progress * 3.5f);
+                if (_smashButton.Progress * 3.5f >= 3.0f)
+                {
+                    System.Console.WriteLine("removed");
+                    _smashButton.Destroy();
+                    _smashButton = null;
+                }
+            }
             base.Update(gameTime);
         }
     }

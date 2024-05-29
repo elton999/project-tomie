@@ -192,9 +192,12 @@ namespace UmbrellaToolsKit
                             component = component.Next;
                         }
                     }
-
-                    layers[i][e].Update(gameTime);
-                    layers[i][e].CoroutineManagement.Update(gameTime);
+                    try
+                    {
+                        layers[i][e].Update(gameTime);
+                        layers[i][e].CoroutineManagement.Update(gameTime);
+                    }
+                    catch { }
                 }
             }
 
@@ -218,7 +221,11 @@ namespace UmbrellaToolsKit
                                 component = component.Next;
                             }
                         }
-                        layers[i][e].UpdateData(gameTime);
+                        try
+                        {
+                            layers[i][e].UpdateData(gameTime);
+                        }
+                        catch { }
                     }
                 }
                 if (Camera != null)
@@ -276,10 +283,13 @@ namespace UmbrellaToolsKit
         private void RemoveGameObject(List<List<GameObject>> layers)
         {
             // UI
-            IEnumerable<GameObject> _UI_Objects_to_remove = from gameObject in UI where gameObject.RemoveFromScene == true select gameObject;
-
-            IEnumerable<GameObject> _UI_Objects = from gameObject in UI where gameObject.RemoveFromScene == false select gameObject;
-            UI = _UI_Objects.ToList<GameObject>();
+            var newUIlayer = new List<GameObject>();
+            for (int i = UI.Count - 1; i >= 0; i--)
+            {
+                if (!UI[i].RemoveFromScene)
+                    newUIlayer.Add(UI[i]);
+            }
+            UI = newUIlayer;
 
             for (int i = layers.Count - 1; i >= 0; i--)
             {
@@ -329,7 +339,8 @@ namespace UmbrellaToolsKit
 
                 //UI Draw before scene
                 for (int i = UI.Count - 1; i >= 0; i--)
-                    UI[i].DrawBeforeScene(spriteBatch);
+                    if (!UI[i].RemoveFromScene)
+                        UI[i].DrawBeforeScene(spriteBatch);
 
 
                 RestartRenderTarget();
@@ -343,7 +354,8 @@ namespace UmbrellaToolsKit
 #endif
                 //UI Draw
                 for (int i = UI.Count - 1; i >= 0; i--)
-                    UI[i].Draw(spriteBatch);
+                    if (!UI[i].RemoveFromScene)
+                        UI[i].Draw(spriteBatch);
             }
 
             //Scale canvas settings

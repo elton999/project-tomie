@@ -82,7 +82,6 @@ namespace Project.UI
         private void SetProgress(float progress)
         {
             _progress = Math.Clamp(_progress + progress, 0.0f, 1.0f);
-            System.Console.WriteLine(_progress);
         }
 
     }

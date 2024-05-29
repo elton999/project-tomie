@@ -91,8 +91,7 @@ namespace UmbrellaToolsKit
         public virtual void OnMouseOver() { }
         public virtual void Destroy()
         {
-            RemoveFromScene = true;
-            if (Components != null) Components.Destroy();
+            _removeFromScene = true;
             OnDestroy();
         }
         public virtual void OnDestroy() { }
