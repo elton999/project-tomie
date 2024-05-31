@@ -64,7 +64,7 @@ namespace Project.UI
                 SetProgress(_minProgressValue * timer);
                 _typeEventInstance.start();
             }
-            else
+            else if (!_alReadyReachedMaxValue)
                 SetProgress(_animationCooldownValue * 0.01f * -timer);
 
             _cooldown = Math.Max(0, _cooldown - timer);
