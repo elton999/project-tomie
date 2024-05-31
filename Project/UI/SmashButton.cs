@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
 using System;
 using UmbrellaToolsKit.Sound;
+using System.Collections;
 
 namespace Project.UI
 {
@@ -15,8 +16,11 @@ namespace Project.UI
         [ShowEditor] private float _maxCooldown = 0.2f;
         [ShowEditor] private float _animationCooldownValue = 50.0f;
 
-        private float _minProgressValue = 4f;
-        private float _progress = 0.0f;
+        [ShowEditor] private float _minProgressValue = 4f;
+        [ShowEditor] private float _progress = 0.0f;
+
+        [ShowEditor] private bool _alReadyReachedMaxValue = false;
+        [ShowEditor] private float _delayToCallCallBack = 2000.0f;
 
         private FMOD.Studio.EventInstance _typeEventInstance;
 
@@ -27,6 +31,8 @@ namespace Project.UI
         private Vector2 _circlePosition => (Scene.Sizes.ToVector2() / 2.0f).ToPoint().ToVector2() - Vector2.UnitY * 30;
 
         public float Progress => _progress;
+
+        public Action OnReachMaxValue;
 
         public override void Start()
         {
@@ -46,7 +52,7 @@ namespace Project.UI
             _animation.Play(gameTime, "tap", AsepriteAnimation.AnimationDirection.LOOP);
             float timer = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (KeyBoardHandler.KeyPressed(Input.INTERACT) && _progress < 1.0f)
+            if (KeyBoardHandler.KeyPressed(Input.INTERACT) && !_alReadyReachedMaxValue)
             {
                 _cooldown = Math.Min(_maxCooldown, _cooldown + _animationCooldownValue * timer);
                 SetProgress(_minProgressValue * timer);
@@ -81,8 +87,20 @@ namespace Project.UI
 
         private void SetProgress(float progress)
         {
-            if (_progress < 1.0f)
-                _progress = Math.Clamp(_progress + progress, 0.0f, 1.0f);
+            if (_alReadyReachedMaxValue) return;
+
+            _progress = Math.Clamp(_progress + progress, 0.0f, 1.0f);
+
+            if (_progress == 1.0f)
+                CoroutineManagement.StarCoroutine(CallEventDelay());
+        }
+
+        private IEnumerator CallEventDelay()
+        {
+            _alReadyReachedMaxValue = true;
+            yield return CoroutineManagement.Wait(_delayToCallCallBack);
+            OnReachMaxValue?.Invoke();
+            yield return null;
         }
 
     }
