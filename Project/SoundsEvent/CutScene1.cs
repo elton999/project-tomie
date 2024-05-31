@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using System.Collections;
+using Microsoft.Xna.Framework;
 using Project.UI;
 using UmbrellaToolsKit;
 using UmbrellaToolsKit.Sound;
@@ -9,6 +10,7 @@ namespace Project.SoundEvent
     {
         private SmashButton _smashButton;
         private FMOD.Studio.EventInstance _soundEventInstance;
+        private bool _reachedMaxProgress = false;
 
         public CutScene1(SmashButton button) => _smashButton = button;
 
@@ -21,17 +23,22 @@ namespace Project.SoundEvent
 
         public override void Update(GameTime gameTime)
         {
-            if (_smashButton != null)
+            if (!_reachedMaxProgress)
             {
-                _soundEventInstance.setParameterByName("pitch", _smashButton.Progress * 3.5f);
-                if (_smashButton.Progress * 3.5f >= 3.0f)
-                {
-                    System.Console.WriteLine("removed");
-                    _smashButton.Destroy();
-                    _smashButton = null;
-                }
+                _soundEventInstance.setParameterByName("pitch", _smashButton.Progress * 3.0f);
+                if (_smashButton.Progress >= 1.0f && !_reachedMaxProgress)
+                    CoroutineManagement.StarCoroutine(HideButtonScreen());
             }
             base.Update(gameTime);
+        }
+
+        public IEnumerator HideButtonScreen()
+        {
+            _reachedMaxProgress = true;
+            yield return CoroutineManagement.Wait(2000.0f);
+            _smashButton.Destroy();
+            _smashButton = null;
+            yield return null;
         }
     }
 }

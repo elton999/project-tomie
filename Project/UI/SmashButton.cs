@@ -46,7 +46,7 @@ namespace Project.UI
             _animation.Play(gameTime, "tap", AsepriteAnimation.AnimationDirection.LOOP);
             float timer = (float)gameTime.ElapsedGameTime.TotalSeconds;
 
-            if (KeyBoardHandler.KeyPressed(Input.INTERACT))
+            if (KeyBoardHandler.KeyPressed(Input.INTERACT) && _progress < 1.0f)
             {
                 _cooldown = Math.Min(_maxCooldown, _cooldown + _animationCooldownValue * timer);
                 SetProgress(_minProgressValue * timer);
@@ -81,7 +81,8 @@ namespace Project.UI
 
         private void SetProgress(float progress)
         {
-            _progress = Math.Clamp(_progress + progress, 0.0f, 1.0f);
+            if (_progress < 1.0f)
+                _progress = Math.Clamp(_progress + progress, 0.0f, 1.0f);
         }
 
     }
