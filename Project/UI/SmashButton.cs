@@ -81,8 +81,9 @@ namespace Project.UI
         public override void DrawSprite(SpriteBatch spriteBatch)
         {
             base.DrawSprite(spriteBatch);
-            spriteBatch.Draw(_circleTexture, _circlePosition, _circleUnfilled, Color.White, 1f, (_circleUnfilled.Size.ToVector2() / 2.0f).ToPoint().ToVector2(), 1.0f, spriteEffect, 0);
-            spriteBatch.Draw(_circleTexture, _circlePosition, _circleFilled, Color.White, 1f, (_circleUnfilled.Size.ToVector2() / 2.0f).ToPoint().ToVector2(), Progress, spriteEffect, 0);
+            Vector2 originSprite = (_circleUnfilled.Size.ToVector2() / 2.0f).ToPoint().ToVector2();
+            spriteBatch.Draw(_circleTexture, _circlePosition, _circleUnfilled, Color.White, 1f, originSprite, 1.0f, spriteEffect, 0);
+            spriteBatch.Draw(_circleTexture, _circlePosition, _circleFilled, Color.White, 1f, originSprite, Progress, spriteEffect, 0);
         }
 
         private void SetProgress(float progress)
