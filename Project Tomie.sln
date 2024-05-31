@@ -21,6 +21,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonoGame.ContentPipeline.Um
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MonoGame.ImGui", "Libs\Monogame.ImGui\MonoGame.ImGui\MonoGame.ImGui.csproj", "{EA81F569-D669-4CDD-829C-252B14BC07F2}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UmbrellaToolsKit.Sound", "Libs\UmbrellaToolsKit.Sound\UmbrellaToolsKit.Sound.csproj", "{C13FDB59-C60E-4335-8F24-FD19A831DBD7}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -53,6 +55,10 @@ Global
 		{EA81F569-D669-4CDD-829C-252B14BC07F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EA81F569-D669-4CDD-829C-252B14BC07F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EA81F569-D669-4CDD-829C-252B14BC07F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C13FDB59-C60E-4335-8F24-FD19A831DBD7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C13FDB59-C60E-4335-8F24-FD19A831DBD7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C13FDB59-C60E-4335-8F24-FD19A831DBD7}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C13FDB59-C60E-4335-8F24-FD19A831DBD7}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -64,6 +70,7 @@ Global
 		{DA92BF0C-223B-42C3-B655-3880351B0DB2} = {6CA91CF9-80C0-4D6B-BF1D-3FA33AF05417}
 		{797DDADA-0560-4D47-A15C-1C76392D8FF7} = {6CA91CF9-80C0-4D6B-BF1D-3FA33AF05417}
 		{EA81F569-D669-4CDD-829C-252B14BC07F2} = {6CA91CF9-80C0-4D6B-BF1D-3FA33AF05417}
+		{C13FDB59-C60E-4335-8F24-FD19A831DBD7} = {6CA91CF9-80C0-4D6B-BF1D-3FA33AF05417}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E8E47A29-2690-49C9-8A2E-D6EFF596EB0E}

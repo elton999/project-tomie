@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.02.00">
+	<object class="AudioFile" id="{ee2eefff-7b5c-4abe-b167-d96df70d61d2}">
+		<property name="assetPath">
+			<value>Sound FX/Disturbing Risers.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>96</value>
+		</property>
+		<property name="channelCount">
+			<value>2</value>
+		</property>
+		<property name="length">
+			<value>6.2862395833333338</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{8811db8c-8f4c-4c1b-8ddd-bb7d23fc8215}</destination>
+		</relationship>
+	</object>
+</objects>

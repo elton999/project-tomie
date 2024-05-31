@@ -3,6 +3,7 @@ using UmbrellaToolsKit.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
+using Project.SoundEvent;
 
 namespace Project
 {
@@ -12,6 +13,7 @@ namespace Project
         private SpriteBatch _spriteBatch;
         private AssetManagement _assetManagement;
         private GameManagement _gameManagement;
+        private UmbrellaToolsKit.Sound.SoundManager _soundManager;
 
         public Game1()
         {
@@ -28,12 +30,14 @@ namespace Project
             _gameManagement.Game = this;
             _gameManagement.Start();
 
+
             base.Initialize();
         }
 
         protected override void LoadContent()
         {
             _spriteBatch = new SpriteBatch(GraphicsDevice);
+            _soundManager = new UmbrellaToolsKit.Sound.SoundManager(FilePath.FMOD_BANK_PATH);
 
             _assetManagement = new AssetManagement();
             _assetManagement.Set<Entities.Actors.Player>("Player", Layers.PLAYER);
@@ -51,6 +55,10 @@ namespace Project
 
             _gameManagement.SceneManagement.MainScene.SetLevelLdtk(0);
 
+            var smashButton = new UI.SmashButton();
+            _gameManagement.SceneManagement.MainScene.AddGameObject(smashButton, Layers.UI);
+            _gameManagement.SceneManagement.MainScene.AddGameObject(new CutScene1(smashButton), Layers.BACKGROUND);
+
             // Inputs
             KeyBoardHandler.AddInput(Input.EXIT, Keys.Escape);
             // moviment
@@ -63,12 +71,20 @@ namespace Project
             KeyBoardHandler.AddInput(Input.INTERACT, Keys.Space);
         }
 
+        protected override void UnloadContent()
+        {
+            _soundManager.Dispose();
+            base.UnloadContent();
+        }
+
         protected override void Update(GameTime gameTime)
         {
             if (KeyBoardHandler.KeyPressed(Input.EXIT))
                 Exit();
 
             _gameManagement.Update(gameTime);
+
+            _soundManager.Update();
 
             base.Update(gameTime);
         }

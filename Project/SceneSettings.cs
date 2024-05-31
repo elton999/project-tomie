@@ -10,7 +10,7 @@ namespace Project
         public override void Start()
         {
             Tag = "SceneSettings";
-            Scene.SetBackgroundColor = BackgroundColor;
+            Scene.BackgroundColor = BackgroundColor;
         }
     }
 }

@@ -78,6 +78,10 @@
     <PackageReference Include="MonoGame.Framework.Android" Version="3.8.0.1641" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\Libs\UmbrellaToolsKit.Sound\UmbrellaToolsKit.Sound.csproj">
+      <Project>{c13fdb59-c60e-4335-8f24-fd19a831dbd7}</Project>
+      <Name>UmbrellaToolsKit.Sound</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Libs\UmbrellaToolsKit\UmbrellaToolsKit.csproj">
       <Project>{da92bf0c-223b-42c3-b655-3880351b0db2}</Project>
       <Name>UmbrellaToolsKit</Name>

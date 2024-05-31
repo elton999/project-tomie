@@ -27,6 +27,12 @@
 /processorParam:TextureFormat=Color
 /build:CutScenes/cutscene_1_frame_1.png
 
+#begin Desktop/Master.bank
+/copy:Desktop/Master.bank
+
+#begin Desktop/Master.strings.bank
+/copy:Desktop/Master.strings.bank
+
 #begin Dialogues/cutscene_1.dn
 /copy:Dialogues/cutscene_1.dn
 
@@ -78,4 +84,21 @@
 /processorParam:MakeSquare=False
 /processorParam:TextureFormat=Color
 /build:Sprites/tilemap.png
+
+#begin Sprites/UI/smash_button.png
+/importer:TextureImporter
+/processor:TextureProcessor
+/processorParam:ColorKeyColor=255,0,255,255
+/processorParam:ColorKeyEnabled=True
+/processorParam:GenerateMipmaps=False
+/processorParam:PremultiplyAlpha=True
+/processorParam:ResizeToPowerOfTwo=False
+/processorParam:MakeSquare=False
+/processorParam:TextureFormat=Color
+/build:Sprites/UI/smash_button.png
+
+#begin Sprites/UI/smash_button_animation.json
+/importer:AsepriteImporter
+/processor:AsepriteProcessor
+/build:Sprites/UI/smash_button_animation.json
 
