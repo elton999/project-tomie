@@ -31,7 +31,7 @@ namespace Project.SoundEvent
         }
         public override void Update(GameTime gameTime)
         {
-            _soundEventInstance.setParameterByName(PITCH_PARAM, _smashButton.Progress * 3.5f);
+            _soundEventInstance.setParameterByName(PITCH_PARAM, _smashButton.Progress * 3.0f);
         }
 
         private void HideButton()

@@ -32,6 +32,12 @@ namespace Project.UI
         private Rectangle _circleUnfilled => _circleDefinitions.Slices["unfilled_circle"].Item1;
         private Vector2 _circlePosition => (Scene.Sizes.ToVector2() / 2.0f).ToPoint().ToVector2() - Vector2.UnitY * 30;
 
+        private float _shakeMagnitude = 0.2f;
+        private float _timeShake = 0.0f;
+        private Vector2 _positionShakeFactor = Vector2.Zero;
+
+        public static readonly Random getRandom = new Random();
+
         public float Progress => _progress;
 
         public Action OnReachMaxValue;
@@ -63,6 +69,7 @@ namespace Project.UI
                 _cooldown = Math.Min(_maxCooldown, _cooldown + _animationCooldownValue * timer);
                 SetProgress(_minProgressValue * timer);
                 _typeEventInstance.start();
+                _timeShake = 5.0f;
             }
             else if (!_alReadyReachedMaxValue)
                 SetProgress(_animationCooldownValue * 0.01f * -timer);
@@ -70,6 +77,7 @@ namespace Project.UI
             _cooldown = Math.Max(0, _cooldown - timer);
 
             Position = (Scene.Sizes.ToVector2() / 2.0f - Body.Size.ToVector2() / 2.0f).ToPoint().ToVector2();
+            ShakeUpdate(gameTime);
 
             base.Update(gameTime);
         }
@@ -88,8 +96,8 @@ namespace Project.UI
         {
             base.DrawSprite(spriteBatch);
             Vector2 originSprite = (_circleUnfilled.Size.ToVector2() / 2.0f).ToPoint().ToVector2();
-            spriteBatch.Draw(_circleTexture, _circlePosition, _circleUnfilled, Color.White, 1f, originSprite, 1.0f, spriteEffect, 0);
-            spriteBatch.Draw(_circleTexture, _circlePosition, _circleFilled, Color.White, 1f, originSprite, Progress, spriteEffect, 0);
+            spriteBatch.Draw(_circleTexture, _circlePosition + _positionShakeFactor, _circleUnfilled, Color.White, 1f, originSprite, 1.0f, spriteEffect, 0);
+            spriteBatch.Draw(_circleTexture, _circlePosition + _positionShakeFactor, _circleFilled, Color.White, 1f, originSprite, Progress, spriteEffect, 0);
         }
 
         private void SetProgress(float progress)
@@ -108,6 +116,21 @@ namespace Project.UI
             yield return CoroutineManagement.Wait(_delayToCallCallBack);
             OnReachMaxValue?.Invoke();
             yield return null;
+        }
+
+        private void ShakeUpdate(GameTime gameTime)
+        {
+            if (_timeShake > 0)
+            {
+                int randomX = getRandom.Next(-5, 5);
+                int randomY = getRandom.Next(-5, 5);
+                _positionShakeFactor = new Vector2(randomX * _shakeMagnitude, randomY * _shakeMagnitude);
+
+                _timeShake -= 1;
+
+                return;
+            }
+            _positionShakeFactor = Vector2.Zero;
         }
 
         private void SkipProgress() => SetProgress(float.MaxValue);
