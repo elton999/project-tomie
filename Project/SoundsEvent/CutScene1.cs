@@ -9,7 +9,6 @@ namespace Project.SoundEvent
     {
         private SmashButton _smashButton;
         private FMOD.Studio.EventInstance _soundEventInstance;
-        private bool _reachedMaxProgress = false;
 
         private const string PITCH_PARAM = "pitch";
 
@@ -27,8 +26,7 @@ namespace Project.SoundEvent
 
         public override void Update(GameTime gameTime)
         {
-            if (!_reachedMaxProgress)
-                _soundEventInstance.setParameterByName(PITCH_PARAM, _smashButton.Progress * 3.0f);
+            _soundEventInstance.setParameterByName(PITCH_PARAM, _smashButton.Progress * 3.5f);
         }
 
         private void HideButton()

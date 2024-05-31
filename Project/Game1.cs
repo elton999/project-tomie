@@ -30,7 +30,6 @@ namespace Project
             _gameManagement.Game = this;
             _gameManagement.Start();
 
-
             base.Initialize();
         }
 

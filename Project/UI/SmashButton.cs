@@ -1,9 +1,11 @@
-﻿using UmbrellaToolsKit;
+﻿using System;
+using UmbrellaToolsKit;
 using UmbrellaToolsKit.Input;
 using UmbrellaToolsKit.Sprite;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework;
-using System;
+using Microsoft.Xna.Framework.Input;
+using UmbrellaToolsKit.Utils;
 using UmbrellaToolsKit.Sound;
 using System.Collections;
 
@@ -44,8 +46,12 @@ namespace Project.UI
             _circleTexture = Content.Load<Texture2D>(FilePath.TILE_MAP_SPRITE_PATH);
             _circleDefinitions = Content.Load<AsepriteDefinitions>(FilePath.TILE_MAP_ATLAS_PATH);
 
+            CheatListener.AddCheat(Keys.F1, SkipProgress);
+
             base.Start();
         }
+
+        public override void OnDestroy() => CheatListener.RemoveCheat(Keys.F1);
 
         public override void Update(GameTime gameTime)
         {
@@ -103,6 +109,8 @@ namespace Project.UI
             OnReachMaxValue?.Invoke();
             yield return null;
         }
+
+        private void SkipProgress() => SetProgress(float.MaxValue);
 
     }
 }
