@@ -6,6 +6,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using UmbrellaToolsKit.Collision;
 using UmbrellaToolsKit.Interfaces;
+using UmbrellaToolsKit.Utils;
 
 namespace UmbrellaToolsKit
 {
@@ -16,6 +17,9 @@ namespace UmbrellaToolsKit
             ScreenGraphicsDevice = screenGraphicsDevice;
             Content = content;
             addLayers();
+#if DEBUG
+            AddGameObject(new CheatListener(), Layers.BACKGROUND);
+#endif
         }
 
         #region Layers

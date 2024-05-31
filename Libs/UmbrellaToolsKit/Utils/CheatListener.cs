@@ -9,7 +9,7 @@ namespace UmbrellaToolsKit.Utils
 {
     public class CheatListener : GameObject
     {
-        private CheatListener _instance;
+        private static CheatListener _instance;
         private List<Tuple<Keys, Action>> _cheatList = new List<Tuple<Keys, Action>>();
 
         public override void Start() => _instance = _instance == null ? this : _instance;
@@ -23,26 +23,32 @@ namespace UmbrellaToolsKit.Utils
 
         public static void Execute(Tuple<Keys, Action> cheat)
         {
+#if DEBUG
             Log.Write($"Executing cheat {cheat.Item2.Method.Name}");
             cheat.Item2?.Invoke();
+#endif
         }
 
-        public void AddCheat(Keys key, Action action = null)
+        public static void AddCheat(Keys key, Action action = null)
         {
+#if DEBUG
             KeyBoardHandler.AddInput(key);
-            _cheatList.Add(new Tuple<Keys, Action>(key, action));
+            _instance._cheatList.Add(new Tuple<Keys, Action>(key, action));
+#endif
         }
 
-        public void RemoveCheat(Keys key)
+        public static void RemoveCheat(Keys key)
         {
-            foreach (var cheat in _cheatList)
+#if DEBUG
+            foreach (var cheat in _instance._cheatList)
             {
                 if (cheat.Item1 == key)
                 {
-                    _cheatList.Remove(cheat);
+                    _instance._cheatList.Remove(cheat);
                     return;
                 }
             }
+#endif
         }
 
         public override void OnDestroy() => _cheatList.Clear();
