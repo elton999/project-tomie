@@ -8,6 +8,7 @@ namespace Project.SoundEvent
     public class CutScene1 : GameObject
     {
         private SmashButton _smashButton;
+        private CutScene _cutSceneSequence = new CutScene(FilePath.CUTSCENE_1_PATH);
         private FMOD.Studio.EventInstance _soundEventInstance;
 
         private const string PITCH_PARAM = "pitch";
@@ -19,11 +20,15 @@ namespace Project.SoundEvent
             _smashButton.OnReachMaxValue += HideButton;
             _soundEventInstance = SoundManager.Instance.GetEventInstance(FSPRO.Event.First_CutScene);
             _soundEventInstance.start();
+            Scene.AddGameObject(_cutSceneSequence, Layers.UI);
             base.Start();
         }
 
-        public override void OnDestroy() => _smashButton.OnReachMaxValue -= HideButton;
-
+        public override void OnDestroy()
+        {
+            _cutSceneSequence.Destroy();
+            _smashButton.OnReachMaxValue -= HideButton;
+        }
         public override void Update(GameTime gameTime)
         {
             _soundEventInstance.setParameterByName(PITCH_PARAM, _smashButton.Progress * 3.5f);
@@ -34,6 +39,8 @@ namespace Project.SoundEvent
             _smashButton.OnReachMaxValue -= HideButton;
             _smashButton.Destroy();
             _smashButton = null;
+
+            _cutSceneSequence.Play();
         }
     }
 }
