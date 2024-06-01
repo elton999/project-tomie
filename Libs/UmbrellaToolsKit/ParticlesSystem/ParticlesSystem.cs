@@ -9,9 +9,11 @@ namespace UmbrellaToolsKit.ParticlesSystem
     {
         private float _timer = 0.0f;
 
-        public bool IsPlaying { get => (IsOnTime && Particles.Count > 0) || EmitsFor == TypeEmitter.INFINITE; }
+        private bool _isPlaying = false;
 
-        private bool IsOnTime { get => EmitsFor == TypeEmitter.FOR_TIME && _timer >= 0; }
+        public bool IsPlaying { get => _isPlaying && ((IsOnTime && Particles.Count > 0) || EmitsFor == TypeEmitter.INFINITE); }
+
+        private bool IsOnTime { get => EmitsFor == TypeEmitter.FOR_TIME && _timer > 0.0f; }
 
         public enum TypeEmitter { FOR_TIME, INFINITE }
 
@@ -32,14 +34,30 @@ namespace UmbrellaToolsKit.ParticlesSystem
         public float ParticleAngleRotation = 90f;
         public float ParticleRadiusSpawn = 10f;
 
+        public override void Start()
+        {
+            Tag = nameof(ParticlesSystem);
+        }
+
         public void Restart() => _timer = EmitterTime;
+
+        public void Play()
+        {
+            _isPlaying = true;
+            Restart();
+        }
 
         public override void Update(GameTime gameTime)
         {
-            _timer -= (float)gameTime.ElapsedGameTime.TotalMilliseconds;
+            _timer -= (float)gameTime.ElapsedGameTime.Milliseconds;
 
             if (IsOnTime || EmitsFor == TypeEmitter.INFINITE)
                 ImitParticles();
+
+            if (Particles.Count > 0)
+            {
+                Console.WriteLine(Particles[0].Position);
+            }
 
             CheckLifeTimeParticles(gameTime);
         }
@@ -65,7 +83,7 @@ namespace UmbrellaToolsKit.ParticlesSystem
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            BeginDraw(spriteBatch);
+            BeginDraw(spriteBatch, Layer != Layers.UI);
             DrawParticles(spriteBatch);
             EndDraw(spriteBatch);
         }
