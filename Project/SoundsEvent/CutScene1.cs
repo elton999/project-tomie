@@ -66,18 +66,18 @@ namespace Project.SoundEvent
 
         private void OnFinishCutSceneSequence()
         {
-            _cutSceneSequence.OnFinish -= OnFinishCutSceneSequence;
             _soundEventInstance.setParameterByName(FINISHED_CUTSCENE_PARAM, 1.0f);
-            _cutSceneSequence.Destroy();
-            _cutSceneSequence = null;
-            _soundEventInstance.setParameterByName(PITCH_PARAM, 4.0f);
             _soundEventInstance.setCallback(OnReachMark, EVENT_CALLBACK_TYPE.TIMELINE_MARKER);
             _showBackground = true;
+
+            _cutSceneSequence.OnFinish -= OnFinishCutSceneSequence;
+            _cutSceneSequence.Destroy();
+            _cutSceneSequence = null;
         }
 
         private RESULT OnReachMark(EVENT_CALLBACK_TYPE type, IntPtr _event, IntPtr parameters)
         {
-            UmbrellaToolsKit.EditorEngine.Log.Write("OnReachMark");
+            UmbrellaToolsKit.EditorEngine.Log.Write("CutScene1 OnReachMark");
             ShowLogoTitle();
 
             return RESULT.OK;
