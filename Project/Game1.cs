@@ -56,7 +56,7 @@ namespace Project
 
             var smashButton = new UI.SmashButton();
             _gameManagement.SceneManagement.MainScene.AddGameObject(smashButton, Layers.UI);
-            _gameManagement.SceneManagement.MainScene.AddGameObject(new CutScene1(smashButton), Layers.BACKGROUND);
+            _gameManagement.SceneManagement.MainScene.AddGameObject(new CutScene1(smashButton), Layers.UI);
 
             // Inputs
             KeyBoardHandler.AddInput(Input.EXIT, Keys.Escape);
