@@ -133,7 +133,7 @@ namespace Project.UI
             _positionShakeFactor = Vector2.Zero;
         }
 
-        private void SkipProgress() => SetProgress(float.MaxValue);
+        private void SkipProgress() => SetProgress(1.0f);
 
     }
 }

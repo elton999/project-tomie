@@ -62,6 +62,8 @@ namespace Project.SoundEvent
 
             _cutSceneSequence.Play();
             _cutSceneSequence.OnFinish += OnFinishCutSceneSequence;
+
+            _soundEventInstance.setParameterByName(PITCH_PARAM, 4.0f);
         }
 
         private void OnFinishCutSceneSequence()
@@ -75,6 +77,7 @@ namespace Project.SoundEvent
             _cutSceneSequence = null;
         }
 
+        #region title sequence
         private RESULT OnReachMark(EVENT_CALLBACK_TYPE type, IntPtr _event, IntPtr parameters)
         {
             UmbrellaToolsKit.EditorEngine.Log.Write("CutScene1 OnReachMark");
@@ -105,5 +108,6 @@ namespace Project.SoundEvent
             _gameTitle.Transparent = 0.0f;
             Scene.AddGameObject(_gameTitle, Layers.UI);
         }
+        #endregion
     }
 }
