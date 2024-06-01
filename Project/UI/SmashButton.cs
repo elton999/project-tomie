@@ -74,6 +74,9 @@ namespace Project.UI
             else if (!_alReadyReachedMaxValue)
                 SetProgress(_animationCooldownValue * 0.01f * -timer);
 
+            if (_alReadyReachedMaxValue)
+                Transparent = Math.Clamp(Transparent - gameTime.ElapsedGameTime.Milliseconds, 0.0f, 1.0f);
+
             _cooldown = Math.Max(0, _cooldown - timer);
 
             Position = (Scene.Sizes.ToVector2() / 2.0f - Body.Size.ToVector2() / 2.0f).ToPoint().ToVector2();
