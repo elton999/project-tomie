@@ -30,7 +30,7 @@ namespace Project.UI
         private AsepriteDefinitions _circleDefinitions;
         private Rectangle _circleFilled => _circleDefinitions.Slices["filled_circle"].Item1;
         private Rectangle _circleUnfilled => _circleDefinitions.Slices["unfilled_circle"].Item1;
-        private Vector2 _circlePosition => (Scene.Sizes.ToVector2() / 2.0f).ToPoint().ToVector2() - Vector2.UnitY * 30;
+        private Vector2 _circlePosition => (Scene.Sizes.ToVector2() / 2.0f).ToPoint().ToVector2();
 
         private float _shakeMagnitude = 0.2f;
         private float _timeShake = 0.0f;
@@ -77,6 +77,7 @@ namespace Project.UI
             _cooldown = Math.Max(0, _cooldown - timer);
 
             Position = (Scene.Sizes.ToVector2() / 2.0f - Body.Size.ToVector2() / 2.0f).ToPoint().ToVector2();
+            Position += Vector2.UnitY * 40;
             ShakeUpdate(gameTime);
 
             base.Update(gameTime);
