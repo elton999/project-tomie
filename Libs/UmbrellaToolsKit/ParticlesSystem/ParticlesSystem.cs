@@ -54,11 +54,6 @@ namespace UmbrellaToolsKit.ParticlesSystem
             if (IsOnTime || EmitsFor == TypeEmitter.INFINITE)
                 ImitParticles();
 
-            if (Particles.Count > 0)
-            {
-                Console.WriteLine(Particles[0].Position);
-            }
-
             CheckLifeTimeParticles(gameTime);
         }
 
