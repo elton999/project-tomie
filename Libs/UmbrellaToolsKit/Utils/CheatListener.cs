@@ -24,7 +24,7 @@ namespace UmbrellaToolsKit.Utils
         public static void Execute(Tuple<Keys, Action> cheat)
         {
 #if DEBUG
-            Log.Write($"Executing cheat {cheat.Item2.Method.Name}");
+            Log.Write($"[CheatListener] Executing cheat {cheat.Item2.Method.Name}");
             cheat.Item2?.Invoke();
 #endif
         }

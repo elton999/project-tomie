@@ -5,11 +5,14 @@ using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using UmbrellaToolsKit.Input;
 using UmbrellaToolsKit.Sprite;
+using System;
 
 namespace Project.UI
 {
     public class CutScene : Dialogue
     {
+        public Action OnFinish;
+
         public struct Frame
         {
             public Texture2D Sprite;
@@ -70,6 +73,7 @@ namespace Project.UI
             {
                 Clear();
                 Log("Stopped");
+                OnFinish?.Invoke();
                 return;
             }
 
