@@ -752,7 +752,7 @@
 	</object>
 	<object class="NamedMarker" id="{90dbbc5e-dafa-493a-a5e2-7c24e950968e}">
 		<property name="position">
-			<value>32</value>
+			<value>32.200000000000003</value>
 		</property>
 		<property name="name">
 			<value>game start</value>
