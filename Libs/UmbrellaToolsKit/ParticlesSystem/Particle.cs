@@ -7,6 +7,14 @@ namespace UmbrellaToolsKit.ParticlesSystem
         public float LifeTime = 10000f;
         public Vector2 Velocity = new Vector2(0, 1);
         public float Angle = 0;
+        public bool DecreaseScale = false;
+        public float DecreaseScaleSpeed = 10.0f;
+
+        public override void Start()
+        {
+            Origin = -(new Vector2(Sprite.Width, Sprite.Height) / 2.0f);
+            base.Start();
+        }
 
         public override void Update(GameTime gameTime)
         {
@@ -14,6 +22,7 @@ namespace UmbrellaToolsKit.ParticlesSystem
             LifeTime -= deltaTime;
             Rotation += Angle * deltaTime;
             Position += Velocity * deltaTime;
+            if (DecreaseScale) Scale = MathHelper.Max(Scale - deltaTime * DecreaseScaleSpeed, 0.0f);
 
             Origin = Vector2.One / 2f;
         }

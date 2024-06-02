@@ -19,20 +19,22 @@ namespace UmbrellaToolsKit.ParticlesSystem
 
         public List<Particle> Particles = new List<Particle>();
         public List<Texture2D> Sprites = new List<Texture2D>();
-        public float EmitterTime = 0.0f;
+        [ShowEditor] public float EmitterTime = 0.0f;
         public TypeEmitter EmitsFor = TypeEmitter.INFINITE;
 
-        public int MaxParticles = 5;
+        [ShowEditor] public int MaxParticles = 5;
 
-        public float ParticleVelocityAngle = 90f;
-        public float ParticleAngleEmitter = 180f - (90f / 2f);
-        public float ParticleMaxScale = 20;
-        public float ParticleAngle = 90f;
-        public float ParticleLifeTime = 1800f;
-        public float ParticleTransparent = 0.5f;
-        public float ParticleVelocity = 200f;
-        public float ParticleAngleRotation = 90f;
-        public float ParticleRadiusSpawn = 10f;
+        [ShowEditor] public float ParticleVelocityAngle = 90f;
+        [ShowEditor] public float ParticleAngleEmitter = 180f - (90f / 2f);
+        [ShowEditor] public float ParticleMaxScale = 20;
+        [ShowEditor] public float ParticleAngle = 90f;
+        [ShowEditor] public float ParticleLifeTime = 1800f;
+        [ShowEditor] public float ParticleTransparent = 0.5f;
+        [ShowEditor] public float ParticleVelocity = 200f;
+        [ShowEditor] public float ParticleAngleRotation = 90f;
+        [ShowEditor] public float ParticleRadiusSpawn = 10f;
+        [ShowEditor] public bool ParticleDecreaseScale = false;
+        [ShowEditor] public float ParticleScaleSpeed = 10.0f;
 
         public override void Start()
         {
@@ -64,6 +66,7 @@ namespace UmbrellaToolsKit.ParticlesSystem
                 Particles[i].Update(gameTime);
                 if (Particles[i].LifeTime <= 0f)
                 {
+                    Particles[i].Dispose();
                     Particles.RemoveAt(i);
                     i--;
                 }
@@ -104,7 +107,9 @@ namespace UmbrellaToolsKit.ParticlesSystem
                 Transparent = ParticleTransparent,
                 Velocity = velocityDirection * ParticleVelocity / 1000f,
                 Sprite = Sprites[random.Next(0, Sprites.Count - 1)],
-                LifeTime = (float)random.NextDouble() * ParticleLifeTime
+                LifeTime = (float)random.NextDouble() * ParticleLifeTime,
+                DecreaseScale = ParticleDecreaseScale,
+                DecreaseScaleSpeed = ParticleScaleSpeed,
             };
         }
     }

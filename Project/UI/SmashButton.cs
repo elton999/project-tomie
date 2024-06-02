@@ -23,7 +23,7 @@ namespace Project.UI
         [ShowEditor] private float _progress = 0.0f;
 
         [ShowEditor] private bool _alReadyReachedMaxValue = false;
-        [ShowEditor] private float _delayToCallCallBack = 2000.0f;
+        [ShowEditor] private float _delayToCallCallBack = 3000.0f;
 
         private FMOD.Studio.EventInstance _typeEventInstance;
 
@@ -57,12 +57,13 @@ namespace Project.UI
             _circleDefinitions = Content.Load<AsepriteDefinitions>(FilePath.TILE_MAP_ATLAS_PATH);
 
             _finishParticleEffect.Position = _circlePosition;
-            Scene.AddGameObject(_finishParticleEffect, Layers.UI);
-            OnReachMaxValue += _finishParticleEffect.Play;
 
             CheatListener.AddCheat(Keys.F1, SkipProgress);
 
             base.Start();
+
+            Scene.AddGameObject(_finishParticleEffect, Layers.UI);
+            OnReachMaxValue += _finishParticleEffect.Play;
         }
 
         public override void OnDestroy()

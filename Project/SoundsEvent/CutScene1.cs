@@ -35,12 +35,6 @@ namespace Project.SoundEvent
             base.Start();
         }
 
-        public override void OnDestroy()
-        {
-            _cutSceneSequence.Destroy();
-            _smashButton.OnReachMaxValueDelayed -= HideButton;
-        }
-
         public override void Update(GameTime gameTime)
         {
             if (_smashButton != null)

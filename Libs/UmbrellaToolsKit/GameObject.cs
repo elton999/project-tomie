@@ -125,6 +125,7 @@ namespace UmbrellaToolsKit
         public virtual void Dispose()
         {
             OnDestroy();
+            Sprite = null;
             if (Components != null) Components.Destroy();
             GC.SuppressFinalize(this);
         }
