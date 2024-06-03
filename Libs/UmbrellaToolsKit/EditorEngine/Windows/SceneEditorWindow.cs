@@ -150,6 +150,8 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                 ShowGameObjectFromLayer(_gameManagement.SceneManagement.MainScene.Middleground);
             if (ImGui.TreeNode("Background"))
                 ShowGameObjectFromLayer(_gameManagement.SceneManagement.MainScene.Backgrounds);
+            if (ImGui.TreeNode("UI"))
+                ShowGameObjectFromLayer(_gameManagement.SceneManagement.MainScene.UI);
             ImGui.End();
         }
 

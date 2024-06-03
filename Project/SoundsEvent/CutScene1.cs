@@ -25,7 +25,7 @@ namespace Project.SoundEvent
 
         public override void Start()
         {
-            _smashButton.OnReachMaxValue += HideButton;
+            _smashButton.OnReachMaxValueDelayed += HideButton;
             _soundEventInstance = SoundManager.Instance.GetEventInstance(FSPRO.Event.First_CutScene);
             _soundEventInstance.start();
 
@@ -33,12 +33,6 @@ namespace Project.SoundEvent
 
             CreateTitleSprite();
             base.Start();
-        }
-
-        public override void OnDestroy()
-        {
-            _cutSceneSequence.Destroy();
-            _smashButton.OnReachMaxValue -= HideButton;
         }
 
         public override void Update(GameTime gameTime)
@@ -56,7 +50,7 @@ namespace Project.SoundEvent
 
         private void HideButton()
         {
-            _smashButton.OnReachMaxValue -= HideButton;
+            _smashButton.OnReachMaxValueDelayed -= HideButton;
             _smashButton.Destroy();
             _smashButton = null;
 

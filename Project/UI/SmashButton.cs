@@ -8,6 +8,7 @@ using Microsoft.Xna.Framework.Input;
 using UmbrellaToolsKit.Utils;
 using UmbrellaToolsKit.Sound;
 using System.Collections;
+using UmbrellaToolsKit.ParticlesSystem;
 
 namespace Project.UI
 {
@@ -22,7 +23,7 @@ namespace Project.UI
         [ShowEditor] private float _progress = 0.0f;
 
         [ShowEditor] private bool _alReadyReachedMaxValue = false;
-        [ShowEditor] private float _delayToCallCallBack = 2000.0f;
+        [ShowEditor] private float _delayToCallCallBack = 3000.0f;
 
         private FMOD.Studio.EventInstance _typeEventInstance;
 
@@ -30,16 +31,19 @@ namespace Project.UI
         private AsepriteDefinitions _circleDefinitions;
         private Rectangle _circleFilled => _circleDefinitions.Slices["filled_circle"].Item1;
         private Rectangle _circleUnfilled => _circleDefinitions.Slices["unfilled_circle"].Item1;
-        private Vector2 _circlePosition => (Scene.Sizes.ToVector2() / 2.0f).ToPoint().ToVector2() - Vector2.UnitY * 30;
+        private Vector2 _circlePosition => (Scene.Sizes.ToVector2() / 2.0f).ToPoint().ToVector2();
 
         private float _shakeMagnitude = 0.2f;
         private float _timeShake = 0.0f;
         private Vector2 _positionShakeFactor = Vector2.Zero;
 
+        private ParticlesSystem _finishParticleEffect = new SmashButtonParticleEfx();
+
         public static readonly Random getRandom = new Random();
 
         public float Progress => _progress;
 
+        public Action OnReachMaxValueDelayed;
         public Action OnReachMaxValue;
 
         public override void Start()
@@ -52,12 +56,22 @@ namespace Project.UI
             _circleTexture = Content.Load<Texture2D>(FilePath.TILE_MAP_SPRITE_PATH);
             _circleDefinitions = Content.Load<AsepriteDefinitions>(FilePath.TILE_MAP_ATLAS_PATH);
 
+            _finishParticleEffect.Position = _circlePosition;
+
             CheatListener.AddCheat(Keys.F1, SkipProgress);
 
             base.Start();
+
+            Scene.AddGameObject(_finishParticleEffect, Layers.UI);
+            OnReachMaxValue += _finishParticleEffect.Play;
         }
 
-        public override void OnDestroy() => CheatListener.RemoveCheat(Keys.F1);
+        public override void OnDestroy()
+        {
+            OnReachMaxValue -= _finishParticleEffect.Play;
+            _finishParticleEffect.Destroy();
+            CheatListener.RemoveCheat(Keys.F1);
+        }
 
         public override void Update(GameTime gameTime)
         {
@@ -74,9 +88,13 @@ namespace Project.UI
             else if (!_alReadyReachedMaxValue)
                 SetProgress(_animationCooldownValue * 0.01f * -timer);
 
+            if (_alReadyReachedMaxValue)
+                Transparent = Math.Clamp(Transparent - gameTime.ElapsedGameTime.Milliseconds, 0.0f, 1.0f);
+
             _cooldown = Math.Max(0, _cooldown - timer);
 
             Position = (Scene.Sizes.ToVector2() / 2.0f - Body.Size.ToVector2() / 2.0f).ToPoint().ToVector2();
+            Position += Vector2.UnitY * 40;
             ShakeUpdate(gameTime);
 
             base.Update(gameTime);
@@ -112,9 +130,10 @@ namespace Project.UI
 
         private IEnumerator CallEventDelay()
         {
+            OnReachMaxValue?.Invoke();
             _alReadyReachedMaxValue = true;
             yield return CoroutineManagement.Wait(_delayToCallCallBack);
-            OnReachMaxValue?.Invoke();
+            OnReachMaxValueDelayed?.Invoke();
             yield return null;
         }
 

@@ -31,6 +31,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)UI\InteractionMenu.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\MenuBase.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\SmashButton.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)UI\SmashButtonParticleEfx.cs" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="$(MSBuildThisFileDirectory)Content\" />

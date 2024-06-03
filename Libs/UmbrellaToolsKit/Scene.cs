@@ -246,8 +246,7 @@ namespace UmbrellaToolsKit
                 UpdateGameObjects(gameTime, SortLayers);
                 // check if gameobjects is visible
                 IsVisibleGameObject(SortLayers);
-                // remove gameObjects
-                RemoveGameObject(SortLayers);
+
             }
         }
 
@@ -287,13 +286,11 @@ namespace UmbrellaToolsKit
         private void RemoveGameObject(List<List<GameObject>> layers)
         {
             // UI
-            var newUIlayer = new List<GameObject>();
             for (int i = UI.Count - 1; i >= 0; i--)
             {
-                if (!UI[i].RemoveFromScene)
-                    newUIlayer.Add(UI[i]);
+                if (UI[i].RemoveFromScene)
+                    UI.RemoveAt(i);
             }
-            UI = newUIlayer;
 
             for (int i = layers.Count - 1; i >= 0; i--)
             {
@@ -342,7 +339,7 @@ namespace UmbrellaToolsKit
                 DrawGameObjectsBeforeScene(spriteBatch, SortLayers);
 
                 //UI Draw before scene
-                for (int i = UI.Count - 1; i >= 0; i--)
+                for (int i = 0; i < UI.Count; i++)
                     if (!UI[i].RemoveFromScene)
                         UI[i].DrawBeforeScene(spriteBatch);
 
@@ -357,9 +354,12 @@ namespace UmbrellaToolsKit
                     this.Grid.Draw(spriteBatch);
 #endif
                 //UI Draw
-                for (int i = UI.Count - 1; i >= 0; i--)
+                for (int i = 0; i < UI.Count; i++)
                     if (!UI[i].RemoveFromScene)
                         UI[i].Draw(spriteBatch);
+
+                // remove gameObjects
+                RemoveGameObject(SortLayers);
             }
 
             //Scale canvas settings
