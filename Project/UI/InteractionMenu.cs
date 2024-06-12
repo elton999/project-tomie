@@ -33,7 +33,7 @@ namespace Project.UI
             if (KeyBoardHandler.KeyPressed(Input.DOWN))
                 SelectNextButton();
 
-            if (KeyBoardHandler.KeyPressed(Input.EXIT))
+            if (KeyBoardHandler.KeyPressed(Input.CANCEL))
                 HideMenu();
 
         }
