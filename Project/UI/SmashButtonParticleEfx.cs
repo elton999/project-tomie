@@ -35,9 +35,6 @@ namespace Project.UI
             base.Start();
         }
 
-        public override void OnDestroy()
-        {
-            CheatListener.RemoveCheat(Keys.F2);
-        }
+        public override void OnDestroy() => CheatListener.RemoveCheat(Keys.F2);
     }
 }

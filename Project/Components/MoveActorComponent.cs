@@ -16,15 +16,9 @@ namespace Project.Components
 
         public override void Start() => _actor = GameObject.GetActor();
 
-        public override void UpdateData(GameTime gameTime)
-        {
-            _actor.Velocity = _direction * _velocity;
-        }
+        public override void UpdateData(GameTime gameTime) => _actor.Velocity = _direction * _velocity;
 
-        public void SetDirection(Vector2 direction)
-        {
-            _direction = direction;
-        }
+        public void SetDirection(Vector2 direction) => _direction = direction;
 
         public void SetVelocity(float velocity) => _velocity = velocity;
     }

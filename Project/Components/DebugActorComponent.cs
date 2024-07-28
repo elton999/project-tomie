@@ -10,10 +10,12 @@ namespace Project.Components
 
         public override void Start()
         {
-            _square = new Square();
-            _square.size = GameObject.size;
-            _square.SquareColor = Color.Blue;
-            _square.Position = GameObject.Position;
+            _square = new Square
+            {
+                size = GameObject.size,
+                SquareColor = Color.Blue,
+                Position = GameObject.Position
+            };
             GameObject.Scene.AddGameObject(_square, Layers.MIDDLEGROUND);
             base.Start();
         }

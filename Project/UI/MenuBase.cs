@@ -120,6 +120,5 @@ namespace Project.UI
                 spriteBatch.DrawString(Font, button.Name, Position + button.TextPosition, button.Color);
             }
         }
-
     }
 }
