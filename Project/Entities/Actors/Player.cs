@@ -12,9 +12,10 @@ namespace Project.Entities.Actors
 
         public override void Start()
         {
-
             size = new Point(20, 55);
             Origin = new Vector2(20, 9);
+
+            Gravity2D = Vector2.Zero;
 
             tag = "player";
             base.Start();
