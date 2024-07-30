@@ -18,8 +18,15 @@ namespace UmbrellaToolsKit.Collision
         public override void UpdateData(GameTime gameTime)
         {
             base.UpdateData(gameTime);
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
             if (HasGravity)
-                Gravity((float)gameTime.ElapsedGameTime.TotalSeconds);
+            {
+                Gravity(deltaTime);
+                return;
+            }
+
+            moveX(Velocity.X * deltaTime);
+            moveY(Velocity.Y * deltaTime);
         }
 
         public int Right { get => (int)(Position.X + size.X); }
