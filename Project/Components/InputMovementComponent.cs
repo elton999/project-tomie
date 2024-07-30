@@ -22,16 +22,16 @@ namespace Project.Components
             Vector2 direction = Vector2.Zero;
 
             if (KeyBoardHandler.KeyDown(Input.LEFT))
-                direction = Vector2.UnitX * -1;
+                direction += Vector2.UnitX * -1;
             if (KeyBoardHandler.KeyDown(Input.RIGHT))
-                direction = Vector2.UnitX;
+                direction += Vector2.UnitX;
 
             if (KeyBoardHandler.KeyDown(Input.UP) && _verticalMovement)
-                direction = Vector2.UnitY * -1;
+                direction += Vector2.UnitY * -1;
             if (KeyBoardHandler.KeyDown(Input.DOWN) && _verticalMovement)
-                direction = Vector2.UnitY;
+                direction += Vector2.UnitY;
 
-            direction.Normalize();
+            //direction.Normalize();
             _moveActor.SetDirection(direction);
             base.Update(gameTime);
         }
