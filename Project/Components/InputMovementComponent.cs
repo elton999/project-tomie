@@ -31,6 +31,7 @@ namespace Project.Components
             if (KeyBoardHandler.KeyDown(Input.DOWN) && _verticalMovement)
                 direction = Vector2.UnitY;
 
+            direction.Normalize();
             _moveActor.SetDirection(direction);
             base.Update(gameTime);
         }
