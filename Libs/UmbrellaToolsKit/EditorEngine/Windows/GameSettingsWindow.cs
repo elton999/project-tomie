@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using ImGuiNET;
 using Microsoft.Xna.Framework;
@@ -19,9 +20,14 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
         {
             get
             {
-                Assembly myAssembly = Assembly.GetExecutingAssembly();
+                Assembly currentAssembly = Assembly.GetExecutingAssembly();
+                Assembly projectAssembly = Assembly.GetEntryAssembly();
                 Type gameSettingsType = typeof(GameSettingsPropertyAttribute);
-                return AttributesHelper.GetTypesWithAttribute(myAssembly, gameSettingsType);
+
+                List<Type> types = AttributesHelper.GetTypesWithAttribute(currentAssembly, gameSettingsType).ToList();
+                types.AddRange(AttributesHelper.GetTypesWithAttribute(projectAssembly, gameSettingsType));
+
+                return types;
             }
         }
 

@@ -23,6 +23,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)FilePath.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)fmod_studio_guids.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)GameDebuggerSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SoundsEvent\CutScene1.cs" />
