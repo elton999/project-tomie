@@ -5,7 +5,7 @@ using Microsoft.Xna.Framework.Input;
 namespace UmbrellaToolsKit.EditorEngine.Windows.GameSettings
 {
     [GameSettingsProperty("Input Settings", "games_settings/")]
-    public class InputGameSettings
+    public class InputGameSettings : GameSettingsProperty
     {
         public struct InputData
         {

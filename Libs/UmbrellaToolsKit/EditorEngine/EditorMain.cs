@@ -41,7 +41,7 @@ namespace UmbrellaToolsKit.EditorEngine
 
             _sceneEditor = new Windows.SceneEditorWindow(_gameManagement);
             _dialogueEditor = new Windows.DialogueEditorWindow(_gameManagement);
-            _gameSettingsEditor = new Windows.GameSettingsWindow(_gameManagement);
+            _gameSettingsEditor = new Windows.GameSettingsWindow(_gameManagement, gameManagement.Game.Content);
         }
 
         public void Draw(GameTime gameTime)

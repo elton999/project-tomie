@@ -1,10 +1,11 @@
 ﻿using UmbrellaToolsKit;
 using UmbrellaToolsKit.EditorEngine.Attributes;
+using UmbrellaToolsKit.EditorEngine;
 
 namespace Project
 {
-    [GameSettingsProperty("Game Debugger", "")]
-    public class GameDebuggerSettings
+    [GameSettingsProperty("GameDebuggerSettings", "/Content/")]
+    public class GameDebuggerSettings : GameSettingsProperty
     {
         [ShowEditor] public bool showInitialCutScene = true;
     }
