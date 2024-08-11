@@ -4,7 +4,6 @@ using Microsoft.Xna.Framework.Input;
 
 namespace UmbrellaToolsKit.EditorEngine.Windows.GameSettings
 {
-
     [GameSettingsProperty("Input Settings", "games_settings/")]
     public class InputGameSettings
     {
@@ -14,6 +13,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows.GameSettings
             public List<Keys> Keys;
         }
 
+        [ShowEditor] public string Name;
         public List<InputData> InputDataList;
     }
 }

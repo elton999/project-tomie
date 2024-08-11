@@ -1,6 +1,9 @@
 using System;
+using System.Collections.Generic;
+using System.Reflection;
 using ImGuiNET;
 using Microsoft.Xna.Framework;
+using UmbrellaToolsKit.EditorEngine.Attributes;
 using UmbrellaToolsKit.EditorEngine.Windows.Interfaces;
 
 namespace UmbrellaToolsKit.EditorEngine.Windows
@@ -8,11 +11,24 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
     public class GameSettingsWindow : IWindowEditable
     {
         private GameManagement _gameManagement;
+        private IEnumerable<Type> _allSettingsData;
+        private object _currentObject = null;
+
         public GameManagement GameManagement => _gameManagement;
+        public IEnumerable<Type> AllSettingsData
+        {
+            get
+            {
+                Assembly myAssembly = Assembly.GetExecutingAssembly();
+                Type gameSettingsType = typeof(GameSettingsPropertyAttribute);
+                return AttributesHelper.GetTypesWithAttribute(myAssembly, gameSettingsType);
+            }
+        }
 
         public GameSettingsWindow(GameManagement gameManagement)
         {
             _gameManagement = gameManagement;
+            _allSettingsData = AllSettingsData;
 
             BarEdtior.OnSwitchEditorWindow += RemoveAsMainWindow;
             BarEdtior.OnOpenGameSettingsEditor += SetAsMainWindow;
@@ -34,6 +50,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 
         public void ShowWindow(GameTime gameTime)
         {
+#if !RELEASE
             uint leftID = ImGui.GetID("MainLeft");
             uint rightID = ImGui.GetID("MainRight");
 
@@ -51,17 +68,36 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
             ImGui.EndChild();
             ImGui.SameLine();
 
-            ImGui.SetNextWindowDockID(leftID, ImGuiCond.Once);
-            ImGui.Begin("Item props");
-            ImGui.SetWindowFontScale(1.2f);
-
-            ImGui.End();
-
             ImGui.SetNextWindowDockID(rightID, ImGuiCond.Once);
-            ImGui.Begin("Dialogue Editor");
+            ImGui.Begin("Game Settings Editor");
             ImGui.SetWindowFontScale(1.2f);
+            ShowSettingProperty();
             ImGui.End();
 
+            ImGui.SetNextWindowDockID(leftID, ImGuiCond.Once);
+            ImGui.Begin("All Game Settings Data");
+            ImGui.SetWindowFontScale(1.2f);
+            ShowSettingsList();
+            ImGui.End();
+#endif
         }
+
+#if !RELEASE
+        private void ShowSettingsList()
+        {
+            foreach (var type in _allSettingsData)
+            {
+                if (ImGui.Selectable(type.Name))
+                    _currentObject = Activator.CreateInstance(type);
+            }
+        }
+
+        private void ShowSettingProperty()
+        {
+            if (_currentObject == null) return;
+
+            InspectorClass.DrawAllFields(_currentObject);
+        }
+#endif
     }
 }
