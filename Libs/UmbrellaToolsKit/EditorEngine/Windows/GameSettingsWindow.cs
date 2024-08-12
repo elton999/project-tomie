@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Xml;
 using ImGuiNET;
 using Microsoft.Xna.Framework;
-using Microsoft.Xna.Framework.Content;
 using Newtonsoft.Json;
 using UmbrellaToolsKit.EditorEngine.Attributes;
 using UmbrellaToolsKit.EditorEngine.Windows.Interfaces;
