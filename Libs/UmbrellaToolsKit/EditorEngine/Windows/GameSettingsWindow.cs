@@ -22,7 +22,6 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
         private string _currentPathFile;
         private bool _canShowPropertyEditor = false;
 
-        private ContentManager _content;
         private string _projectPath => _buildPath + "/../../../../Project";
         private string _buildPath => Environment.CurrentDirectory;
 
