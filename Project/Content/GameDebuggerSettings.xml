@@ -1,6 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:Project="Project">
   <Asset Type="Project:GameDebuggerSettings">
-    <showInitialCutScene>false</showInitialCutScene>
+    <showInitialCutScene>true</showInitialCutScene>
+    <showPlayerBox>false</showPlayerBox>
   </Asset>
 </XnaContent>

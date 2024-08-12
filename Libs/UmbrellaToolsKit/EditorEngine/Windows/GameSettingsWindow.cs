@@ -7,6 +7,7 @@ using System.Xml;
 using ImGuiNET;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
+using Newtonsoft.Json;
 using UmbrellaToolsKit.EditorEngine.Attributes;
 using UmbrellaToolsKit.EditorEngine.Windows.Interfaces;
 
@@ -154,6 +155,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
             using (XmlWriter writer = XmlWriter.Create(pathFile, settings))
             {
                 Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer.Serialize(writer, instance, null);
+                Console.WriteLine(JsonConvert.SerializeObject(instance));
                 writer.Close();
             }
         }

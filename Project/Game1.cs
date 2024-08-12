@@ -37,7 +37,7 @@ namespace Project
 
         protected override void LoadContent()
         {
-            _gameDebugger = (GameDebuggerSettings)GameSettingsProperty.GetProperty(FilePath.GAME_DEBUGGER_PATH);
+            _gameDebugger = (GameDebuggerSettings)GameSettingsProperty.GetProperty(FilePath.GAME_DEBUGGER_PATH, typeof(GameDebuggerSettings));
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _soundManager = new UmbrellaToolsKit.Sound.SoundManager(FilePath.FMOD_BANK_PATH);
