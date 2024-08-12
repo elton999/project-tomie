@@ -23,6 +23,7 @@ namespace UmbrellaToolsKit.EditorEngine
         //windows
         private IWindowEditable _sceneEditor;
         private IWindowEditable _dialogueEditor;
+        private IWindowEditable _gameSettingsEditor;
         private bool _showEditor = false;
         private bool _showEditorKeyUp = true;
 
@@ -32,7 +33,7 @@ namespace UmbrellaToolsKit.EditorEngine
         {
             _game = game;
             _gameManagement = gameManagement;
- #if !RELEASE
+#if !RELEASE
             _imGUIRenderer = new ImGuiRenderer(game).Initialize().RebuildFontAtlas();
 #endif
             _mainBarEditor = new BarEdtior();
@@ -40,6 +41,7 @@ namespace UmbrellaToolsKit.EditorEngine
 
             _sceneEditor = new Windows.SceneEditorWindow(_gameManagement);
             _dialogueEditor = new Windows.DialogueEditorWindow(_gameManagement);
+            _gameSettingsEditor = new Windows.GameSettingsWindow(_gameManagement);
         }
 
         public void Draw(GameTime gameTime)

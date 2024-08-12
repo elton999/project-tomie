@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Runtime.InteropServices.ComTypes;
 #if !RELEASE
 using ImGuiNET;
 using MonoGame.ImGui.Extensions;
@@ -19,7 +18,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
         private Storage.Load _storage;
 
         private GameManagement _gameManagement;
-        public GameManagement GameManagement { get => _gameManagement; }
+        public GameManagement GameManagement => _gameManagement;
 
         public Storage.Load Storage => _storage;
 
@@ -180,9 +179,9 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
         {
             if (_storage == null)
                 _storage = new Storage.Load(filename);
-            if(_storage != null)
+            if (_storage != null)
                 _storage.SetFilename(filename);
-            
+
             List<float> ids = new List<float>();
             foreach (var node in DialogueData.Nodes)
                 ids.Add(node.Id);
@@ -201,7 +200,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
         }
 
         private void SelectNode(BasicNode node) => SelectedNode = node;
-        private void RemoveSelectedNode(BasicNode node) => SelectedNode = SelectedNode == node ? null: node;
+        private void RemoveSelectedNode(BasicNode node) => SelectedNode = SelectedNode == node ? null : node;
 #if !RELEASE
         private void TraceLineConnection(ImDrawListPtr drawList)
         {
@@ -244,7 +243,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
             foreach (float nodeId in nodeIds)
             {
                 int id = (int)nodeId;
-                if(DialogueData.LastNodeId < id)
+                if (DialogueData.LastNodeId < id)
                     DialogueData.LastNodeId = id;
             }
             DialogueData.LastNodeId++;

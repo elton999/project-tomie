@@ -3,6 +3,7 @@ using ImGuiNET;
 using MonoGame.ImGui.Extensions;
 #endif
 using Microsoft.Xna.Framework;
+using System;
 
 namespace UmbrellaToolsKit.EditorEngine.Fields
 {
@@ -56,7 +57,7 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
 		{
 #if !RELEASE
 			TableFormatBegin(name);
-			ImGui.InputFloat("", ref value);
+			ImGui.InputFloat(string.Empty, ref value);
 			TableFormatEnd();
 #endif
 		}
@@ -71,8 +72,8 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
 		{
 #if !RELEASE
 			TableFormatBegin(name);
-			if (value == null) value = "";
-			ImGui.InputText("", ref value, 255);
+			if (String.IsNullOrEmpty(value)) value = string.Empty;
+			ImGui.InputText(string.Empty, ref value, 255);
 			TableFormatEnd();
 #endif
 		}
@@ -81,8 +82,8 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
 		{
 #if !RELEASE
 			TableFormatBegin(name, 1);
-			if (value == null) value = "";
-			ImGui.InputTextMultiline("", ref value, 500, (Vector2.One * 500).ToNumericVector2(), ImGuiInputTextFlags.EnterReturnsTrue);
+			if (String.IsNullOrEmpty(value)) value = string.Empty;
+			ImGui.InputTextMultiline(string.Empty, ref value, 500, (Vector2.One * 500).ToNumericVector2(), ImGuiInputTextFlags.EnterReturnsTrue);
 			TableFormatEnd();
 #endif
 		}
@@ -91,8 +92,8 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
 		{
 #if !RELEASE
 			TableFormatBegin(name);
-			if (value == null) value = "";
-			if (ImGui.BeginCombo("", value, ImGuiComboFlags.HeightLarge | ImGuiComboFlags.HeightLargest))
+			if (String.IsNullOrEmpty(value)) value = string.Empty;
+			if (ImGui.BeginCombo(string.Empty, value, ImGuiComboFlags.HeightLarge | ImGuiComboFlags.HeightLargest))
 			{
 				for (int i = 0; i < options.Length; i++)
 				{

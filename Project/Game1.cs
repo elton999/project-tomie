@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Project.SoundEvent;
+using UmbrellaToolsKit.EditorEngine;
 
 namespace Project
 {
@@ -14,6 +15,7 @@ namespace Project
         private AssetManagement _assetManagement;
         private GameManagement _gameManagement;
         private UmbrellaToolsKit.Sound.SoundManager _soundManager;
+        private GameDebuggerSettings _gameDebugger;
 
         public Game1()
         {
@@ -35,6 +37,8 @@ namespace Project
 
         protected override void LoadContent()
         {
+            _gameDebugger = (GameDebuggerSettings)GameSettingsProperty.GetProperty(FilePath.GAME_DEBUGGER_PATH, typeof(GameDebuggerSettings));
+
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _soundManager = new UmbrellaToolsKit.Sound.SoundManager(FilePath.FMOD_BANK_PATH);
 
@@ -54,9 +58,12 @@ namespace Project
 
             _gameManagement.SceneManagement.MainScene.SetLevelLdtk(0);
 
-            var smashButton = new UI.SmashButton();
-            _gameManagement.SceneManagement.MainScene.AddGameObject(smashButton, Layers.UI);
-            _gameManagement.SceneManagement.MainScene.AddGameObject(new CutScene1(smashButton), Layers.UI);
+            if (_gameDebugger.showInitialCutScene)
+            {
+                var smashButton = new UI.SmashButton();
+                _gameManagement.SceneManagement.MainScene.AddGameObject(smashButton, Layers.UI);
+                _gameManagement.SceneManagement.MainScene.AddGameObject(new CutScene1(smashButton), Layers.UI);
+            }
 
             // Inputs
             KeyBoardHandler.AddInput(Input.CANCEL, Keys.Escape);

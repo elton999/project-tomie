@@ -12,9 +12,10 @@ namespace Project.Entities.Actors
 
         public override void Start()
         {
+            size = new Point(20, 20);
+            Origin = new Vector2(20, 46);
 
-            size = new Point(20, 55);
-            Origin = new Vector2(20, 9);
+            HasGravity = false;
 
             tag = "player";
             base.Start();
@@ -24,7 +25,7 @@ namespace Project.Entities.Actors
             AddComponent<MoveActorComponent>().SetVelocity(70f);
             _inputMovement = AddComponent<InputMovementComponent>();
             AddComponent<CharacterAnimationComponent>().AddAnimation(FilePath.PLAYER_ATLAS_PATH);
-            // AddComponent<DebugActorComponent>();
+            AddComponent<DebugActorComponent>();
         }
 
         public override void Update(GameTime gameTime)

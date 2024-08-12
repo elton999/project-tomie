@@ -6,12 +6,13 @@
 /platform:Windows
 /config:
 /profile:Reach
-/compress:False
+/compress:True
 
 #-------------------------------- References --------------------------------#
 
 /reference:..\..\Newtonsoft.Json.dll
 /reference:..\..\MonoGame.ContentPipeline.UmbrellaToolsKit.dll
+/reference:..\..\opengl\bin\Debug\netcoreapp3.1\project-opengl.dll
 
 #---------------------------------- Content ---------------------------------#
 
@@ -78,6 +79,9 @@
 /processorParam:PremultiplyAlpha=True
 /processorParam:TextureFormat=Compressed
 /build:Font.spritefont
+
+#begin GameDebuggerSettings.xml
+/copy:GameDebuggerSettings.xml
 
 #begin Maps/Tilemap.ldtk
 /importer:LdtkImporter
