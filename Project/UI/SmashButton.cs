@@ -73,10 +73,10 @@ namespace Project.UI
             CheatListener.RemoveCheat(Keys.F1);
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
-            _animation.Play(gameTime, "tap", AsepriteAnimation.AnimationDirection.LOOP);
-            float timer = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            _animation.Play(deltaTime, "tap", AsepriteAnimation.AnimationDirection.LOOP);
+            float timer = deltaTime;
 
             if (KeyBoardHandler.KeyPressed(Input.INTERACT) && !_alReadyReachedMaxValue)
             {
@@ -89,15 +89,15 @@ namespace Project.UI
                 SetProgress(_animationCooldownValue * 0.01f * -timer);
 
             if (_alReadyReachedMaxValue)
-                Transparent = Math.Clamp(Transparent - gameTime.ElapsedGameTime.Milliseconds, 0.0f, 1.0f);
+                Transparent = Math.Clamp(Transparent - deltaTime, 0.0f, 1.0f);
 
             _cooldown = Math.Max(0, _cooldown - timer);
 
             Position = (Scene.Sizes.ToVector2() / 2.0f - Body.Size.ToVector2() / 2.0f).ToPoint().ToVector2();
             Position += Vector2.UnitY * 40;
-            ShakeUpdate(gameTime);
+            ShakeUpdate();
 
-            base.Update(gameTime);
+            base.Update(deltaTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -137,7 +137,7 @@ namespace Project.UI
             yield return null;
         }
 
-        private void ShakeUpdate(GameTime gameTime)
+        private void ShakeUpdate()
         {
             if (_timeShake > 0)
             {

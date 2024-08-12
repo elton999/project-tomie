@@ -16,9 +16,8 @@ namespace UmbrellaToolsKit.ParticlesSystem
             base.Start();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
-            float deltaTime = (float)gameTime.ElapsedGameTime.TotalMilliseconds;
             LifeTime -= deltaTime;
             Rotation += Angle * deltaTime;
             Position += Velocity * deltaTime;

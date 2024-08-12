@@ -28,10 +28,10 @@ namespace Project.Entities.Actors
             AddComponent<DebugActorComponent>();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
             Scene.Camera.Target = Position;
-            base.Update(gameTime);
+            base.Update(deltaTime);
         }
 
         public static void DisableInput() => _inputMovement.DisableInput();

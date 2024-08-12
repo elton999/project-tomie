@@ -3,7 +3,6 @@ using UmbrellaToolsKit;
 using UmbrellaToolsKit.Input;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using System;
 
 namespace Project.UI
 {
@@ -33,14 +32,14 @@ namespace Project.UI
             base.Start();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
             if (_isShowing && KeyBoardHandler.KeyPressed(Input.INTERACT))
                 _skip = true;
 
             // if (KeyBoardHandler.KeyPressed(Input.INTERACT))
             //     Say("Hello World! it is just a little bit different than you think it is in the game world and you can see it in the game world by clicking on the button below and press the Enter key.");
-            base.Update(gameTime);
+            base.Update(deltaTime);
         }
 
         public void Say(string text)

@@ -4,7 +4,7 @@ using UmbrellaToolsKit.Interfaces;
 
 namespace UmbrellaToolsKit
 {
-    public class SceneManagement : IUpdatable, Interfaces.IDrawable
+    public class SceneManagement : Interfaces.IDrawable
     {
         public GameManagement GameManagement;
         public Scene MainScene;

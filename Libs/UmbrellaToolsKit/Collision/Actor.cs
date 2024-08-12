@@ -15,10 +15,9 @@ namespace UmbrellaToolsKit.Collision
             base.Start();
         }
 
-        public override void UpdateData(GameTime gameTime)
+        public override void UpdateData(float deltaTime)
         {
-            base.UpdateData(gameTime);
-            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            base.UpdateData(deltaTime);
             if (HasGravity)
             {
                 Gravity(deltaTime);

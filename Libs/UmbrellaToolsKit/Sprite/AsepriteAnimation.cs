@@ -34,71 +34,67 @@ namespace UmbrellaToolsKit.Sprite
         {
             get
             {
-                if (this.maxFrame != null)
+                if (maxFrame != null)
                 {
-                    if (this.maxFrame[this.maxFrame.Count - 1] < this.frameTimerCount && this.tag != null) return true;
+                    if (maxFrame[maxFrame.Count - 1] < frameTimerCount && tag != null) return true;
                 }
                 return false;
             }
         }
 
-        public void Restart()
-        {
-            this.tag = "";
-        }
+        public void Restart() => tag = "";
 
-        public void Play(GameTime gameTime, string tag, AnimationDirection aDirection = AnimationDirection.FORWARD)
+        public void Play(float deltaTime, string tag, AnimationDirection aDirection = AnimationDirection.FORWARD)
         {
             if (tag != this.tag)
             {
                 int i = 0;
-                while (i < this.AsepriteDefinitions.Tags.Count)
+                while (i < AsepriteDefinitions.Tags.Count)
                 {
-                    if (tag == this.AsepriteDefinitions.Tags[i].Name)
+                    if (tag == AsepriteDefinitions.Tags[i].Name)
                     {
-                        this.a_from = this.AsepriteDefinitions.Tags[i].from;
-                        this.a_to = this.AsepriteDefinitions.Tags[i].to;
-                        this.tag = this.AsepriteDefinitions.Tags[i].Name;
-                        this.direction = aDirection;
-                        this.frameCurrent = 0;
-                        this.frameTimerCount = 0;
-                        this.maxFrame = new List<float>();
-                        this.checkedFirstframe = false;
+                        a_from = AsepriteDefinitions.Tags[i].from;
+                        a_to = AsepriteDefinitions.Tags[i].to;
+                        tag = AsepriteDefinitions.Tags[i].Name;
+                        direction = aDirection;
+                        frameCurrent = 0;
+                        frameTimerCount = 0;
+                        maxFrame = new List<float>();
+                        checkedFirstframe = false;
                         break;
                     }
                     i++;
                 }
 
                 i = 0;
-                while (i + this.a_from <= this.a_to)
+                while (i + a_from <= a_to)
                 {
-                    int i_frame = this.a_from + i;
+                    int i_frame = a_from + i;
                     int last_frame = i - 1;
 
-                    if (i > 0) this.maxFrame.Add((this.AsepriteDefinitions.Duration[i_frame]) + this.maxFrame[last_frame]);
-                    else this.maxFrame.Add(this.AsepriteDefinitions.Duration[i_frame]);
+                    if (i > 0) maxFrame.Add((AsepriteDefinitions.Duration[i_frame]) + maxFrame[last_frame]);
+                    else maxFrame.Add(AsepriteDefinitions.Duration[i_frame]);
 
                     i++;
                 }
             }
 
-            float delta = (float)gameTime.ElapsedGameTime.Milliseconds;
-            this.frameTimerCount += delta;
+            frameTimerCount += deltaTime;
 
-            if (this.frameTimerCount >= this.maxFrame[this.frameCurrent] || (this.frameCurrent == 0 && !checkedFirstframe))
+            if (frameTimerCount >= maxFrame[frameCurrent] || (frameCurrent == 0 && !checkedFirstframe))
             {
-                if (this.a_to > (this.frameCurrent + this.a_from) && checkedFirstframe) this.frameCurrent++;
-                else if (this.direction == AnimationDirection.LOOP)
+                if (a_to > (frameCurrent + a_from) && checkedFirstframe) frameCurrent++;
+                else if (direction == AnimationDirection.LOOP)
                 {
-                    this.frameCurrent = 0;
-                    this.frameTimerCount = 0;
-                    this.checkedFirstframe = false;
+                    frameCurrent = 0;
+                    frameTimerCount = 0;
+                    checkedFirstframe = false;
                 }
 
-                frame = (int)(this.frameCurrent + this.a_from);
-                this.Body = this.AsepriteDefinitions.Bodys[frame];
+                frame = (int)(frameCurrent + a_from);
+                Body = AsepriteDefinitions.Bodys[frame];
 
-                this.checkedFirstframe = true;
+                checkedFirstframe = true;
             }
 
         }

@@ -19,7 +19,7 @@ namespace Project.Entities.Actors
             base.Start();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
             if (!overlapCheck(_playerActor)) return;
             if (KeyBoardHandler.KeyPressed(Input.INTERACT))

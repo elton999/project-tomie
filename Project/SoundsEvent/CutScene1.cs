@@ -35,7 +35,7 @@ namespace Project.SoundEvent
             base.Start();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
             if (_smashButton != null)
                 _soundEventInstance.setParameterByName(PITCH_PARAM, _smashButton.Progress * 3.0f);

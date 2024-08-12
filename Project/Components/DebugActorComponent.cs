@@ -20,10 +20,10 @@ namespace Project.Components
             base.Start();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
             _square.Position = GameObject.Position;
-            base.Update(gameTime);
+            base.Update(deltaTime);
         }
     }
 }

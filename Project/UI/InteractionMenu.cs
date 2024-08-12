@@ -20,7 +20,7 @@ namespace Project.UI
             SpaceBetweenButtons = Vector2.Zero;
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
             if (!IsShowingMenu) return;
 

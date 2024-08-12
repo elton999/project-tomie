@@ -49,21 +49,21 @@ namespace UmbrellaToolsKit.ParticlesSystem
             Restart();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
-            _timer -= (float)gameTime.ElapsedGameTime.Milliseconds;
+            _timer -= deltaTime;
 
             if (IsOnTime || EmitsFor == TypeEmitter.INFINITE)
                 ImitParticles();
 
-            CheckLifeTimeParticles(gameTime);
+            CheckLifeTimeParticles(deltaTime);
         }
 
-        public void CheckLifeTimeParticles(GameTime gameTime)
+        public void CheckLifeTimeParticles(float deltaTime)
         {
             for (int i = 0; i < Particles.Count; i++)
             {
-                Particles[i].Update(gameTime);
+                Particles[i].Update(deltaTime);
                 if (Particles[i].LifeTime <= 0f)
                 {
                     Particles[i].Dispose();

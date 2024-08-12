@@ -15,7 +15,7 @@ namespace Project.Components
             _moveActor = GameObject.GetComponent<MoveActorComponent>();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
             if (!_inputEnable) return;
 
@@ -33,7 +33,7 @@ namespace Project.Components
 
             if (direction.Length() > 0) direction.Normalize();
             _moveActor.SetDirection(direction);
-            base.Update(gameTime);
+            base.Update(deltaTime);
         }
 
         public void DisableInput() => _inputEnable = false;
