@@ -17,8 +17,11 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
     {
         private GameManagement _gameManagement;
         private IEnumerable<Type> _allSettingsData;
-        private object _currentObject = null;
-        private string _currentPathFile = null;
+
+        private object _currentObject;
+        private string _currentPathFile;
+        private bool _canShowPropertyEditor = false;
+
         private ContentManager _content;
         private string _projectPath => _buildPath + "/../../../../Project";
         private string _buildPath => Environment.CurrentDirectory;
@@ -41,11 +44,10 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
             }
         }
 
-        public GameSettingsWindow(GameManagement gameManagement, ContentManager content)
+        public GameSettingsWindow(GameManagement gameManagement)
         {
             _gameManagement = gameManagement;
             _allSettingsData = AllSettingsData;
-            _content = content;
 
             BarEdtior.OnSwitchEditorWindow += RemoveAsMainWindow;
             BarEdtior.OnOpenGameSettingsEditor += SetAsMainWindow;
@@ -111,7 +113,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 
         private void ShowSettingProperty()
         {
-            if (_currentObject == null) return;
+            if (!_canShowPropertyEditor) return;
             if (ImGui.Button("Save"))
             {
                 SaveFile(_projectPath + _currentPathFile, _currentObject);
@@ -123,16 +125,19 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 
         private object GetInstanceByType(Type type)
         {
+            _canShowPropertyEditor = false;
             bool hasPropertyAttribute = type.GetCustomAttributes(typeof(GameSettingsPropertyAttribute), true).Length > 0;
+
             if (hasPropertyAttribute)
             {
                 var propertyAttribute = type.GetCustomAttributesData();
-                string nameFile = (string)propertyAttribute[0].ConstructorArguments[0].Value;
-                nameFile += FILE_EXTENSION;
-                string pathFile = (string)propertyAttribute[0].ConstructorArguments[1].Value;
-                pathFile += nameFile;
+                var arguments = propertyAttribute[0].ConstructorArguments;
+                string nameFile = (string)arguments[0].Value + FILE_EXTENSION;
+                string pathFile = (string)arguments[1].Value;
 
+                pathFile += nameFile;
                 _currentPathFile = pathFile;
+                _canShowPropertyEditor = true;
 
                 if (!File.Exists(pathFile))
                 {
@@ -142,10 +147,11 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                     SaveFile(_buildPath + pathFile, instance);
                     return instance;
                 }
-                else return GameSettingsProperty.GetProperty(pathFile);
+
+                return GameSettingsProperty.GetProperty(pathFile);
             }
 
-            return null;
+            return default;
         }
 
         private static void SaveFile(string pathFile, object instance)
