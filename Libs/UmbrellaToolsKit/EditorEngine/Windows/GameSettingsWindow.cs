@@ -19,7 +19,8 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
         private object _currentObject = null;
         private string _currentPathFile = null;
         private ContentManager _content;
-        private string _projectPath => Environment.CurrentDirectory + "/../../../../Project";
+        private string _projectPath => _buildPath + "/../../../../Project";
+        private string _buildPath => Environment.CurrentDirectory;
 
         public const string FILE_EXTENSION = ".xml";
 
@@ -111,7 +112,10 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
         {
             if (_currentObject == null) return;
             if (ImGui.Button("Save"))
-                SaveFile(_currentPathFile, _currentObject);
+            {
+                SaveFile(_projectPath + _currentPathFile, _currentObject);
+                SaveFile(_buildPath + _currentPathFile, _currentObject);
+            }
 
             InspectorClass.DrawAllFields(_currentObject);
         }
@@ -126,7 +130,6 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                 nameFile += FILE_EXTENSION;
                 string pathFile = (string)propertyAttribute[0].ConstructorArguments[1].Value;
                 pathFile += nameFile;
-                pathFile = _projectPath + pathFile;
 
                 _currentPathFile = pathFile;
 
@@ -134,16 +137,11 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                 {
                     var instance = Activator.CreateInstance(type);
                     _currentObject = instance;
-                    SaveFile(pathFile, instance);
+                    SaveFile(_projectPath + pathFile, instance);
+                    SaveFile(_buildPath + pathFile, instance);
                     return instance;
                 }
-                else
-                {
-                    using (XmlReader reader = XmlReader.Create(pathFile))
-                    {
-                        return Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer.Deserialize<GameSettingsProperty>(reader, pathFile);
-                    }
-                }
+                else return GameSettingsProperty.GetProperty(pathFile);
             }
 
             return null;
@@ -156,6 +154,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
             using (XmlWriter writer = XmlWriter.Create(pathFile, settings))
             {
                 Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer.Serialize(writer, instance, null);
+                writer.Close();
             }
         }
 #endif
