@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.Xna.Framework;
 
 namespace UmbrellaToolsKit.Sprite
@@ -12,92 +9,98 @@ namespace UmbrellaToolsKit.Sprite
         public Rectangle Body { get; set; }
         public AsepriteDefinitions AsepriteDefinitions { get; set; }
 
-        public AsepriteAnimation(AsepriteDefinitions AsepriteDefinitions)
-        {
-            this.AsepriteDefinitions = AsepriteDefinitions;
-        }
-
-        #region play animation
-        public int frame;
-        public int frameCurrent;
+        public int Frame;
+        public int CurrentFrame;
         private float frameTimerCount;
-        private List<float> maxFrame = new List<float>();
+        private List<float> MaxFrame = new List<float>();
         private AnimationDirection direction;
         public enum AnimationDirection { FORWARD, LOOP, PING_PONG }
-        private bool checkedFirstframe;
+        private bool isTheFirstFrame;
 
         private int a_from;
         private int a_to;
-        public string tag;
+        public string currentAnimationName;
 
-        public bool lastFrame
+        public bool IsTheLasFrame
         {
             get
             {
-                if (maxFrame != null)
-                {
-                    if (maxFrame[maxFrame.Count - 1] < frameTimerCount && tag != null) return true;
-                }
+                if (MaxFrame.Count > 0)
+                    if (MaxFrame[MaxFrame.Count - 1] < frameTimerCount && !String.IsNullOrEmpty(currentAnimationName)) return true;
                 return false;
             }
         }
 
-        public void Restart() => tag = "";
+        public AsepriteAnimation(AsepriteDefinitions asepriteDefinitions) => AsepriteDefinitions = asepriteDefinitions;
 
-        public void Play(float deltaTime, string tag, AnimationDirection aDirection = AnimationDirection.FORWARD)
+        public void Restart() => currentAnimationName = String.Empty;
+
+        public void Play(float deltaTime, string animationName, AnimationDirection aDirection = AnimationDirection.FORWARD)
         {
-            if (tag != this.tag)
+            if (animationName != currentAnimationName)
             {
-                int i = 0;
-                while (i < AsepriteDefinitions.Tags.Count)
-                {
-                    if (tag == AsepriteDefinitions.Tags[i].Name)
-                    {
-                        a_from = AsepriteDefinitions.Tags[i].from;
-                        a_to = AsepriteDefinitions.Tags[i].to;
-                        tag = AsepriteDefinitions.Tags[i].Name;
-                        direction = aDirection;
-                        frameCurrent = 0;
-                        frameTimerCount = 0;
-                        maxFrame = new List<float>();
-                        checkedFirstframe = false;
-                        break;
-                    }
-                    i++;
-                }
-
-                i = 0;
-                while (i + a_from <= a_to)
-                {
-                    int i_frame = a_from + i;
-                    int last_frame = i - 1;
-
-                    if (i > 0) maxFrame.Add((AsepriteDefinitions.Duration[i_frame]) + maxFrame[last_frame]);
-                    else maxFrame.Add(AsepriteDefinitions.Duration[i_frame]);
-
-                    i++;
-                }
+                SetAnimation(animationName, aDirection);
+                SetAllFrameOfAnimation();
             }
 
             frameTimerCount += deltaTime;
+            bool reachMaxTimeOfFrame = frameTimerCount >= MathHelper.MilliSecondsToSeconds(MaxFrame[CurrentFrame]);
+            bool hasJustStartedTheAnimation = CurrentFrame == 0 && !isTheFirstFrame;
+            bool CanGoToNextFrame = reachMaxTimeOfFrame || hasJustStartedTheAnimation;
 
-            if (frameTimerCount >= maxFrame[frameCurrent] || (frameCurrent == 0 && !checkedFirstframe))
+            if (CanGoToNextFrame) NextFrame();
+        }
+
+        public void SetAllFrameOfAnimation()
+        {
+            for (int frameCount = 0; frameCount + a_from <= a_to; frameCount++)
             {
-                if (a_to > (frameCurrent + a_from) && checkedFirstframe) frameCurrent++;
-                else if (direction == AnimationDirection.LOOP)
+                int frameIndex = a_from + frameCount;
+                int last_frame = frameCount - 1;
+
+                var durationFrames = AsepriteDefinitions.Duration;
+                float currentDuration = (float)durationFrames[frameIndex];
+                if (frameCount > 0) MaxFrame.Add(currentDuration + MaxFrame[last_frame]);
+                else MaxFrame.Add(currentDuration);
+            }
+        }
+
+        public void SetAnimation(string animationName, AnimationDirection aDirection)
+        {
+            int i = 0;
+            while (i < AsepriteDefinitions.Tags.Count)
+            {
+                var animationData = AsepriteDefinitions.Tags[i];
+                if (animationName == animationData.Name)
                 {
-                    frameCurrent = 0;
-                    frameTimerCount = 0;
-                    checkedFirstframe = false;
+                    a_from = animationData.from;
+                    a_to = animationData.to;
+                    currentAnimationName = animationData.Name;
+                    direction = aDirection;
+                    CurrentFrame = 0;
+                    frameTimerCount = 0.0f;
+                    MaxFrame = new List<float>();
+                    isTheFirstFrame = false;
+                    break;
                 }
+                i++;
+            }
+        }
 
-                frame = (int)(frameCurrent + a_from);
-                Body = AsepriteDefinitions.Bodys[frame];
-
-                checkedFirstframe = true;
+        public void NextFrame()
+        {
+            if (a_to > (CurrentFrame + a_from) && isTheFirstFrame) CurrentFrame++;
+            else if (direction == AnimationDirection.LOOP)
+            {
+                CurrentFrame = 0;
+                frameTimerCount = 0.0f;
+                isTheFirstFrame = false;
             }
 
+            Frame = (int)(CurrentFrame + a_from);
+            Body = AsepriteDefinitions.Bodys[Frame];
+
+            isTheFirstFrame = true;
         }
-        #endregion
     }
 }

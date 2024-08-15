@@ -21,7 +21,7 @@ namespace UmbrellaToolsKit.ParticlesSystem
             LifeTime -= deltaTime;
             Rotation += Angle * deltaTime;
             Position += Velocity * deltaTime;
-            if (DecreaseScale) Scale = MathHelper.Max(Scale - deltaTime * DecreaseScaleSpeed, 0.0f);
+            if (DecreaseScale) Scale = Microsoft.Xna.Framework.MathHelper.Max(Scale - deltaTime * DecreaseScaleSpeed, 0.0f);
 
             Origin = Vector2.One / 2f;
         }

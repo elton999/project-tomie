@@ -69,7 +69,7 @@ namespace UmbrellaToolsKit
         public bool UseLevelLimits = true;
         public void moveX(float delta)
         {
-            _position.X = MathHelper.Lerp(Position.X, Target.X, MoveSpeed * delta);
+            _position.X = Microsoft.Xna.Framework.MathHelper.Lerp(Position.X, Target.X, MoveSpeed * delta);
             if (UseLevelLimits)
             {
                 float maxValue = Scene.LevelSize.X + Scene.ScreenOffset.X - Origin.X;
@@ -81,7 +81,7 @@ namespace UmbrellaToolsKit
 
         public void moveY(float delta)
         {
-            _position.Y = MathHelper.Lerp(Position.Y, Target.Y, MoveSpeed * delta);
+            _position.Y = Microsoft.Xna.Framework.MathHelper.Lerp(Position.Y, Target.Y, MoveSpeed * delta);
 
             if (UseLevelLimits)
             {

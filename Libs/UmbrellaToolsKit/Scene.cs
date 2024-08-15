@@ -170,8 +170,8 @@ namespace UmbrellaToolsKit
         #endregion
 
         #region Update
-        public float timer = 0;
-        public float updateDataTime = 1 / 30f;
+        public float deltaTimerData = 0;
+        public float updateDataTime = 1.0f / 30.0f;
         private void UpdateGameObjects(GameTime gameTime, List<List<GameObject>> layers)
         {
             float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
@@ -205,8 +205,8 @@ namespace UmbrellaToolsKit
                 }
             }
 
-            timer += deltaTime;
-            while (timer >= updateDataTime)
+            deltaTimerData += deltaTime;
+            while (deltaTimerData >= updateDataTime)
             {
                 for (int i = layers.Count - 1; i >= 0; i--)
                 {
@@ -214,27 +214,27 @@ namespace UmbrellaToolsKit
                     {
 
                         if (Camera != null)
-                            Camera.update(deltaTime);
+                            Camera.update(deltaTimerData);
 
                         if (layers[i][e].Components != null)
                         {
                             var component = layers[i][e].Components;
                             while (component != null)
                             {
-                                component.UpdateData(deltaTime);
+                                component.UpdateData(deltaTimerData);
                                 component = component.Next;
                             }
                         }
                         try
                         {
-                            layers[i][e].UpdateData(deltaTime);
+                            layers[i][e].UpdateData(deltaTimerData);
                         }
                         catch { }
                     }
                 }
                 if (Camera != null)
                     Camera.CheckActorAndSolids();
-                timer -= updateDataTime;
+                deltaTimerData -= updateDataTime;
             }
         }
 

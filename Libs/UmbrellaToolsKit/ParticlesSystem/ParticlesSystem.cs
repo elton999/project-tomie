@@ -96,14 +96,14 @@ namespace UmbrellaToolsKit.ParticlesSystem
         {
             var random = new Random();
             var velocityDirection = new Vector2(
-                (float)Math.Sin((double)MathHelper.ToRadians((float)random.NextDouble() * ParticleVelocityAngle + ParticleAngleEmitter)),
-                (float)Math.Cos((double)MathHelper.ToRadians((float)random.NextDouble() * ParticleVelocityAngle + ParticleAngleEmitter)));
+                (float)Math.Sin((double)Microsoft.Xna.Framework.MathHelper.ToRadians((float)random.NextDouble() * ParticleVelocityAngle + ParticleAngleEmitter)),
+                (float)Math.Cos((double)Microsoft.Xna.Framework.MathHelper.ToRadians((float)random.NextDouble() * ParticleVelocityAngle + ParticleAngleEmitter)));
 
             return new Particle()
             {
                 Position = Position + ParticleRadiusSpawn * velocityDirection * (float)random.NextDouble(),
                 Scale = (float)random.NextDouble() * ParticleMaxScale,
-                Angle = MathHelper.ToRadians((float)random.NextDouble() * ParticleAngle / 100f),
+                Angle = Microsoft.Xna.Framework.MathHelper.ToRadians((float)random.NextDouble() * ParticleAngle / 100f),
                 Transparent = ParticleTransparent,
                 Velocity = velocityDirection * ParticleVelocity / 1000f,
                 Sprite = Sprites[random.Next(0, Sprites.Count - 1)],
