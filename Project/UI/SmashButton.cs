@@ -76,22 +76,21 @@ namespace Project.UI
         public override void Update(float deltaTime)
         {
             _animation.Play(deltaTime, "tap", AnimationDirection.LOOP);
-            float timer = deltaTime;
 
             if (KeyBoardHandler.KeyPressed(Input.INTERACT) && !_alReadyReachedMaxValue)
             {
-                _cooldown = Math.Min(_maxCooldown, _cooldown + _animationCooldownValue * timer);
-                SetProgress(_minProgressValue * timer);
+                _cooldown = Math.Min(_maxCooldown, _cooldown + _animationCooldownValue * deltaTime);
+                SetProgress(_minProgressValue * deltaTime);
                 _typeEventInstance.start();
                 _timeShake = 5.0f;
             }
             else if (!_alReadyReachedMaxValue)
-                SetProgress(_animationCooldownValue * 0.01f * -timer);
+                SetProgress(_animationCooldownValue * 0.01f * -deltaTime);
 
             if (_alReadyReachedMaxValue)
                 Transparent = Math.Clamp(Transparent - deltaTime, 0.0f, 1.0f);
 
-            _cooldown = Math.Max(0, _cooldown - timer);
+            _cooldown = Math.Max(0, _cooldown - deltaTime);
 
             Position = (Scene.Sizes.ToVector2() / 2.0f - Body.Size.ToVector2() / 2.0f).ToPoint().ToVector2();
             Position += Vector2.UnitY * 40;
