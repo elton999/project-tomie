@@ -20,18 +20,17 @@ namespace UmbrellaToolsKit.Sprite
             Slices = new Dictionary<string, (Rectangle, Vector2)>();
         }
 
-        public void BodyAdd(Rectangle body)
-        {
-            Bodys.Add(body);
-        }
+        public void BodyAdd(Rectangle body) => Bodys.Add(body);
 
         public void TagAdd(string name, string direction, int from, int to)
         {
-            AsepriteTags AsepriteTags = new AsepriteTags();
-            AsepriteTags.Name = name;
-            AsepriteTags.direction = direction;
-            AsepriteTags.from = from;
-            AsepriteTags.to = to;
+            AsepriteTags AsepriteTags = new AsepriteTags
+            {
+                Name = name,
+                direction = direction,
+                from = from,
+                to = to
+            };
             Tags.Add(AsepriteTags);
         }
     }

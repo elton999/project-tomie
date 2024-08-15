@@ -75,7 +75,7 @@ namespace Project.UI
 
         public override void Update(float deltaTime)
         {
-            _animation.Play(deltaTime, "tap", AsepriteAnimation.AnimationDirection.LOOP);
+            _animation.Play(deltaTime, "tap", AnimationDirection.LOOP);
             float timer = deltaTime;
 
             if (KeyBoardHandler.KeyPressed(Input.INTERACT) && !_alReadyReachedMaxValue)
