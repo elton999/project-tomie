@@ -4,22 +4,21 @@ using Microsoft.Xna.Framework;
 
 namespace UmbrellaToolsKit.Sprite
 {
-    public class AsepriteAnimation
+    public class AsepriteAnimation : ISpriteAnimation
     {
         public Rectangle Body { get; set; }
         public AsepriteDefinitions AsepriteDefinitions { get; set; }
 
-        public int Frame;
-        public int CurrentFrame;
+        public int Frame { get; set; }
+        public int CurrentFrame { get; set; }
         private float frameTimerCount;
         private List<float> MaxFrame = new List<float>();
         private AnimationDirection direction;
-        public enum AnimationDirection { FORWARD, LOOP, PING_PONG }
         private bool isTheFirstFrame;
 
         private int a_from;
         private int a_to;
-        public string currentAnimationName;
+        public string currentAnimationName { get; set; }
 
         public bool IsTheLasFrame
         {
