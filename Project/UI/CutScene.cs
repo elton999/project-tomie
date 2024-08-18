@@ -41,7 +41,7 @@ namespace Project.UI
             base.Start();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
             if (_isPlaying && KeyBoardHandler.KeyPressed(Input.INTERACT))
                 if (_isAnimationDone)

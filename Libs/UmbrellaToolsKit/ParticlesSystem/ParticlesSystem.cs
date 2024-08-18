@@ -8,11 +8,8 @@ namespace UmbrellaToolsKit.ParticlesSystem
     public class ParticlesSystem : GameObject
     {
         private float _timer = 0.0f;
-
         private bool _isPlaying = false;
-
         public bool IsPlaying { get => _isPlaying && ((IsOnTime && Particles.Count > 0) || EmitsFor == TypeEmitter.INFINITE); }
-
         private bool IsOnTime { get => EmitsFor == TypeEmitter.FOR_TIME && _timer > 0.0f; }
 
         public enum TypeEmitter { FOR_TIME, INFINITE }
@@ -36,10 +33,7 @@ namespace UmbrellaToolsKit.ParticlesSystem
         [ShowEditor] public bool ParticleDecreaseScale = false;
         [ShowEditor] public float ParticleScaleSpeed = 10.0f;
 
-        public override void Start()
-        {
-            Tag = nameof(ParticlesSystem);
-        }
+        public override void Start() => Tag = nameof(ParticlesSystem);
 
         public void Restart() => _timer = EmitterTime;
 
@@ -49,21 +43,22 @@ namespace UmbrellaToolsKit.ParticlesSystem
             Restart();
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
-            _timer -= (float)gameTime.ElapsedGameTime.Milliseconds;
+            deltaTime = MathUtils.SecondsToMilliseconds(deltaTime);
+            _timer -= deltaTime;
 
             if (IsOnTime || EmitsFor == TypeEmitter.INFINITE)
                 ImitParticles();
 
-            CheckLifeTimeParticles(gameTime);
+            CheckLifeTimeParticles(deltaTime);
         }
 
-        public void CheckLifeTimeParticles(GameTime gameTime)
+        public void CheckLifeTimeParticles(float deltaTime)
         {
             for (int i = 0; i < Particles.Count; i++)
             {
-                Particles[i].Update(gameTime);
+                Particles[i].Update(deltaTime);
                 if (Particles[i].LifeTime <= 0f)
                 {
                     Particles[i].Dispose();
@@ -96,8 +91,8 @@ namespace UmbrellaToolsKit.ParticlesSystem
         {
             var random = new Random();
             var velocityDirection = new Vector2(
-                (float)Math.Sin((double)MathHelper.ToRadians((float)random.NextDouble() * ParticleVelocityAngle + ParticleAngleEmitter)),
-                (float)Math.Cos((double)MathHelper.ToRadians((float)random.NextDouble() * ParticleVelocityAngle + ParticleAngleEmitter)));
+                (float)Math.Sin(MathHelper.ToRadians((float)random.NextDouble() * ParticleVelocityAngle + ParticleAngleEmitter)),
+                (float)Math.Cos(MathHelper.ToRadians((float)random.NextDouble() * ParticleVelocityAngle + ParticleAngleEmitter)));
 
             return new Particle()
             {

@@ -11,7 +11,7 @@ using Eto.Forms;
 
 namespace UmbrellaToolsKit
 {
-    public class GameManagement : IUpdatable
+    public class GameManagement
     {
         private EditorMain _editor;
 

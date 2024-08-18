@@ -1,5 +1,4 @@
-﻿using Microsoft.Xna.Framework;
-using UmbrellaToolsKit;
+﻿using UmbrellaToolsKit;
 using UmbrellaToolsKit.Sprite;
 using Microsoft.Xna.Framework.Graphics;
 
@@ -10,7 +9,7 @@ namespace Project.Components
         private const string WALK_ANIMATION = "walk";
         private const string IDLE_ANIMATION = "idle";
 
-        private AsepriteAnimation _animation;
+        private ISpriteAnimation _animation;
         private MoveActorComponent _moveActor;
 
         public override void Start() => _moveActor = GameObject.GetComponent<MoveActorComponent>();
@@ -20,9 +19,9 @@ namespace Project.Components
             _animation = new AsepriteAnimation(GameObject.Scene.Content.Load<AsepriteDefinitions>(path));
         }
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
-            base.Update(gameTime);
+            base.Update(deltaTime);
             if (_animation == null) return;
 
             string animationName = IDLE_ANIMATION;
@@ -35,7 +34,7 @@ namespace Project.Components
             if (_moveActor.Direction.X < 0.0f && _moveActor.IsMoving)
                 GameObject.spriteEffect = SpriteEffects.FlipHorizontally;
 
-            _animation.Play(gameTime, animationName, AsepriteAnimation.AnimationDirection.LOOP);
+            _animation.Play(deltaTime, animationName, AnimationDirection.LOOP);
             GameObject.Body = _animation.Body;
         }
     }

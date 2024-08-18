@@ -1,16 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Content;
 using UmbrellaToolsKit.Collision;
-using UmbrellaToolsKit.Interfaces;
 using UmbrellaToolsKit.Utils;
 
 namespace UmbrellaToolsKit
 {
-    public class Scene : IUpdatable, IDisposable
+    public class Scene : IDisposable
     {
         public Scene(GraphicsDevice screenGraphicsDevice, ContentManager content)
         {
@@ -172,14 +170,16 @@ namespace UmbrellaToolsKit
         #endregion
 
         #region Update
-        public float timer = 0;
-        public float updateDataTime = 1 / 30f;
+        public float deltaTimerData = 0;
+        public float updateDataTime = 1.0f / 30.0f;
         private void UpdateGameObjects(GameTime gameTime, List<List<GameObject>> layers)
         {
+            float deltaTime = (float)gameTime.ElapsedGameTime.TotalSeconds;
+
             //UI update
             for (int i = UI.Count - 1; i >= 0; i--)
             {
-                UI[i].Update(gameTime);
+                UI[i].Update(deltaTime);
                 UI[i].CoroutineManagement.Update(gameTime);
             }
 
@@ -192,21 +192,21 @@ namespace UmbrellaToolsKit
                         var component = layers[i][e].Components;
                         while (component != null)
                         {
-                            component.Update(gameTime);
+                            component.Update(deltaTime);
                             component = component.Next;
                         }
                     }
                     try
                     {
-                        layers[i][e].Update(gameTime);
+                        layers[i][e].Update(deltaTime);
                         layers[i][e].CoroutineManagement.Update(gameTime);
                     }
                     catch { }
                 }
             }
 
-            timer += (float)gameTime.ElapsedGameTime.TotalSeconds;
-            while (timer >= updateDataTime)
+            deltaTimerData += deltaTime;
+            if (deltaTimerData >= MathUtils.MillisecondsToSeconds(updateDataTime))
             {
                 for (int i = layers.Count - 1; i >= 0; i--)
                 {
@@ -214,27 +214,27 @@ namespace UmbrellaToolsKit
                     {
 
                         if (Camera != null)
-                            Camera.update(gameTime);
+                            Camera.update(deltaTimerData);
 
                         if (layers[i][e].Components != null)
                         {
                             var component = layers[i][e].Components;
                             while (component != null)
                             {
-                                component.UpdateData(gameTime);
+                                component.UpdateData(deltaTimerData);
                                 component = component.Next;
                             }
                         }
                         try
                         {
-                            layers[i][e].UpdateData(gameTime);
+                            layers[i][e].UpdateData(deltaTimerData);
                         }
                         catch { }
                     }
                 }
                 if (Camera != null)
                     Camera.CheckActorAndSolids();
-                timer -= updateDataTime;
+                deltaTimerData = 0.0f;
             }
         }
 

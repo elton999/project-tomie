@@ -64,9 +64,9 @@ namespace UmbrellaToolsKit
         public virtual void OnVisible() { }
         public virtual void OnInvisible() { }
 
-        public virtual void Update(GameTime gameTime) { }
+        public virtual void Update(float deltaTime) { }
 
-        public virtual void UpdateData(GameTime gameTime) { }
+        public virtual void UpdateData(float deltaTime) { }
 
         public System.Collections.IEnumerator Wait(float time)
         {

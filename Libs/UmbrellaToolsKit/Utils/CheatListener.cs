@@ -14,7 +14,7 @@ namespace UmbrellaToolsKit.Utils
 
         public override void Start() => _instance = _instance == null ? this : _instance;
 
-        public override void Update(GameTime gameTime)
+        public override void Update(float deltaTime)
         {
             foreach (var cheat in _cheatList)
                 if (KeyBoardHandler.KeyPressed(cheat.Item1))
