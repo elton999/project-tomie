@@ -13,12 +13,15 @@ namespace Project.Components
             _square = new Square
             {
                 size = GameObject.size,
-                SquareColor = Color.Blue,
-                Position = GameObject.Position
+                SquareColor = Color.White,
+                Position = GameObject.Position,
+                SpriteColor = Color.Blue
             };
             GameObject.Scene.AddGameObject(_square, Layers.MIDDLEGROUND);
             base.Start();
         }
+
+        public void SetColor(Color color) => _square.SpriteColor = color;
 
         public override void Update(float deltaTime)
         {
