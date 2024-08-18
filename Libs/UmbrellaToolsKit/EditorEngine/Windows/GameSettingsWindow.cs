@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Xml;
 using ImGuiNET;
 using Microsoft.Xna.Framework;
-using Newtonsoft.Json;
 using UmbrellaToolsKit.EditorEngine.Attributes;
 using UmbrellaToolsKit.EditorEngine.Windows.Interfaces;
 
@@ -154,7 +153,8 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 
         private static void SaveFile(string pathFile, object instance)
         {
-            Log.Write($"[{instance.GetType().Name}] saving: {pathFile}");
+            var timer = new Utils.Timer();
+            timer.Begin();
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.Indent = true;
             using (XmlWriter writer = XmlWriter.Create(pathFile, settings))
@@ -162,6 +162,8 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                 Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer.Serialize(writer, instance, null);
                 writer.Close();
             }
+            timer.End();
+            Log.Write($"[{instance.GetType().Name}] saving: {pathFile}, {timer.GetTotalSeconds()}");
         }
 #endif
     }
