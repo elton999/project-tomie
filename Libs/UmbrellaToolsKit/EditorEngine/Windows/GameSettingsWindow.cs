@@ -137,7 +137,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                 _currentPathFile = pathFile;
                 _canShowPropertyEditor = true;
 
-                if (!File.Exists(pathFile))
+                if (!File.Exists(_buildPath + pathFile))
                 {
                     var instance = Activator.CreateInstance(type);
                     _currentObject = instance;
@@ -146,7 +146,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                     return instance;
                 }
 
-                return GameSettingsProperty.GetProperty(pathFile);
+                return GameSettingsProperty.GetProperty(_buildPath + pathFile, type);
             }
 
             return default;
@@ -154,12 +154,12 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 
         private static void SaveFile(string pathFile, object instance)
         {
+            Log.Write($"[{instance.GetType().Name}] saving: {pathFile}");
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.Indent = true;
             using (XmlWriter writer = XmlWriter.Create(pathFile, settings))
             {
                 Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer.Serialize(writer, instance, null);
-                Console.WriteLine(JsonConvert.SerializeObject(instance));
                 writer.Close();
             }
         }
