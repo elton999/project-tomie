@@ -24,8 +24,9 @@ namespace UmbrellaToolsKit.Sprite
         {
             get
             {
-                if (MaxFrame.Count > 0)
-                    if (MaxFrame[MaxFrame.Count - 1] < frameTimerCount && !String.IsNullOrEmpty(currentAnimationName)) return true;
+                bool hasValidFrames = !String.IsNullOrEmpty(currentAnimationName) && MaxFrame.Count > 0;
+                if (hasValidFrames)
+                    if (MathUtils.MillisecondsToSeconds(MaxFrame[MaxFrame.Count - 1]) < frameTimerCount) return true;
                 return false;
             }
         }
@@ -43,7 +44,7 @@ namespace UmbrellaToolsKit.Sprite
             }
 
             frameTimerCount += deltaTime;
-            bool reachMaxTimeOfFrame = frameTimerCount >= MathUtils.MilliSecondsToSeconds(MaxFrame[CurrentFrame]);
+            bool reachMaxTimeOfFrame = frameTimerCount >= MathUtils.MillisecondsToSeconds(MaxFrame[CurrentFrame]);
             bool hasJustStartedTheAnimation = CurrentFrame == 0 && !isTheFirstFrame;
             bool CanGoToNextFrame = reachMaxTimeOfFrame || hasJustStartedTheAnimation;
 

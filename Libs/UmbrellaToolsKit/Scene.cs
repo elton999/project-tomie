@@ -206,7 +206,7 @@ namespace UmbrellaToolsKit
             }
 
             deltaTimerData += deltaTime;
-            if (deltaTimerData >= MathUtils.MilliSecondsToSeconds(updateDataTime))
+            if (deltaTimerData >= MathUtils.MillisecondsToSeconds(updateDataTime))
             {
                 for (int i = layers.Count - 1; i >= 0; i--)
                 {

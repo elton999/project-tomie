@@ -17,7 +17,8 @@ namespace UmbrellaToolsKit
             return vector;
         }
 
-        public static float MilliSecondsToSeconds(float milliSecondsToSeconds) => milliSecondsToSeconds / 1000.0f;
+        public static float MillisecondsToSeconds(float milliSeconds) => milliSeconds / 1000.0f;
+        public static float SecondsToMilliseconds(float seconds) => seconds * 1000.0f;
 
         public static float Divide(float value) => value / 2.0f;
         public static Vector2 Divide(Vector2 value) => value / 2.0f;

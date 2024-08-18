@@ -45,6 +45,7 @@ namespace UmbrellaToolsKit.ParticlesSystem
 
         public override void Update(float deltaTime)
         {
+            deltaTime = MathUtils.SecondsToMilliseconds(deltaTime);
             _timer -= deltaTime;
 
             if (IsOnTime || EmitsFor == TypeEmitter.INFINITE)
