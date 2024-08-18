@@ -1,5 +1,4 @@
 ﻿using System;
-using Microsoft.Xna.Framework;
 using UmbrellaToolsKit;
 using UmbrellaToolsKit.Input;
 using UmbrellaToolsKit.Collision;

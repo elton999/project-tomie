@@ -43,7 +43,7 @@ namespace UmbrellaToolsKit.Sprite
             }
 
             frameTimerCount += deltaTime;
-            bool reachMaxTimeOfFrame = frameTimerCount >= MathHelper.MilliSecondsToSeconds(MaxFrame[CurrentFrame]);
+            bool reachMaxTimeOfFrame = frameTimerCount >= MathUtils.MilliSecondsToSeconds(MaxFrame[CurrentFrame]);
             bool hasJustStartedTheAnimation = CurrentFrame == 0 && !isTheFirstFrame;
             bool CanGoToNextFrame = reachMaxTimeOfFrame || hasJustStartedTheAnimation;
 

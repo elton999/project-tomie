@@ -8,11 +8,8 @@ namespace UmbrellaToolsKit.ParticlesSystem
     public class ParticlesSystem : GameObject
     {
         private float _timer = 0.0f;
-
         private bool _isPlaying = false;
-
         public bool IsPlaying { get => _isPlaying && ((IsOnTime && Particles.Count > 0) || EmitsFor == TypeEmitter.INFINITE); }
-
         private bool IsOnTime { get => EmitsFor == TypeEmitter.FOR_TIME && _timer > 0.0f; }
 
         public enum TypeEmitter { FOR_TIME, INFINITE }
@@ -36,10 +33,7 @@ namespace UmbrellaToolsKit.ParticlesSystem
         [ShowEditor] public bool ParticleDecreaseScale = false;
         [ShowEditor] public float ParticleScaleSpeed = 10.0f;
 
-        public override void Start()
-        {
-            Tag = nameof(ParticlesSystem);
-        }
+        public override void Start() => Tag = nameof(ParticlesSystem);
 
         public void Restart() => _timer = EmitterTime;
 
@@ -96,14 +90,14 @@ namespace UmbrellaToolsKit.ParticlesSystem
         {
             var random = new Random();
             var velocityDirection = new Vector2(
-                (float)Math.Sin((double)Microsoft.Xna.Framework.MathHelper.ToRadians((float)random.NextDouble() * ParticleVelocityAngle + ParticleAngleEmitter)),
-                (float)Math.Cos((double)Microsoft.Xna.Framework.MathHelper.ToRadians((float)random.NextDouble() * ParticleVelocityAngle + ParticleAngleEmitter)));
+                (float)Math.Sin(MathHelper.ToRadians((float)random.NextDouble() * ParticleVelocityAngle + ParticleAngleEmitter)),
+                (float)Math.Cos(MathHelper.ToRadians((float)random.NextDouble() * ParticleVelocityAngle + ParticleAngleEmitter)));
 
             return new Particle()
             {
                 Position = Position + ParticleRadiusSpawn * velocityDirection * (float)random.NextDouble(),
                 Scale = (float)random.NextDouble() * ParticleMaxScale,
-                Angle = Microsoft.Xna.Framework.MathHelper.ToRadians((float)random.NextDouble() * ParticleAngle / 100f),
+                Angle = MathHelper.ToRadians((float)random.NextDouble() * ParticleAngle / 100f),
                 Transparent = ParticleTransparent,
                 Velocity = velocityDirection * ParticleVelocity / 1000f,
                 Sprite = Sprites[random.Next(0, Sprites.Count - 1)],

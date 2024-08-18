@@ -206,7 +206,7 @@ namespace UmbrellaToolsKit
             }
 
             deltaTimerData += deltaTime;
-            while (deltaTimerData >= updateDataTime)
+            if (deltaTimerData >= MathUtils.MilliSecondsToSeconds(updateDataTime))
             {
                 for (int i = layers.Count - 1; i >= 0; i--)
                 {
@@ -234,7 +234,7 @@ namespace UmbrellaToolsKit
                 }
                 if (Camera != null)
                     Camera.CheckActorAndSolids();
-                deltaTimerData -= updateDataTime;
+                deltaTimerData = 0.0f;
             }
         }
 
