@@ -71,7 +71,7 @@ namespace UmbrellaToolsKit.TileMap
                 EditorEngine.Log.Write(".");
                 // TODO: values and nodes
                 var entity = layer.EntityInstances[i];
-                AssetManagement.Instance.addEntityOnScene(
+                AssetManagement.Instance.AddEntityOnScene(
                         entity.Identifier,
                         entity.Iid,
                         new Vector2(entity.Px[0] + scene.ScreenOffset.X, entity.Px[1] + scene.ScreenOffset.Y),
@@ -91,7 +91,7 @@ namespace UmbrellaToolsKit.TileMap
                 EditorEngine.Log.Write(".");
                 if (AssetManagement.Instance != null)
                 {
-                    AssetManagement.Instance.addEntityOnScene(
+                    AssetManagement.Instance.AddEntityOnScene(
                         entity.name,
                         "gameobject",
                         new Vector2(entity.x + scene.ScreenOffset.X, entity.y + scene.ScreenOffset.Y),
@@ -150,7 +150,7 @@ namespace UmbrellaToolsKit.TileMap
                 var tile = layer.AutoLayerTiles[i];
                 int x = (int)tile.Px[0] / 8;
                 int y = (int)tile.Px[1] / 8;
-                if (y >=0 && y < layerTiles.tiles.Count && x < layerTiles.tiles[y].Count)
+                if (y >= 0 && y < layerTiles.tiles.Count && x < layerTiles.tiles[y].Count)
                 {
                     layerTiles.tiles[y][x][0] = (int)tile.Src[0];
                     if (layerTiles.tiles[y][x].Count == 1)
