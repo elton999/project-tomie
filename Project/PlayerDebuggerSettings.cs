@@ -1,10 +1,11 @@
 ﻿using UmbrellaToolsKit;
+using UmbrellaToolsKit.EditorEngine;
 using UmbrellaToolsKit.EditorEngine.Attributes;
 
 namespace Company.ClassLibrary1
 {
     [GameSettingsProperty(nameof(PlayerDebuggerSettings), "/Content/")]
-    public class PlayerDebuggerSettings
+    public class PlayerDebuggerSettings : GameSettingsProperty
     {
         [ShowEditor] public bool ShowPlayerCollisionArea = false;
         [ShowEditor] public bool ShowPlayerHitBoxArea = false;

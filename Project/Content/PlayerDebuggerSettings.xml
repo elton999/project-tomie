@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <XnaContent xmlns:ClassLibrary1="Company.ClassLibrary1">
   <Asset Type="ClassLibrary1:PlayerDebuggerSettings">
-    <ShowPlayerCollisionArea>false</ShowPlayerCollisionArea>
-    <ShowPlayerHitBoxArea>false</ShowPlayerHitBoxArea>
+    <ShowPlayerCollisionArea>true</ShowPlayerCollisionArea>
+    <ShowPlayerHitBoxArea>true</ShowPlayerHitBoxArea>
   </Asset>
 </XnaContent>

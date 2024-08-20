@@ -91,6 +91,9 @@
 #begin new.cdb
 /copy:new.cdb
 
+#begin PlayerDebuggerSettings.xml
+/copy:PlayerDebuggerSettings.xml
+
 #begin Sprites/atlas.json
 /importer:AsepriteImporter
 /processor:AsepriteProcessor

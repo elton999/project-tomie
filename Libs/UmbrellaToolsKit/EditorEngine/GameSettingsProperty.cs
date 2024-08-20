@@ -11,18 +11,16 @@ namespace UmbrellaToolsKit.EditorEngine
             timer.Begin();
 
             GameSettingsProperty property = (GameSettingsProperty)Activator.CreateInstance(type);
-            using (XmlReader reader = XmlReader.Create(pathFile))
+            try
             {
-                try
+                using (XmlReader reader = XmlReader.Create(pathFile))
                 {
                     property = Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer.Deserialize<GameSettingsProperty>(reader, pathFile);
+                    reader.Close();
                 }
-                catch
-                { };
-                reader.Close();
-                timer.End();
-                Log.Write($"[{nameof(GameSettingsProperty)}] reading: {pathFile}");
             }
+            catch
+            { };
 
             timer.End();
             Log.Write($"[{nameof(GameSettingsProperty)}] reading: {pathFile}, timer: {timer.GetTotalSeconds()}");

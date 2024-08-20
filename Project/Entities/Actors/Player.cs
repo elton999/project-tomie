@@ -3,12 +3,15 @@ using UmbrellaToolsKit.Collision;
 using Microsoft.Xna.Framework;
 using Project.Components;
 using Microsoft.Xna.Framework.Graphics;
+using Company.ClassLibrary1;
+using UmbrellaToolsKit.EditorEngine;
 
 namespace Project.Entities.Actors
 {
     public class Player : Actor
     {
         private static InputMovementComponent _inputMovement;
+        private PlayerDebuggerSettings playerDebugger;
 
         public override void Start()
         {
@@ -20,12 +23,15 @@ namespace Project.Entities.Actors
             tag = "player";
             base.Start();
 
+            playerDebugger = GameSettingsProperty.GetProperty<PlayerDebuggerSettings>(FilePath.PLAYER_GAME_DEBUGGER_PATH);
+
             Sprite = Scene.Content.Load<Texture2D>(FilePath.PLAYER_SPRITE_PATH);
 
             AddComponent<MoveActorComponent>().SetVelocity(70f);
             _inputMovement = AddComponent<InputMovementComponent>();
             AddComponent<CharacterAnimationComponent>().AddAnimation(FilePath.PLAYER_ATLAS_PATH);
-            AddComponent<DebugActorComponent>();
+
+            if (playerDebugger.ShowPlayerCollisionArea) AddComponent<DebugActorComponent>();
         }
 
         public override void Update(float deltaTime)
