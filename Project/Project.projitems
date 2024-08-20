@@ -25,6 +25,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameDebuggerSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlayerDebuggerSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SoundsEvent\CutScene1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\CutScene.cs" />
