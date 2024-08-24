@@ -3,5 +3,8 @@
   <Asset Type="ClassLibrary1:PlayerDebuggerSettings">
     <ShowPlayerCollisionArea>true</ShowPlayerCollisionArea>
     <ShowPlayerHitBoxArea>true</ShowPlayerHitBoxArea>
+    <PlayerSizeCollisionArea>20 20</PlayerSizeCollisionArea>
+    <PlayerOriginSprite>20 46</PlayerOriginSprite>
+    <PlayerSpeed>70</PlayerSpeed>
   </Asset>
 </XnaContent>
