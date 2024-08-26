@@ -1,31 +1,37 @@
 ﻿using UmbrellaToolsKit;
 using UmbrellaToolsKit.Collision;
-using Microsoft.Xna.Framework;
 using Project.Components;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using UmbrellaToolsKit.EditorEngine;
 
 namespace Project.Entities.Actors
 {
     public class Player : Actor
     {
         private static InputMovementComponent _inputMovement;
+        private PlayerDebuggerSettings playerSettings;
 
         public override void Start()
         {
-            size = new Point(20, 20);
-            Origin = new Vector2(20, 46);
+            playerSettings = GameSettingsProperty.GetProperty<PlayerDebuggerSettings>(FilePath.PLAYER_GAME_DEBUGGER_PATH);
+
+            size = playerSettings.PlayerSizeCollisionAreaPoint;
+            Origin = playerSettings.PlayerOriginSprite;
 
             HasGravity = false;
 
             tag = "player";
             base.Start();
 
+
             Sprite = Scene.Content.Load<Texture2D>(FilePath.PLAYER_SPRITE_PATH);
 
-            AddComponent<MoveActorComponent>().SetVelocity(70f);
+            AddComponent<MoveActorComponent>().SetVelocity(playerSettings.PlayerSpeed);
             _inputMovement = AddComponent<InputMovementComponent>();
             AddComponent<CharacterAnimationComponent>().AddAnimation(FilePath.PLAYER_ATLAS_PATH);
-            AddComponent<DebugActorComponent>();
+
+            if (playerSettings.ShowPlayerCollisionArea) AddComponent<DebugActorComponent>().SetColor(Color.Blue);
         }
 
         public override void Update(float deltaTime)

@@ -37,13 +37,14 @@ namespace Project
 
         protected override void LoadContent()
         {
-            _gameDebugger = (GameDebuggerSettings)GameSettingsProperty.GetProperty(FilePath.GAME_DEBUGGER_PATH, typeof(GameDebuggerSettings));
+            _gameDebugger = GameSettingsProperty.GetProperty<GameDebuggerSettings>(FilePath.GAME_DEBUGGER_PATH);
 
             _spriteBatch = new SpriteBatch(GraphicsDevice);
             _soundManager = new UmbrellaToolsKit.Sound.SoundManager(FilePath.FMOD_BANK_PATH);
 
             _assetManagement = new AssetManagement();
             _assetManagement.Set<Entities.Actors.Player>("Player", Layers.PLAYER);
+            _assetManagement.Set<Entities.Actors.PlayerHitBox>("Player", Layers.PLAYER);
 
             // UI Settings
             _assetManagement.Set<SceneSettings>("Player", Layers.UI);

@@ -13,9 +13,11 @@
     <Compile Include="$(MSBuildThisFileDirectory)Components\DebugActorComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\InputMovementComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\MoveActorComponent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\PositionConstrainComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Actors\HitboxEvents.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Actors\InteractionHitBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Actors\Player.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Entities\Actors\PlayerHitBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\PropRender.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Props\DoorProp.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Props\LockerProp.cs" />
@@ -25,6 +27,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Game1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)GameDebuggerSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Input.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)PlayerDebuggerSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SceneSettings.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)SoundsEvent\CutScene1.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)UI\CutScene.cs" />
