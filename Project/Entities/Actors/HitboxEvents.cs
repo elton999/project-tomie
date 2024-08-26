@@ -9,18 +9,18 @@ namespace Project.Entities.Actors
     {
         public static Action<HitboxEvents> OnAnyInteract;
 
-        private Actor _playerActor;
+        private Actor _playerHitBoXActor;
 
         public override void Start()
         {
-            _playerActor = Scene.AllActors[0];
+            _playerHitBoXActor = Scene.Players[1].GetActor();
             tag += " hitbox";
             base.Start();
         }
 
         public override void Update(float deltaTime)
         {
-            if (!overlapCheck(_playerActor)) return;
+            if (!overlapCheck(_playerHitBoXActor)) return;
             if (KeyBoardHandler.KeyPressed(Input.INTERACT))
             {
                 OnAnyInteract?.Invoke(this);

@@ -15,7 +15,7 @@ namespace Project.Components
                 size = GameObject.size,
                 SquareColor = Color.White,
                 Position = GameObject.Position,
-                SpriteColor = Color.Blue
+                SpriteColor = Color.White,
             };
             GameObject.Scene.AddGameObject(_square, Layers.MIDDLEGROUND);
             base.Start();

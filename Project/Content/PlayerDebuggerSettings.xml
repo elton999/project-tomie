@@ -1,10 +1,12 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<XnaContent xmlns:ClassLibrary1="Company.ClassLibrary1">
-  <Asset Type="ClassLibrary1:PlayerDebuggerSettings">
+<XnaContent xmlns:Project="Project">
+  <Asset Type="Project:PlayerDebuggerSettings">
     <ShowPlayerCollisionArea>true</ShowPlayerCollisionArea>
     <ShowPlayerHitBoxArea>true</ShowPlayerHitBoxArea>
-    <PlayerSizeCollisionArea>20 20</PlayerSizeCollisionArea>
     <PlayerOriginSprite>20 46</PlayerOriginSprite>
+    <PlayerSizeCollisionArea>20 20</PlayerSizeCollisionArea>
+    <PlayerHitBoxAreaSize>20 46</PlayerHitBoxAreaSize>
+    <PlayerOriginHitbox>0 -23</PlayerOriginHitbox>
     <PlayerSpeed>70</PlayerSpeed>
   </Asset>
 </XnaContent>

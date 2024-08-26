@@ -44,6 +44,7 @@ namespace Project
 
             _assetManagement = new AssetManagement();
             _assetManagement.Set<Entities.Actors.Player>("Player", Layers.PLAYER);
+            _assetManagement.Set<Entities.Actors.PlayerHitBox>("Player", Layers.PLAYER);
 
             // UI Settings
             _assetManagement.Set<SceneSettings>("Player", Layers.UI);

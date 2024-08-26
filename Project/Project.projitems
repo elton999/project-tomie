@@ -13,6 +13,7 @@
     <Compile Include="$(MSBuildThisFileDirectory)Components\DebugActorComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\InputMovementComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Components\MoveActorComponent.cs" />
+    <Compile Include="$(MSBuildThisFileDirectory)Components\PositionConstrainComponent.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Actors\HitboxEvents.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Actors\InteractionHitBox.cs" />
     <Compile Include="$(MSBuildThisFileDirectory)Entities\Actors\Player.cs" />

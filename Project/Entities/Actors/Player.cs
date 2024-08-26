@@ -1,9 +1,8 @@
 ﻿using UmbrellaToolsKit;
 using UmbrellaToolsKit.Collision;
-using Microsoft.Xna.Framework;
 using Project.Components;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
-using Company.ClassLibrary1;
 using UmbrellaToolsKit.EditorEngine;
 
 namespace Project.Entities.Actors
@@ -32,7 +31,7 @@ namespace Project.Entities.Actors
             _inputMovement = AddComponent<InputMovementComponent>();
             AddComponent<CharacterAnimationComponent>().AddAnimation(FilePath.PLAYER_ATLAS_PATH);
 
-            if (playerSettings.ShowPlayerCollisionArea) AddComponent<DebugActorComponent>();
+            if (playerSettings.ShowPlayerCollisionArea) AddComponent<DebugActorComponent>().SetColor(Color.Blue);
         }
 
         public override void Update(float deltaTime)
