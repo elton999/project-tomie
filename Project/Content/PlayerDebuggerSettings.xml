@@ -3,10 +3,10 @@
   <Asset Type="Project:PlayerDebuggerSettings">
     <ShowPlayerCollisionArea>true</ShowPlayerCollisionArea>
     <ShowPlayerHitBoxArea>true</ShowPlayerHitBoxArea>
-    <PlayerOriginSprite>20 46</PlayerOriginSprite>
-    <PlayerSizeCollisionArea>20 20</PlayerSizeCollisionArea>
+    <PlayerOriginSprite>25 55</PlayerOriginSprite>
+    <PlayerSizeCollisionArea>10 10</PlayerSizeCollisionArea>
     <PlayerHitBoxAreaSize>20 46</PlayerHitBoxAreaSize>
-    <PlayerOriginHitbox>0 -23</PlayerOriginHitbox>
+    <PlayerOriginHitbox>-5 -43</PlayerOriginHitbox>
     <PlayerSpeed>70</PlayerSpeed>
   </Asset>
 </XnaContent>
