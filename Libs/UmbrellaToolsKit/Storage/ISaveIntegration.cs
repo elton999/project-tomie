@@ -2,8 +2,7 @@ namespace UmbrellaToolsKit.Storage
 {
     public interface ISaveIntegration
     {
-        void Open(string filename);
-
+        T Get<T>(string filename);
         void Set<T>(T value);
 
         void Save(string filename);
