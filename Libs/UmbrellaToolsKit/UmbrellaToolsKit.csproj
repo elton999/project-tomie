@@ -17,4 +17,7 @@
     <ProjectReference Include="..\MonoGame.ContentPipeline.UmbrellaToolsKit\MonoGame.ContentPipeline.UmbrellaToolsKit.csproj" />
     <ProjectReference Include="..\Monogame.ImGui\MonoGame.ImGui\MonoGame.ImGui.csproj" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Storage\Integrations\" />
+  </ItemGroup>
 </Project>
