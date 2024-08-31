@@ -1,9 +1,9 @@
 namespace UmbrellaToolsKit.Storage
 {
-    public interface ISaveIntegration
+    public interface ISaveIntegration<T>
     {
-        T Get<T>(string filename);
-        void Set<T>(T value);
+        T Get(string filename);
+        void Set(T value);
 
         void Save(string filename);
     }

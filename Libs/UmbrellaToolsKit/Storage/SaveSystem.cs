@@ -6,21 +6,21 @@ namespace UmbrellaToolsKit.Storage
 {
     public class SaveSystem : IDisposable
     {
-        private class SaveData
+        public class SaveData
         {
             public Dictionary<string, string> StringValues = new();
             public Dictionary<string, int> IntValues = new();
             public Dictionary<string, float> FloatValues = new();
         }
 
-        private SaveSettings _integration;
+        private SaveSettings<SaveData> _integration;
         private static SaveData _saveData;
 
-        public SaveSystem(SaveSettings integration)
+        public SaveSystem(SaveSettings<SaveData> integration)
         {
             _integration = integration;
             if (_saveData == null)
-                _saveData = _integration.SaveIntegration.Get<SaveData>(_integration.FilePath);
+                _saveData = _integration.SaveIntegration.Get(_integration.FilePath);
         }
 
         public void SetString(string key, string value) => _saveData.StringValues.AddForce(key, value);
@@ -52,7 +52,7 @@ namespace UmbrellaToolsKit.Storage
 
         public void Save(string filename)
         {
-            _integration.SaveIntegration.Set<SaveData>(_saveData);
+            _integration.SaveIntegration.Set(_saveData);
             _integration.SaveIntegration.Save(filename);
         }
 
