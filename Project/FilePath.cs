@@ -36,7 +36,7 @@
 
 
         // Properties Settings
-        public const string GAME_DEBUGGER_PATH = @"Content/GameDebuggerSettings.xml";
-        public const string PLAYER_GAME_DEBUGGER_PATH = @"Content/PlayerDebuggerSettings.xml";
+        public const string GAME_DEBUGGER_PATH = @"Content/GameDebuggerSettings";
+        public const string PLAYER_GAME_DEBUGGER_PATH = @"Content/PlayerDebuggerSettings";
     }
 }
