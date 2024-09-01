@@ -133,7 +133,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                 _currentPathFile = pathFile;
                 _canShowPropertyEditor = true;
 
-                if (!File.Exists(_buildPath + pathFile))
+                if (!File.Exists(_buildPath + pathFile + GameSettingsProperty.SaveIntegration.Extension))
                 {
                     var instance = Activator.CreateInstance(type);
                     _currentObject = instance;

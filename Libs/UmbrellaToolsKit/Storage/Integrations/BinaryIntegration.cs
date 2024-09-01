@@ -11,7 +11,7 @@ namespace UmbrellaToolsKit.Storage.Integrations
 
         public string Extension { get => ".bin"; }
 
-        public T Get(string filename)
+        public object Get(string filename, Type type = null)
         {
             T values = (T)Activator.CreateInstance(typeof(T));
             try
@@ -21,8 +21,8 @@ namespace UmbrellaToolsKit.Storage.Integrations
                     string base64String = binaryReader.ReadString();
                     byte[] bytes = Convert.FromBase64String(base64String);
                     string jsonString = Encoding.UTF8.GetString(bytes);
-
-                    values = (T)JsonConvert.DeserializeObject(jsonString);
+                    type ??= typeof(T);
+                    values = (T)JsonConvert.DeserializeObject(jsonString, type);
                     Console.WriteLine(JsonConvert.SerializeObject(values));
                     binaryReader.Close();
                 }

@@ -10,7 +10,7 @@ namespace UmbrellaToolsKit.Storage.Integrations
 
         public string Extension { get => ".xml"; }
 
-        public T Get(string filename)
+        public object Get(string filename, Type type = null)
         {
             T values = (T)Activator.CreateInstance(typeof(T));
             try
