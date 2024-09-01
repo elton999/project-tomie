@@ -33,6 +33,8 @@ namespace UmbrellaToolsKit.Storage.Integrations
             return values;
         }
 
+        public T Get(string filename) => (T)Get(filename, typeof(T));
+
         public void Save(string filename)
         {
             using (BinaryWriter binaryWriter = new BinaryWriter(new FileStream(filename + Extension, FileMode.Create)))

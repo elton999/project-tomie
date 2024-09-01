@@ -19,8 +19,7 @@ namespace UmbrellaToolsKit.Storage
         public SaveSystem(SaveSettings<SaveData> integration)
         {
             _integration = integration;
-            if (_saveData == null)
-                _saveData = (SaveData)_integration.SaveIntegration.Get(_integration.FilePath);
+            _saveData ??=_integration.SaveIntegration.Get(_integration.FilePath);
         }
 
         public void SetString(string key, string value) => _saveData.StringValues.AddForce(key, value);
