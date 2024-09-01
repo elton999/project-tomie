@@ -155,14 +155,10 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
         {
             var timer = new Utils.Timer();
             timer.Begin();
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Indent = true;
-            using (XmlWriter writer = XmlWriter.Create(pathFile, settings))
-            {
-                Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer.Serialize(writer, instance, null);
-                writer.Close();
-            }
+            GameSettingsProperty.SaveIntegration.Set(instance);
+            GameSettingsProperty.SaveIntegration.Save(pathFile);
             timer.End();
+
             Log.Write($"[{instance.GetType().Name}] saving: {pathFile}, {timer.GetTotalSeconds()}");
         }
 #endif

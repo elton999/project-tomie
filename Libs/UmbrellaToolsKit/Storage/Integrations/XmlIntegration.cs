@@ -4,7 +4,7 @@ using Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate;
 
 namespace UmbrellaToolsKit.Storage.Integrations
 {
-    public abstract class XmlIntegration<T> : ISaveIntegration<T>
+    public class XmlIntegration<T> : ISaveIntegration<T>
     {
         private T _values;
 
@@ -35,6 +35,6 @@ namespace UmbrellaToolsKit.Storage.Integrations
             }
         }
 
-        public void Set(T value) => _values = value;
+        public void Set(object value) => _values = (T)value;
     }
 }
