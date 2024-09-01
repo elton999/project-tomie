@@ -177,10 +177,8 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 #endif
         public void Save(string filename)
         {
-            if (_storage == null)
-                _storage = new Storage.Load(filename);
-            if (_storage != null)
-                _storage.SetFilename(filename);
+            _storage ??= new Storage.Load(filename);
+            _storage.SetFilename(filename);
 
             List<float> ids = new List<float>();
             foreach (var node in DialogueData.Nodes)

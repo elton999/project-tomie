@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Xml;
 using ImGuiNET;
 using Microsoft.Xna.Framework;
 using UmbrellaToolsKit.EditorEngine.Attributes;
@@ -21,9 +20,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
         private bool _canShowPropertyEditor = false;
 
         private string _projectPath => _buildPath + "/../../../../Project";
-        private string _buildPath => Environment.CurrentDirectory;
-
-        public const string FILE_EXTENSION = ".xml";
+        private string _buildPath => Environment.CurrentDirectory; 
 
         public GameManagement GameManagement => _gameManagement;
         public IEnumerable<Type> AllSettingsData
@@ -129,14 +126,14 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
             {
                 var propertyAttribute = type.GetCustomAttributesData();
                 var arguments = propertyAttribute[0].ConstructorArguments;
-                string nameFile = (string)arguments[0].Value + FILE_EXTENSION;
+                string nameFile = (string)arguments[0].Value;
                 string pathFile = (string)arguments[1].Value;
 
                 pathFile += nameFile;
                 _currentPathFile = pathFile;
                 _canShowPropertyEditor = true;
 
-                if (!File.Exists(_buildPath + pathFile))
+                if (!File.Exists(_buildPath + pathFile + GameSettingsProperty.SaveIntegration.Extension))
                 {
                     var instance = Activator.CreateInstance(type);
                     _currentObject = instance;
@@ -155,14 +152,10 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
         {
             var timer = new Utils.Timer();
             timer.Begin();
-            XmlWriterSettings settings = new XmlWriterSettings();
-            settings.Indent = true;
-            using (XmlWriter writer = XmlWriter.Create(pathFile, settings))
-            {
-                Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer.Serialize(writer, instance, null);
-                writer.Close();
-            }
+            GameSettingsProperty.SaveIntegration.Set(instance);
+            GameSettingsProperty.SaveIntegration.Save(pathFile);
             timer.End();
+
             Log.Write($"[{instance.GetType().Name}] saving: {pathFile}, {timer.GetTotalSeconds()}");
         }
 #endif

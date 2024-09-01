@@ -12,7 +12,7 @@ namespace UmbrellaToolsKit.Utils
         private static CheatListener _instance;
         private List<Tuple<Keys, Action>> _cheatList = new List<Tuple<Keys, Action>>();
 
-        public override void Start() => _instance = _instance == null ? this : _instance;
+        public override void Start() => _instance ??= this;
 
         public override void Update(float deltaTime)
         {

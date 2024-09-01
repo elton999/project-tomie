@@ -1,40 +1,33 @@
 using System;
-using System.Xml;
+using UmbrellaToolsKit.Storage;
+using UmbrellaToolsKit.Storage.Integrations;
 
 namespace UmbrellaToolsKit.EditorEngine
 {
     public class GameSettingsProperty
     {
-        public static GameSettingsProperty GetProperty(string pathFile, Type type)
+        public static ISaveIntegration<GameSettingsProperty> SaveIntegration = new XmlIntegration<GameSettingsProperty>();
+
+        public static object GetProperty(string pathFile, Type type)
         {
             var timer = new Utils.Timer();
+
             timer.Begin();
-
-            GameSettingsProperty property = (GameSettingsProperty)Activator.CreateInstance(type);
-            try
-            {
-                using (XmlReader reader = XmlReader.Create(pathFile))
-                {
-                    property = Microsoft.Xna.Framework.Content.Pipeline.Serialization.Intermediate.IntermediateSerializer.Deserialize<GameSettingsProperty>(reader, pathFile);
-                    reader.Close();
-                }
-            }
-            catch
-            { };
-
+            object property = SaveIntegration.Get(pathFile, type);
             timer.End();
+
             Log.Write($"[{nameof(GameSettingsProperty)}] reading: {pathFile}, timer: {timer.GetTotalSeconds()}");
             return property;
         }
 
-        public static GameSettingsProperty GetGameSettingsProperty(string pathFile)
-        {
-            return GetProperty(pathFile, typeof(GameSettingsProperty));
-        }
+        public static GameSettingsProperty GetGameSettingsProperty(string pathFile) => (GameSettingsProperty)GetProperty(pathFile, typeof(GameSettingsProperty));
 
         public static T GetProperty<T>(string pathFile) where T : GameSettingsProperty
         {
-            return (T)GetProperty(pathFile, typeof(T));
+            var property = GetProperty(pathFile , typeof(T));
+
+            if (property is T) return (T)property;
+            return default(T);
         }
     }
 }
