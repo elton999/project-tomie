@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Xml;
 using ImGuiNET;
 using Microsoft.Xna.Framework;
 using UmbrellaToolsKit.EditorEngine.Attributes;
@@ -21,9 +20,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
         private bool _canShowPropertyEditor = false;
 
         private string _projectPath => _buildPath + "/../../../../Project";
-        private string _buildPath => Environment.CurrentDirectory;
-
-        public const string FILE_EXTENSION = ".xml";
+        private string _buildPath => Environment.CurrentDirectory; 
 
         public GameManagement GameManagement => _gameManagement;
         public IEnumerable<Type> AllSettingsData
@@ -129,7 +126,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
             {
                 var propertyAttribute = type.GetCustomAttributesData();
                 var arguments = propertyAttribute[0].ConstructorArguments;
-                string nameFile = (string)arguments[0].Value + FILE_EXTENSION;
+                string nameFile = (string)arguments[0].Value;
                 string pathFile = (string)arguments[1].Value;
 
                 pathFile += nameFile;

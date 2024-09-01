@@ -7,14 +7,16 @@ namespace UmbrellaToolsKit.Storage.Integrations
 {
     public class BinaryIntegration<T> : ISaveIntegration<T>
     {
-        object _values;
+        private object _values;
+
+        public string Extension { get => ".bin"; }
 
         public T Get(string filename)
         {
             T values = (T)Activator.CreateInstance(typeof(T));
             try
             {
-                using (BinaryReader binaryReader = new BinaryReader(new FileStream(filename, FileMode.Open)))
+                using (BinaryReader binaryReader = new BinaryReader(new FileStream(filename + Extension, FileMode.Open)))
                 {
                     string base64String = binaryReader.ReadString();
                     byte[] bytes = Convert.FromBase64String(base64String);
@@ -33,7 +35,7 @@ namespace UmbrellaToolsKit.Storage.Integrations
 
         public void Save(string filename)
         {
-            using (BinaryWriter binaryWriter = new BinaryWriter(new FileStream(filename, FileMode.Create)))
+            using (BinaryWriter binaryWriter = new BinaryWriter(new FileStream(filename + Extension, FileMode.Create)))
             {
                 string jsonString = JsonConvert.SerializeObject(_values);
                 byte[] bytes = Encoding.UTF8.GetBytes(jsonString);

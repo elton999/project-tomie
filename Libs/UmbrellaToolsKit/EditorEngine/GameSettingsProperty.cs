@@ -6,7 +6,7 @@ namespace UmbrellaToolsKit.EditorEngine
 {
     public class GameSettingsProperty
     {
-        public static ISaveIntegration<GameSettingsProperty> SaveIntegration = new XmlIntegration<GameSettingsProperty>();
+        public static ISaveIntegration<GameSettingsProperty> SaveIntegration = new BinaryIntegration<GameSettingsProperty>();
 
         public static GameSettingsProperty GetProperty(string pathFile)
         {

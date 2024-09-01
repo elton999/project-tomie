@@ -8,14 +8,16 @@ namespace UmbrellaToolsKit.Storage.Integrations
     {
         private T _values;
 
+        public string Extension { get => ".xml"; }
+
         public T Get(string filename)
         {
             T values = (T)Activator.CreateInstance(typeof(T));
             try
             {
-                using (XmlReader reader = XmlReader.Create(filename))
+                using (XmlReader reader = XmlReader.Create(filename + Extension))
                 {
-                    values = IntermediateSerializer.Deserialize<T>(reader, filename);
+                    values = IntermediateSerializer.Deserialize<T>(reader, filename + Extension);
                     reader.Close();
                 }
             }
@@ -28,7 +30,7 @@ namespace UmbrellaToolsKit.Storage.Integrations
         {
             XmlWriterSettings settings = new XmlWriterSettings();
             settings.Indent = true;
-            using (XmlWriter writer = XmlWriter.Create(filename, settings))
+            using (XmlWriter writer = XmlWriter.Create(filename + Extension, settings))
             {
                 IntermediateSerializer.Serialize(writer, _values, null);
                 writer.Close();
