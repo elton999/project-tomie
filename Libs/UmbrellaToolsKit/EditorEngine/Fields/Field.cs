@@ -4,6 +4,7 @@ using MonoGame.ImGui.Extensions;
 #endif
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections;
 
 namespace UmbrellaToolsKit.EditorEngine.Fields
 {
@@ -108,6 +109,18 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
 			TableFormatEnd();
 #endif
 		}
+
+    public static void DrawList(string name, ref IList value)
+    {
+#if !RELEASE
+      TableFormatBegin(name);
+      foreach(var item in value)
+      {
+        
+      }
+      TableFormatEnd();
+#endif
+    }
 
 #if !RELEASE
 		public static void DrawBoolean(string name, ref bool value) => ImGui.Checkbox(name, ref value);

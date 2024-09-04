@@ -2,6 +2,7 @@
 using ImGuiNET;
 #endif
 using Microsoft.Xna.Framework;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
@@ -10,6 +11,23 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 {
     public class InspectorClass
     {
+        public class InspectorField
+        {
+            public Type Type;
+            public string Name;
+            public Object Value;
+        }
+
+        public static Dictionary<Type, int> TypeDict = new Dictionary<Type, int>()
+        {
+            {typeof(Vector2), 0},
+            {typeof(Vector3), 1},
+            {typeof(float), 2},
+            {typeof(string), 3},
+            {typeof(bool), 4}
+
+        };
+
         public static void DrawAllFields(object obj)
         {
 #if !RELEASE
@@ -44,16 +62,25 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                     if (fieldsWithoutCategories.Contains(field))
                     {
                         fieldsWithoutCategories.Remove(field);
-                        if (treeNode) DrawField(field, obj);
+                        if (treeNode) SetField(field, obj);
                     }
                 }
                 if (treeNode) ImGui.Unindent();
             }
 
             foreach (var field in fieldsWithoutCategories)
-                DrawField(field, obj);
+                SetField(field, obj);
 #endif
         }
+
+#if !RELEASE
+       public static void SetField(FieldInfo field, object obj)
+       { 
+            var fieldSettings = new InspectorField() {Name = field.Name, Value = field.GetValue(obj), Type = field.FieldType} ;
+            DrawField(fieldSettings);
+            field.SetValue(obj, fieldSettings.Value);
+       }
+#endif
 
 #if !RELEASE
         public static bool DrawSeparator(string name)
@@ -66,34 +93,36 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
             return treeNode;
         }
 
-        public static void DrawField(FieldInfo fInfo, object prop)
+        public static void DrawField(InspectorField obj)
         {
-            switch (fInfo.FieldType.ToString())
+            if(!TypeDict.ContainsKey(obj.Type)) return;
+
+            switch (TypeDict[obj.Type])
             {
-                case "Microsoft.Xna.Framework.Vector2":
-                    var vector2 = (Vector2)fInfo.GetValue(prop);
-                    Fields.Field.DrawVector(fInfo.Name, ref vector2);
-                    fInfo.SetValue(prop, vector2);
+                case 0:
+                    var vector2 = (Vector2)obj.Value;
+                    Fields.Field.DrawVector(obj.Name, ref vector2);
+                    obj.Value = vector2;
                     break;
-                case "Microsoft.Xna.Framework.Vector3":
-                    var vector3 = (Vector3)fInfo.GetValue(prop);
-                    Fields.Field.DrawVector(fInfo.Name, ref vector3);
-                    fInfo.SetValue(prop, vector3);
+                case 1:
+                    var vector3 = (Vector3)obj.Value;
+                    Fields.Field.DrawVector(obj.Name, ref vector3);
+                    obj.Value = vector3; 
                     break;
-                case "System.Single":
-                    var floatValue = (float)fInfo.GetValue(prop);
-                    Fields.Field.DrawFloat(fInfo.Name, ref floatValue);
-                    fInfo.SetValue(prop, floatValue);
+                case 2:
+                    var floatValue = (float)obj.Value;
+                    Fields.Field.DrawFloat(obj.Name, ref floatValue);
+                    obj.Value = floatValue;
                     break;
-                case "System.String":
-                    var stringValue = (string)fInfo.GetValue(prop);
-                    Fields.Field.DrawString(fInfo.Name, ref stringValue);
-                    fInfo.SetValue(prop, stringValue);
+                case 3:
+                    var stringValue = (string)obj.Value;
+                    Fields.Field.DrawString(obj.Name, ref stringValue);
+                    obj.Value = stringValue;
                     break;
-                case "System.Boolean":
-                    var boolValue = (bool)fInfo.GetValue(prop);
-                    Fields.Field.DrawBoolean(fInfo.Name, ref boolValue);
-                    fInfo.SetValue(prop, boolValue);
+                case 4:
+                    var boolValue = (bool)obj.Value;
+                    Fields.Field.DrawBoolean(obj.Name, ref boolValue);
+                    obj.Value = boolValue;
                     break;
             }
         }
