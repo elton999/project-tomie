@@ -86,8 +86,8 @@ namespace Project
 
         protected override void Update(GameTime gameTime)
         {
-            if (KeyBoardHandler.KeyPressed(Input.CANCEL))
-                Exit();
+           // if (KeyBoardHandler.KeyPressed(Input.CANCEL))
+           //     Exit();
 
             _gameManagement.Update(gameTime);
 

@@ -40,6 +40,8 @@ namespace Project.UI
         public bool TextToCenter = true;
         public Color DefaultTextColor = Color.White;
 
+        public Action OnCloseMenu;
+
         public void SelectNextButton()
         {
             _selectIndex++;
@@ -103,7 +105,11 @@ namespace Project.UI
 
         public void ShowMenu() => _canShow = true;
 
-        public void HideMenu() => _canShow = false;
+        public void HideMenu() 
+        {
+            _canShow = false;
+            OnCloseMenu?.Invoke();
+        }
 
         public override void DrawSprite(SpriteBatch spriteBatch)
         {

@@ -8,6 +8,7 @@ namespace Project.Entities.Actors
     public class InteractionHitBox : HitboxEvents
     {
         private InteractionMenu _interactionMenu;
+        private InputMovementComponent _playerInputSettings => Scene.Players[0].GetComponent<InputMovementComponent>();
 
         public override void Start()
         {
@@ -31,8 +32,15 @@ namespace Project.Entities.Actors
 
         public override void OnInteract()
         {
-            Scene.Players[0].GetComponent<InputMovementComponent>().DisableInput();
+            _playerInputSettings.DisableInput();
+            _interactionMenu.OnCloseMenu += OnLeaveInteract;
             _interactionMenu.ShowMenu();
+        }
+
+        public override void OnLeaveInteract()
+        {
+            _interactionMenu.OnCloseMenu -= OnLeaveInteract;
+            _playerInputSettings.EnableInput();
         }
     }
 }

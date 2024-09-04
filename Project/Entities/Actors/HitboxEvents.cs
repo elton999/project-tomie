@@ -29,5 +29,7 @@ namespace Project.Entities.Actors
         }
 
         public abstract void OnInteract();
+
+        public abstract void OnLeaveInteract();
     }
 }
