@@ -7,13 +7,14 @@ namespace UmbrellaToolsKit.EditorEngine.Windows.GameSettings
     [GameSettingsProperty("Input Settings", "games_settings/")]
     public class InputGameSettings : GameSettingsProperty
     {
+        [System.Serializable]
         public struct InputData
         {
-            public string InputName;
-            public List<Keys> Keys;
+            [ShowEditor] public string InputName;
+            [ShowEditor] public List<Keys> Keys;
         }
 
         [ShowEditor] public string Name;
-        public List<InputData> InputDataList;
+        [ShowEditor] public List<InputData> InputDataList;
     }
 }

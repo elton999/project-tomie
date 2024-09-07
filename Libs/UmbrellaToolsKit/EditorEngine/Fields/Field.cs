@@ -5,6 +5,7 @@ using MonoGame.ImGui.Extensions;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections;
+using UmbrellaToolsKit.EditorEngine.Windows;
 
 namespace UmbrellaToolsKit.EditorEngine.Fields
 {
@@ -116,8 +117,19 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
       TableFormatBegin(name);
       foreach(var item in value)
       {
-        
+          var fieldSettings  = new InspectorClass.InspectorField()
+          {
+              Name = name,
+              Value = item,
+              Type = item.GetType()
+          };
+          InspectorClass.DrawField(fieldSettings);
       }
+      //if(ImGui.Button("+"))
+      //{  
+      //    var item = System.Activator.CreateInstance(i) 
+      //    value.Add(item);    
+      //}
       TableFormatEnd();
 #endif
     }

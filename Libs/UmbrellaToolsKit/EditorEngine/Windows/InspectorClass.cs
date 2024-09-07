@@ -95,35 +95,45 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 
         public static void DrawField(InspectorField obj)
         {
-            if(!TypeDict.ContainsKey(obj.Type)) return;
-
-            switch (TypeDict[obj.Type])
+            if(TypeDict.ContainsKey(obj.Type))
             {
-                case 0:
-                    var vector2 = (Vector2)obj.Value;
-                    Fields.Field.DrawVector(obj.Name, ref vector2);
-                    obj.Value = vector2;
-                    break;
-                case 1:
-                    var vector3 = (Vector3)obj.Value;
-                    Fields.Field.DrawVector(obj.Name, ref vector3);
-                    obj.Value = vector3; 
-                    break;
-                case 2:
-                    var floatValue = (float)obj.Value;
-                    Fields.Field.DrawFloat(obj.Name, ref floatValue);
-                    obj.Value = floatValue;
-                    break;
-                case 3:
-                    var stringValue = (string)obj.Value;
-                    Fields.Field.DrawString(obj.Name, ref stringValue);
-                    obj.Value = stringValue;
-                    break;
-                case 4:
-                    var boolValue = (bool)obj.Value;
-                    Fields.Field.DrawBoolean(obj.Name, ref boolValue);
-                    obj.Value = boolValue;
-                    break;
+                switch (TypeDict[obj.Type])
+                {
+                    case 0:
+                        var vector2 = (Vector2)obj.Value;
+                        Fields.Field.DrawVector(obj.Name, ref vector2);
+                        obj.Value = vector2;
+                        break;
+                    case 1:
+                        var vector3 = (Vector3)obj.Value;
+                        Fields.Field.DrawVector(obj.Name, ref vector3);
+                        obj.Value = vector3; 
+                        break;
+                    case 2:
+                        var floatValue = (float)obj.Value;
+                        Fields.Field.DrawFloat(obj.Name, ref floatValue);
+                        obj.Value = floatValue;
+                        break;
+                    case 3:
+                        var stringValue = (string)obj.Value;
+                        Fields.Field.DrawString(obj.Name, ref stringValue);
+                        obj.Value = stringValue;
+                        break;
+                    case 4:
+                        var boolValue = (bool)obj.Value;
+                        Fields.Field.DrawBoolean(obj.Name, ref boolValue);
+                        obj.Value = boolValue;
+                        break;
+                }
+                return;
+            }
+
+            if(obj.Value is System.Collections.IList)
+            {
+                 System.Collections.IList list = (System.Collections.IList)obj.Value;
+                 Fields.Field.DrawList(obj.Name, ref list);
+                 obj.Value = list;
+                 return;
             }
         }
 #endif
