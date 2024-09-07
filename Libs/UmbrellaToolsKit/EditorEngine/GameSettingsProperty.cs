@@ -17,7 +17,8 @@ namespace UmbrellaToolsKit.EditorEngine
             timer.End();
 
             Log.Write($"[{nameof(GameSettingsProperty)}] reading: {pathFile}, timer: {timer.GetTotalSeconds()}");
-            return property;
+            if(property.GetType() == type) return property;
+            return System.Activator.CreateInstance(type);
         }
 
         public static GameSettingsProperty GetGameSettingsProperty(string pathFile) => (GameSettingsProperty)GetProperty(pathFile, typeof(GameSettingsProperty));
@@ -27,7 +28,7 @@ namespace UmbrellaToolsKit.EditorEngine
             var property = GetProperty(pathFile , typeof(T));
 
             if (property is T) return (T)property;
-            return default(T);
+            return (T)System.Activator.CreateInstance(typeof(T));
         }
     }
 }
