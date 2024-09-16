@@ -1,4 +1,6 @@
 using System.Collections.Generic;
+using System.Collections;
+using System;
 
 namespace UmbrellaToolsKit.Utils
 {
@@ -12,6 +14,15 @@ namespace UmbrellaToolsKit.Utils
                 return;
             }
             dictionary.Add(key, value);
+        }
+
+        public static void AddNewItem(this IList list)
+        {
+            Type type = list.GetType().GetGenericArguments()[0];
+            object value;
+            if(type == typeof(string)) value = String.Empty;
+            else value = System.Activator.CreateInstance(type);
+            list.Add(value);
         }
     }
 }

@@ -3,6 +3,7 @@ using ImGuiNET;
 using MonoGame.ImGui.Extensions;
 #endif
 using Microsoft.Xna.Framework;
+using UmbrellaToolsKit.Utils;
 using System;
 using System.Collections;
 using UmbrellaToolsKit.EditorEngine.Windows;
@@ -97,11 +98,11 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
 			if (String.IsNullOrEmpty(value)) value = string.Empty;
 			if (ImGui.BeginCombo(string.Empty, value, ImGuiComboFlags.HeightLarge | ImGuiComboFlags.HeightLargest))
 			{
-				for (int i = 0; i < options.Length; i++)
+				for (int optionIndex = 0; optionIndex < options.Length; optionIndex++)
 				{
-					bool is_selected = options[i] == value;
-					if (ImGui.Selectable(options[i], is_selected))
-						value = options[i];
+					bool is_selected = options[optionIndex] == value;
+					if (ImGui.Selectable(options[optionIndex], is_selected))
+						value = options[optionIndex];
 					if (is_selected)
 						ImGui.SetItemDefaultFocus();
 				}
@@ -115,21 +116,24 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
     {
 #if !RELEASE
       TableFormatBegin(name);
-      foreach(var item in value)
+      if(ImGui.TreeNode(name))
       {
-          var fieldSettings  = new InspectorClass.InspectorField()
+          for(int itemIndex = 0; itemIndex < value.Count; itemIndex++)
           {
-              Name = name,
-              Value = item,
-              Type = item.GetType()
-          };
-          InspectorClass.DrawField(fieldSettings);
+              var item = value[itemIndex];
+              var fieldSettings = new InspectorClass.InspectorField()
+              {
+                  Name = name,
+                  Value = item,
+                  Type = item.GetType()
+              };
+              InspectorClass.DrawField(fieldSettings);
+              value[itemIndex] = fieldSettings.Value;
+          }
       }
-      //if(ImGui.Button("+"))
-      //{  
-      //    var item = System.Activator.CreateInstance(i) 
-      //    value.Add(item);    
-      //}
+
+      if(ImGui.Button("add new item"))
+          value.AddNewItem();
       TableFormatEnd();
 #endif
     }

@@ -47,7 +47,7 @@ namespace Project.UI
                 if (_isAnimationDone)
                     NextFrame();
                 else
-                    _skip = true;
+                    _skipTextAnimation = true;
         }
 
         public void Play()
@@ -60,7 +60,7 @@ namespace Project.UI
         {
             Clear();
             _isPlaying = true;
-            _skip = false;
+            _skipTextAnimation = false;
             _currentFrame++;
             if (_currentFrame < _frames.Count)
             {

@@ -3,6 +3,7 @@ using ImGuiNET;
 #endif
 using Microsoft.Xna.Framework;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
@@ -130,7 +131,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 
             if(obj.Value is System.Collections.IList)
             {
-                 System.Collections.IList list = (System.Collections.IList)obj.Value;
+                 var list = (IList)obj.Value;
                  Fields.Field.DrawList(obj.Name, ref list);
                  obj.Value = list;
                  return;
