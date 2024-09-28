@@ -12,7 +12,7 @@ namespace Project.UI
         private Point _size;
 
         protected bool _isShowing = false;
-        protected bool _skip = false;
+        protected bool _skipTextAnimation = false;
         [ShowEditor] private float _timeToWrite = 0.5f;
 
         private string _text;
@@ -35,7 +35,7 @@ namespace Project.UI
         public override void Update(float deltaTime)
         {
             if (_isShowing && KeyBoardHandler.KeyPressed(Input.INTERACT))
-                _skip = true;
+                _skipTextAnimation = true;
 
             // if (KeyBoardHandler.KeyPressed(Input.INTERACT))
             //     Say("Hello World! it is just a little bit different than you think it is in the game world and you can see it in the game world by clicking on the button below and press the Enter key.");
@@ -54,24 +54,24 @@ namespace Project.UI
             FormatText();
 
             CoroutineManagement.ClearCoroutines();
-            CoroutineManagement.StarCoroutine(WriteText());
+            CoroutineManagement.StarCoroutine(WriteTextAnimation());
         }
 
         public void Clear()
         {
             _isShowing = false;
-            _skip = false;
+            _skipTextAnimation = false;
             _isAnimationDone = false;
         }
 
-        public IEnumerator WriteText()
+        public IEnumerator WriteTextAnimation()
         {
-            for (int i = 0; i < _formattedText.Length; i++)
+            for (int letterIndex = 0; letterIndex < _formattedText.Length; letterIndex++)
             {
-                string currentLetter = _formattedText[i].ToString();
+                string currentLetter = _formattedText[letterIndex].ToString();
                 _renderText += currentLetter;
 
-                if (!_skip)
+                if (!_skipTextAnimation)
                     yield return CoroutineManagement.Wait(_timeToWrite);
             }
             _isAnimationDone = true;

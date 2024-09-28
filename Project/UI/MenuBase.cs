@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
@@ -105,7 +106,7 @@ namespace Project.UI
 
         public void ShowMenu() => _canShow = true;
 
-        public void HideMenu() 
+        public void HideMenu()
         {
             _canShow = false;
             OnCloseMenu?.Invoke();

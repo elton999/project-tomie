@@ -160,14 +160,14 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 
             int lines = 10;
             int columns = 6;
-            for (int i = 0; i < lines; i++)
+            for (int lineCount = 0; lineCount < lines; lineCount++)
             {
-                for (int j = 0; j < columns; j++)
+                for (int columnCount = 0; columnCount < columns; columnCount++)
                 {
-                    if ((i + j) % 2 == 0)
+                    if ((lineCount + columnCount) % 2 == 0)
                     {
                         Vector2 size = Vector2.One * 200;
-                        Vector2 position = size * (new Vector2(i, j));
+                        Vector2 position = size * (new Vector2(lineCount, columnCount));
 
                         Primativas.Square.Draw(drawList, position, size, Color.DimGray);
                     }
@@ -215,16 +215,16 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 
             foreach (var node in DialogueData.Nodes)
             {
-                if (node is INodeInPutle)
+                if (node is not INodeInPutle) continue;
+
+                INodeInPutle nodeInPutle = (INodeInPutle)node;
+                float distance = (nodeInPutle.InPosition - MouseHandler.Position).Length();
+
+                if (distance <= 5f)
                 {
-                    INodeInPutle nodeInPutle = (INodeInPutle)node;
-                    float distance = (nodeInPutle.InPosition - MouseHandler.Position).Length();
-                    if (distance <= 5f)
-                    {
-                        NodeStartConnection.AddNodeConnection(nodeInPutle);
-                        IsConnecting = false;
-                        return;
-                    }
+                    NodeStartConnection.AddNodeConnection(nodeInPutle);
+                    IsConnecting = false;
+                    return;
                 }
             }
         }

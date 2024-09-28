@@ -7,6 +7,7 @@ using ImGuiNET;
 using Microsoft.Xna.Framework;
 using UmbrellaToolsKit.EditorEngine.Attributes;
 using UmbrellaToolsKit.EditorEngine.Windows.Interfaces;
+using UmbrellaToolsKit.Utils;
 
 namespace UmbrellaToolsKit.EditorEngine.Windows
 {
@@ -20,7 +21,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
         private bool _canShowPropertyEditor = false;
 
         private string _projectPath => _buildPath + "/../../../../Project";
-        private string _buildPath => Environment.CurrentDirectory; 
+        private string _buildPath => Environment.CurrentDirectory;
 
         public GameManagement GameManagement => _gameManagement;
         public IEnumerable<Type> AllSettingsData
@@ -120,7 +121,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
         private object GetInstanceByType(Type type)
         {
             _canShowPropertyEditor = false;
-            bool hasPropertyAttribute = type.GetCustomAttributes(typeof(GameSettingsPropertyAttribute), true).Length > 0;
+            bool hasPropertyAttribute = type.HasPropertyAttribute(typeof(GameSettingsPropertyAttribute));
 
             if (hasPropertyAttribute)
             {
