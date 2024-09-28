@@ -20,10 +20,11 @@ namespace UmbrellaToolsKit.Utils
         {
             Type type = list.GetType().GetGenericArguments()[0];
             object value;
-            if(type == typeof(string)) value = String.Empty;
+            if (type == typeof(string)) value = String.Empty;
             else value = System.Activator.CreateInstance(type);
             list.Add(value);
         }
+
         public static void RemoveAtSafe(this IList list, int index)
         {
             if (index < 0 || index >= list.Count) return;

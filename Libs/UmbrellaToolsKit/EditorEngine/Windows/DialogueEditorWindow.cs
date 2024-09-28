@@ -215,16 +215,16 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 
             foreach (var node in DialogueData.Nodes)
             {
-                if (node is INodeInPutle)
+                if (node is not INodeInPutle) continue;
+
+                INodeInPutle nodeInPutle = (INodeInPutle)node;
+                float distance = (nodeInPutle.InPosition - MouseHandler.Position).Length();
+
+                if (distance <= 5f)
                 {
-                    INodeInPutle nodeInPutle = (INodeInPutle)node;
-                    float distance = (nodeInPutle.InPosition - MouseHandler.Position).Length();
-                    if (distance <= 5f)
-                    {
-                        NodeStartConnection.AddNodeConnection(nodeInPutle);
-                        IsConnecting = false;
-                        return;
-                    }
+                    NodeStartConnection.AddNodeConnection(nodeInPutle);
+                    IsConnecting = false;
+                    return;
                 }
             }
         }

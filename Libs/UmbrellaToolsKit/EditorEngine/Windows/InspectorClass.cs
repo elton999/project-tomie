@@ -75,12 +75,12 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
         }
 
 #if !RELEASE
-       public static void SetField(FieldInfo field, object obj)
-       { 
-            var fieldSettings = new InspectorField() {Name = field.Name, Value = field.GetValue(obj), Type = field.FieldType} ;
+        public static void SetField(FieldInfo field, object obj)
+        {
+            var fieldSettings = new InspectorField() { Name = field.Name, Value = field.GetValue(obj), Type = field.FieldType };
             DrawField(fieldSettings);
             field.SetValue(obj, fieldSettings.Value);
-       }
+        }
 #endif
 
 #if !RELEASE
@@ -96,7 +96,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
 
         public static void DrawField(InspectorField obj)
         {
-            if(TypeDict.ContainsKey(obj.Type))
+            if (TypeDict.ContainsKey(obj.Type))
             {
                 switch (TypeDict[obj.Type])
                 {
@@ -108,7 +108,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                     case 1:
                         var vector3 = (Vector3)obj.Value;
                         Fields.Field.DrawVector(obj.Name, ref vector3);
-                        obj.Value = vector3; 
+                        obj.Value = vector3;
                         break;
                     case 2:
                         var floatValue = (float)obj.Value;
@@ -129,12 +129,12 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                 return;
             }
 
-            if(obj.Value is System.Collections.IList)
+            if (obj.Value is IList)
             {
-                 var list = (IList)obj.Value;
-                 Fields.Field.DrawList(obj.Name, ref list);
-                 obj.Value = list;
-                 return;
+                var list = (IList)obj.Value;
+                Fields.Field.DrawList(obj.Name, ref list);
+                obj.Value = list;
+                return;
             }
         }
 #endif

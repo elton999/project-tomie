@@ -3,7 +3,6 @@
 using ImGuiNET;
 using MonoGame.ImGui.Extensions;
 #endif
-using System.Collections.Generic;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Input;
 using UmbrellaToolsKit.Input;
@@ -181,7 +180,7 @@ namespace UmbrellaToolsKit.EditorEngine.Nodes
             _storage.SetString($"content-{Id}", Content);
             _storage.SetFloat($"position-{Id}-vector-x", Position.X);
             _storage.SetFloat($"position-{Id}-vector-y", Position.Y);
-            if (ParentNode != null)
+            if (ParentNode is not null)
                 _storage.SetFloat($"parent-{Id}", ParentNode.Id);
             _storage.SetString($"sprite-{Id}", SpriteName);
 
@@ -190,10 +189,8 @@ namespace UmbrellaToolsKit.EditorEngine.Nodes
 #if !RELEASE
         public virtual void DrawInspector()
         {
-            ImGui.PushStyleColor(ImGuiCol.Button, new System.Numerics.Vector4(1, 0, 0, 1));
-            if (ImGui.Button("Delete"))
+            if (Fields.Buttons.RedButton("Delete"))
                 OnDelete();
-            ImGui.PopStyleColor();
 
             InspectorClass.DrawAllFields(this);
         }
@@ -213,8 +210,8 @@ namespace UmbrellaToolsKit.EditorEngine.Nodes
 
         protected void DrawSelectionArea(ImDrawListPtr imDraw)
         {
-            if (CanMoveNode)
-                Primativas.Square.Draw(imDraw, SelectedNodePosition, SelectedNodeSize, Color.White);
+            if (!CanMoveNode) return;
+            Primativas.Square.Draw(imDraw, SelectedNodePosition, SelectedNodeSize, Color.White);
         }
 #endif
     }

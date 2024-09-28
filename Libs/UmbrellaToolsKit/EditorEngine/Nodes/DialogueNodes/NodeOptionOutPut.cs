@@ -2,7 +2,6 @@
 using ImGuiNET;
 #endif
 using Microsoft.Xna.Framework;
-using UmbrellaToolsKit.EditorEngine.Windows.DialogueEditor;
 using UmbrellaToolsKit.Storage;
 
 namespace UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes
@@ -20,7 +19,7 @@ namespace UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes
             string content = Content;
             Fields.Field.DrawLongText("Content", ref content);
             Content = content;
-            if(ImGui.Button("Delete Option")) OnDelete();
+            if (ImGui.Button("Delete Option")) OnDelete();
         }
 
 #endif
@@ -39,10 +38,10 @@ namespace UmbrellaToolsKit.EditorEngine.Nodes.DialogueNodes
         public override void OnSave()
         {
             base.OnSave();
-           _storage.SetString($"Nodes-Object-{Id}", typeof(NodeOptionOutPut).Namespace + "." + typeof(NodeOptionOutPut).Name );
+            _storage.SetString($"Nodes-Object-{Id}", typeof(NodeOptionOutPut).Namespace + "." + typeof(NodeOptionOutPut).Name);
         }
-        #if !RELEASE
-        public override void Draw(ImDrawListPtr imDraw) 
+#if !RELEASE
+        public override void Draw(ImDrawListPtr imDraw)
         {
             DrawConnections(imDraw);
             DrawOutputPoint(imDraw);

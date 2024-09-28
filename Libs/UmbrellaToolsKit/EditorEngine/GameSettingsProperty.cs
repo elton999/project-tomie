@@ -17,18 +17,18 @@ namespace UmbrellaToolsKit.EditorEngine
             timer.End();
 
             Log.Write($"[{nameof(GameSettingsProperty)}] reading: {pathFile}, timer: {timer.GetTotalSeconds()}");
-            if(property.GetType() == type) return property;
-            return System.Activator.CreateInstance(type);
+            if (property.GetType() == type) return property;
+            return Activator.CreateInstance(type);
         }
 
         public static GameSettingsProperty GetGameSettingsProperty(string pathFile) => (GameSettingsProperty)GetProperty(pathFile, typeof(GameSettingsProperty));
 
         public static T GetProperty<T>(string pathFile) where T : GameSettingsProperty
         {
-            var property = GetProperty(pathFile , typeof(T));
+            var property = GetProperty(pathFile, typeof(T));
 
             if (property is T) return (T)property;
-            return (T)System.Activator.CreateInstance(typeof(T));
+            return (T)Activator.CreateInstance(typeof(T));
         }
     }
 }

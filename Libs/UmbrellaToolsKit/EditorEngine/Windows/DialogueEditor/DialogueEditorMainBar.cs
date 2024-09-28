@@ -27,7 +27,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows.DialogueEditor
                 if (ImGui.MenuItem("Open..."))
                 {
                     var openFileDialog = OpenFileDialogue.OpenFileDialog("Open file", "Dialogue Nodes", ".Umbrella");
-                    if(OpenFileDialogue.SaveFileDialog(openFileDialog))
+                    if (OpenFileDialogue.SaveFileDialog(openFileDialog))
                     {
                         _dialogueSettingPath = openFileDialog.FileName;
                         OnAnyOpenFile?.Invoke(_dialogueSettingPath);
@@ -36,7 +36,7 @@ namespace UmbrellaToolsKit.EditorEngine.Windows.DialogueEditor
 
                 if (ImGui.MenuItem("Save"))
                 {
-                    if(_dialogueSettingPath == null)
+                    if (_dialogueSettingPath is null)
                     {
                         var saveFileDialog = ExportDialogue.SaveFileDialog("Save", "Umbrella Tools Kit Dialogue Nodes file", ".Umbrella");
 
@@ -47,8 +47,8 @@ namespace UmbrellaToolsKit.EditorEngine.Windows.DialogueEditor
                         }
 
                         return;
-                    }else 
-                        _dialogueEditorWindow.Save(_dialogueSettingPath);
+                    }
+                    _dialogueEditorWindow.Save(_dialogueSettingPath);
                 }
 
                 if (ImGui.MenuItem("Export DN file"))
