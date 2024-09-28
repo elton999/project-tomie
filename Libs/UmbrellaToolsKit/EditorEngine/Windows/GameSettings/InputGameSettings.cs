@@ -4,17 +4,17 @@ using Microsoft.Xna.Framework.Input;
 
 namespace UmbrellaToolsKit.EditorEngine.Windows.GameSettings
 {
-    [GameSettingsProperty("Input Settings", "games_settings/")]
+    [GameSettingsProperty(nameof(InputGameSettings), "/Content/")]
     public class InputGameSettings : GameSettingsProperty
     {
         [System.Serializable]
-        public struct InputData
+        public class InputData
         {
             [ShowEditor] public string InputName;
-            [ShowEditor] public List<Keys> Keys;
+            [ShowEditor] public List<Keys> Keys = new();
         }
 
         [ShowEditor] public string Name;
-        [ShowEditor] public List<InputData> InputDataList;
+        [ShowEditor] public List<InputData> InputDataList = new();
     }
 }
