@@ -112,31 +112,46 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
 #endif
 		}
 
-    public static void DrawList(string name, ref IList value)
-    {
+		public static void DrawList(string name, ref IList value)
+		{
 #if !RELEASE
-      TableFormatBegin(name);
-      if(ImGui.TreeNode(name))
-      {
-          for(int itemIndex = 0; itemIndex < value.Count; itemIndex++)
-          {
-              var item = value[itemIndex];
-              var fieldSettings = new InspectorClass.InspectorField()
-              {
-                  Name = name,
-                  Value = item,
-                  Type = item.GetType()
-              };
-              InspectorClass.DrawField(fieldSettings);
-              value[itemIndex] = fieldSettings.Value;
-          }
-      }
+			int listCount = value.IsValid() ? value.Count : 0;
 
-      if(ImGui.Button("add new item"))
-          value.AddNewItem();
-      TableFormatEnd();
+			if (!ImGui.TreeNode(name, $"{name} ({listCount})")) return;
+
+			DrawListFields(name, value);
+
+			if (ImGui.Button("add new item"))
+				value.AddNewItem();
 #endif
-    }
+		}
+
+#if !RELEASE
+		private static void DrawListFields(string name, IList value)
+		{
+			int indexToRemove = -1;
+			for (int itemIndex = 0; itemIndex < value.Count; itemIndex++)
+			{
+				var item = value[itemIndex];
+				var fieldSettings = new InspectorClass.InspectorField()
+				{
+					Name = name,
+					Value = item,
+					Type = item.GetType()
+				};
+
+				TableFormatBeginCustom($"#{name}");
+				InspectorClass.DrawField(fieldSettings);
+				ImGui.TableNextColumn();
+				if (Buttons.RedButton("Delete")) indexToRemove = itemIndex;
+				TableFormatEnd();
+
+				value[itemIndex] = fieldSettings.Value;
+			}
+
+			value.RemoveAtSafe(indexToRemove);
+		}
+#endif
 
 #if !RELEASE
 		public static void DrawBoolean(string name, ref bool value) => ImGui.Checkbox(name, ref value);
@@ -148,6 +163,14 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
 			ImGui.BeginTable($"##{name}", columns);
 			ImGui.TableNextColumn();
 			ImGui.TextUnformatted(name);
+			ImGui.TableNextColumn();
+#endif
+		}
+
+		public static void TableFormatBeginCustom(string name, int columns = 2)
+		{
+#if !RELEASE
+			ImGui.BeginTable($"##{name}", columns);
 			ImGui.TableNextColumn();
 #endif
 		}
