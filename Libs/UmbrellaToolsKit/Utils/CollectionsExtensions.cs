@@ -24,5 +24,10 @@ namespace UmbrellaToolsKit.Utils
             else value = System.Activator.CreateInstance(type);
             list.Add(value);
         }
+        public static void RemoveAtSafe(this IList list, int index)
+        {
+            if (index < 0 || index >= list.Count) return;
+            list.RemoveAt(index);
+        }
     }
 }
