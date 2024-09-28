@@ -29,5 +29,10 @@ namespace UmbrellaToolsKit.Utils
             if (index < 0 || index >= list.Count) return;
             list.RemoveAt(index);
         }
+
+        public static bool IsValid(this IList list)
+        {
+            return list is not null;
+        }
     }
 }
