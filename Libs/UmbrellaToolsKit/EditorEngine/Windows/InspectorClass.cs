@@ -7,10 +7,11 @@ using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Reflection;
+using UmbrellaToolsKit.Utils;
 
 namespace UmbrellaToolsKit.EditorEngine.Windows
 {
-    public class InspectorClass
+    public static class InspectorClass
     {
         public class InspectorField
         {
@@ -134,6 +135,12 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                 var list = (IList)obj.Value;
                 Fields.Field.DrawList(obj.Name, ref list);
                 obj.Value = list;
+                return;
+            }
+
+            if (obj.Type.HasPropertyAttribute(typeof(SerializableAttribute)))
+            {
+                DrawAllFields(obj.Value);
                 return;
             }
         }

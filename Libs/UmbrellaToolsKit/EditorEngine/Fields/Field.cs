@@ -96,15 +96,14 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
 #if !RELEASE
 			TableFormatBegin(name);
 			if (String.IsNullOrEmpty(value)) value = string.Empty;
+
 			if (ImGui.BeginCombo(string.Empty, value, ImGuiComboFlags.HeightLarge | ImGuiComboFlags.HeightLargest))
 			{
 				for (int optionIndex = 0; optionIndex < options.Length; optionIndex++)
 				{
 					bool is_selected = options[optionIndex] == value;
-					if (ImGui.Selectable(options[optionIndex], is_selected))
-						value = options[optionIndex];
-					if (is_selected)
-						ImGui.SetItemDefaultFocus();
+					if (ImGui.Selectable(options[optionIndex], is_selected)) value = options[optionIndex];
+					if (is_selected) ImGui.SetItemDefaultFocus();
 				}
 				ImGui.EndCombo();
 			}
@@ -121,8 +120,7 @@ namespace UmbrellaToolsKit.EditorEngine.Fields
 
 			DrawListFields(name, value);
 
-			if (ImGui.Button("add new item"))
-				value.AddNewItem();
+			if (ImGui.Button("add new item")) value.AddNewItem();
 #endif
 		}
 
