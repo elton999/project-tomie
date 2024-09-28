@@ -26,13 +26,14 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
             {typeof(Vector3), 1},
             {typeof(float), 2},
             {typeof(string), 3},
-            {typeof(bool), 4}
+            {typeof(bool), 4},
 
         };
 
         public static void DrawAllFields(object obj)
         {
 #if !RELEASE
+            if (obj is null) return;
             var type = obj.GetType();
             var fieldsCategories = new Dictionary<string, List<FieldInfo>>();
             var fieldsWithoutCategories = new List<FieldInfo>();
@@ -135,6 +136,15 @@ namespace UmbrellaToolsKit.EditorEngine.Windows
                 var list = (IList)obj.Value;
                 Fields.Field.DrawList(obj.Name, ref list);
                 obj.Value = list;
+                return;
+            }
+
+            if (obj.Value is Enum)
+            {
+                var values = Enum.GetNames(obj.Type);
+                string valueName = obj.Value.ToString();
+                Fields.Field.DrawStringOptions(obj.Name, ref valueName, values);
+                obj.Value = Enum.Parse(obj.Type, valueName, true);
                 return;
             }
 
