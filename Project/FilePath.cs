@@ -36,6 +36,7 @@
 
 
         // Properties Settings
+        public const string INPUT_SETTINGS_PATH = @"Content/InputGameSettings";
         public const string GAME_DEBUGGER_PATH = @"Content/GameDebuggerSettings";
         public const string PLAYER_GAME_DEBUGGER_PATH = @"Content/PlayerDebuggerSettings";
     }

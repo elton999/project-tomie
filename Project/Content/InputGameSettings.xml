@@ -42,6 +42,7 @@
         <Keys>
           <Item>Space</Item>
           <Item>Enter</Item>
+          <Item>X</Item>
         </Keys>
       </Item>
     </InputDataList>

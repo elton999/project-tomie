@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Project.SoundEvent;
 using UmbrellaToolsKit.EditorEngine;
+using UmbrellaToolsKit.EditorEngine.Windows.GameSettings;
 
 namespace Project
 {
@@ -65,6 +66,9 @@ namespace Project
                 _gameManagement.SceneManagement.MainScene.AddGameObject(smashButton, Layers.UI);
                 _gameManagement.SceneManagement.MainScene.AddGameObject(new CutScene1(smashButton), Layers.UI);
             }
+
+            var inputSettings = GameSettingsProperty.GetProperty<InputGameSettings>(FilePath.INPUT_SETTINGS_PATH);
+            inputSettings.BindAllInputs();
         }
 
         protected override void UnloadContent()
