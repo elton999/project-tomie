@@ -65,17 +65,6 @@ namespace Project
                 _gameManagement.SceneManagement.MainScene.AddGameObject(smashButton, Layers.UI);
                 _gameManagement.SceneManagement.MainScene.AddGameObject(new CutScene1(smashButton), Layers.UI);
             }
-
-            // Inputs
-            KeyBoardHandler.AddInput(Input.CANCEL, Keys.Escape);
-            // moviment
-            KeyBoardHandler.AddInput(Input.LEFT, Keys.Left);
-            KeyBoardHandler.AddInput(Input.RIGHT, Keys.Right);
-            // UI inputs
-            KeyBoardHandler.AddInput(Input.UP, Keys.Up);
-            KeyBoardHandler.AddInput(Input.DOWN, Keys.Down);
-
-            KeyBoardHandler.AddInput(Input.INTERACT, Keys.Space);
         }
 
         protected override void UnloadContent()
@@ -86,9 +75,6 @@ namespace Project
 
         protected override void Update(GameTime gameTime)
         {
-           // if (KeyBoardHandler.KeyPressed(Input.CANCEL))
-           //     Exit();
-
             _gameManagement.Update(gameTime);
 
             _soundManager.Update();
