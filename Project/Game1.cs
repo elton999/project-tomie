@@ -5,6 +5,7 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Project.SoundEvent;
 using UmbrellaToolsKit.EditorEngine;
+using UmbrellaToolsKit.EditorEngine.Windows.GameSettings;
 
 namespace Project
 {
@@ -66,16 +67,8 @@ namespace Project
                 _gameManagement.SceneManagement.MainScene.AddGameObject(new CutScene1(smashButton), Layers.UI);
             }
 
-            // Inputs
-            KeyBoardHandler.AddInput(Input.CANCEL, Keys.Escape);
-            // moviment
-            KeyBoardHandler.AddInput(Input.LEFT, Keys.Left);
-            KeyBoardHandler.AddInput(Input.RIGHT, Keys.Right);
-            // UI inputs
-            KeyBoardHandler.AddInput(Input.UP, Keys.Up);
-            KeyBoardHandler.AddInput(Input.DOWN, Keys.Down);
-
-            KeyBoardHandler.AddInput(Input.INTERACT, Keys.Space);
+            var inputSettings = GameSettingsProperty.GetProperty<InputGameSettings>(FilePath.INPUT_SETTINGS_PATH);
+            inputSettings.BindAllInputs();
         }
 
         protected override void UnloadContent()
@@ -86,9 +79,6 @@ namespace Project
 
         protected override void Update(GameTime gameTime)
         {
-           // if (KeyBoardHandler.KeyPressed(Input.CANCEL))
-           //     Exit();
-
             _gameManagement.Update(gameTime);
 
             _soundManager.Update();
